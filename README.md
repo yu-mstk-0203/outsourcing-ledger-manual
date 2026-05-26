@@ -1,19 +1,19 @@
-# Outsourcing Ledger Manual
+# 業務委託契約実績台帳 入力マニュアル
 
-Static GitHub Pages publication for the outsourcing ledger input manual.
+業務委託契約実績台帳の入力マニュアルを GitHub Pages で公開するための静的サイトです。
 
-## Published files
+## 公開ファイル
 
 - `index.html`
-- `fig*.svg` and `fig*.webp`
-- Only the PNG files under `manual-assets/` that are referenced by `index.html`
+- `fig*.svg` および `fig*.webp`
+- `manual-assets/` 配下のうち、`index.html` から参照されている PNG ファイルのみ
 
-Do not publish local agent settings, Google shortcut files, browser profiles, or unreferenced screenshots.
+ローカルのエージェント設定、Google ショートカットファイル、ブラウザプロファイル、未参照のスクリーンショットは公開しないでください。
 
-## Update workflow
+## 更新手順
 
-1. Edit the source manual in the working folder.
-2. Copy the updated HTML to `index.html`.
-3. Copy only newly referenced image files into `manual-assets/`.
-4. Run the asset check workflow locally or let GitHub Actions run it.
-5. Commit and push to `main`; GitHub Pages republishes the site.
+1. 作業フォルダ内のマニュアル原本を編集する。
+2. 更新した HTML を `index.html` にコピーする。
+3. 新たに参照する画像ファイルのみ `manual-assets/` にコピーする。
+4. アセットチェックのワークフローをローカルで実行するか、GitHub Actions に任せる。
+5. `main` にコミット＆プッシュすると、GitHub Pages がサイトを再公開する。
