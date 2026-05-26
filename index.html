@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>業務委託契約実績台帳 Ver2.0 入力マニュアル</title>
+<style>
+:root{
+  --ink:#17202c;
+  --muted:#5e6978;
+  --soft:#eef2f6;
+  --paper:#f7f8fa;
+  --card:#ffffff;
+  --line:#d8dee7;
+  --line-strong:#aeb8c7;
+  --navy:#18324f;
+  --navy-2:#254c73;
+  --blue-soft:#e8f0f8;
+  --amber:#8b6417;
+  --amber-soft:#fbf5e8;
+  --red:#9d352f;
+  --red-soft:#f8eceb;
+  --green:#2f614c;
+  --green-soft:#e9f2ee;
+  --shadow:0 10px 30px rgba(23,32,44,.08);
+  --radius:8px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--paper);
+  font-family:"Yu Gothic","Meiryo","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.82;
+  letter-spacing:0;
+}
+a{
+  color:var(--navy-2);
+  text-decoration:none;
+  border-bottom:1px solid rgba(37,76,115,.35);
+  transition:background-color .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+a:hover{
+  background:#e8f0f8;
+  color:var(--navy);
+  border-bottom-color:var(--navy);
+}
+button{font:inherit;}
+.layout{display:grid; grid-template-columns:280px minmax(0,1fr); max-width:1220px; margin:0 auto;}
+.toc{
+  position:sticky;
+  top:0;
+  align-self:start;
+  height:100vh;
+  overflow:auto;
+  padding:26px 18px 40px;
+  background:#f0f3f7;
+  border-right:1px solid var(--line);
+}
+.toc-title{
+  margin:0 0 14px;
+  color:var(--navy);
+  font-weight:800;
+  font-size:14px;
+  letter-spacing:.04em;
+  border-bottom:2px solid var(--navy);
+  padding-bottom:10px;
+}
+.toc a{
+  display:block;
+  border:0;
+  color:#344257;
+  font-size:13px;
+  line-height:1.5;
+  padding:6px 9px;
+  border-left:3px solid transparent;
+  border-radius:6px;
+}
+.toc a:hover,.toc a.active{background:#e2e8f0; border-left-color:var(--navy); color:var(--navy);}
+.toc a.lv1{font-weight:800; margin-top:12px; color:var(--navy);}
+.toc a.lv2{padding-left:22px;}
+.toc a.lv3{padding-left:36px; font-size:12px; color:#4f5d70;}
+.content{min-width:0; padding:38px 48px 110px;}
+.doc-header{
+  background:linear-gradient(135deg,var(--navy),#203f60);
+  color:#fff;
+  border-radius:var(--radius);
+  padding:28px 32px;
+  box-shadow:var(--shadow);
+  margin-bottom:26px;
+}
+.doc-header h1{margin:0; font-size:30px; line-height:1.35; letter-spacing:.02em;}
+.doc-header p{margin:8px 0 0; color:#dce6f0;}
+.meta-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:3px 10px;
+  border:1px solid rgba(255,255,255,.35);
+  border-radius:999px;
+  font-size:12px;
+  color:#eef4fa;
+  white-space:nowrap;
+}
+section{margin:28px 0;}
+h2.part{
+  margin:38px 0 18px;
+  padding:13px 18px;
+  background:var(--navy);
+  color:#fff;
+  border-radius:var(--radius);
+  font-size:22px;
+  line-height:1.45;
+  white-space:normal;
+}
+h3.sec{
+  margin:30px 0 12px;
+  padding:0 0 7px;
+  border-bottom:2px solid var(--line);
+  color:var(--navy);
+  font-size:19px;
+  white-space:normal;
+}
+h4.sub{
+  margin:22px 0 8px;
+  color:#23344a;
+  font-size:16px;
+}
+h5.field{
+  margin:18px 0 6px;
+  padding-left:10px;
+  border-left:4px solid var(--navy-2);
+  color:#23344a;
+  font-size:15px;
+  white-space:normal;
+}
+p{margin:8px 0;}
+.lead{font-size:17px; color:#24354a;}
+.screen-only{display:block;}
+.print-only{display:none;}
+.grid{display:grid; gap:14px;}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr));}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  box-shadow:0 2px 8px rgba(23,32,44,.04);
+}
+.card h3,.card h4{margin-top:0;}
+.note{
+  border:1px solid var(--line);
+  border-left:5px solid var(--navy-2);
+  background:#fff;
+  border-radius:var(--radius);
+  padding:14px 16px;
+  margin:14px 0;
+}
+.note strong,.box-title{display:block; color:var(--navy); margin-bottom:3px;}
+.note.important{background:var(--blue-soft); border-left-color:var(--navy);}
+.note.warn{background:var(--red-soft); border-left-color:var(--red);}
+.note.check{background:var(--green-soft); border-left-color:var(--green);}
+.note.example{background:var(--amber-soft); border-left-color:var(--amber);}
+.tbl-wrap{overflow-x:auto; margin:12px 0 18px;}
+.tbl-wrap[data-scroll]::before{
+  content:"横にスクロールできます";
+  display:none;
+  margin:0 0 6px;
+  color:var(--muted);
+  font-size:12px;
+}
+table{width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line);}
+th,td{border:1px solid var(--line); padding:9px 10px; vertical-align:top; text-align:left;}
+th{background:#edf1f5; color:var(--navy); font-weight:800;}
+tbody tr:nth-child(even){background:#fafbfc;}
+.label-table col.no{width:44px;}
+.label-table col.item{width:210px;}
+.label-table col.kind{width:92px;}
+.label-table th:nth-child(3),.label-table td:nth-child(3){white-space:nowrap; text-align:center;}
+.three-col-label col.item{width:220px;}
+.three-col-label col.kind{width:92px;}
+.three-col-label th:nth-child(2),.three-col-label td:nth-child(2){white-space:nowrap; text-align:center;}
+.three-col-label th:nth-child(3),.three-col-label td:nth-child(3){white-space:normal; text-align:left;}
+.question-table col.no{width:72px;}
+.question-table col.check{width:50%;}
+.question-table col.place{width:auto;}
+.question-table th:first-child,.question-table td:first-child{
+  text-align:center;
+  white-space:nowrap;
+}
+.question-table th,.question-table td{vertical-align:middle;}
+.decision-table col.result{width:42%;}
+.decision-table col.screen{width:180px;}
+.decision-table col.action{width:auto;}
+.decision-table th:nth-child(2),.decision-table td:nth-child(2){
+  text-align:center;
+  white-space:nowrap;
+}
+.evidence-table col.field{width:190px;}
+.evidence-table col.source{width:270px;}
+.evidence-table col.point{width:auto;}
+.route{
+  display:inline-block;
+  min-width:72px;
+  padding:2px 8px;
+  border-radius:999px;
+  color:#fff;
+  text-align:center;
+  font-weight:800;
+  font-size:13px;
+  white-space:nowrap;
+}
+.route.a{background:var(--navy);}
+.route.b{background:var(--amber);}
+.route.c{background:var(--green);}
+.badge{display:inline-block; padding:2px 7px; border-radius:5px; font-size:12px; font-weight:800; white-space:nowrap;}
+.req{background:#eef2f6; color:var(--navy); border:1px solid var(--line-strong);}
+.cond{background:#fbf5e8; color:var(--amber); border:1px solid #dcc58d;}
+.steps{counter-reset:step; list-style:none; margin:12px 0; padding:0;}
+.steps li{
+  counter-increment:step;
+  position:relative;
+  margin:10px 0;
+  padding:12px 14px 12px 52px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+}
+.steps li::before{
+  content:counter(step);
+  position:absolute;
+  left:14px;
+  top:14px;
+  width:24px;
+  height:24px;
+  line-height:24px;
+  text-align:center;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  font-weight:800;
+  font-size:13px;
+}
+.st-title{display:block; color:var(--navy); font-weight:800; margin-bottom:3px;}
+.bullets{margin:8px 0; padding-left:1.3em;}
+.bullets li{margin:4px 0;}
+.checklist{list-style:none; margin:12px 0; padding:0;}
+.checklist li{
+  position:relative;
+  padding:8px 10px 8px 34px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+}
+.checklist li::before{
+  content:"□";
+  position:absolute;
+  left:10px;
+  top:8px;
+  color:var(--navy);
+  font-weight:800;
+}
+.checklist .group-h{
+  padding-left:12px;
+  background:var(--navy);
+  color:#fff;
+  font-weight:800;
+}
+.checklist .group-h::before{content:"";}
+.url-panel{
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  margin:16px 0;
+}
+.url-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+  padding:16px;
+}
+.url-card h3{margin:0 0 6px; color:var(--navy); font-size:17px;}
+.url-action{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:10px;}
+.open-link{
+  display:inline-block;
+  background:var(--navy);
+  color:#fff;
+  border:0;
+  border-radius:6px;
+  padding:7px 12px;
+  font-weight:800;
+  min-height:44px;
+  line-height:30px;
+  white-space:nowrap;
+}
+.open-link:hover{background:#224768; color:#fff; border:0; box-shadow:0 3px 10px rgba(24,50,79,.22);}
+.copy-btn{
+  border:1px solid var(--line-strong);
+  background:#fff;
+  color:var(--navy);
+  border-radius:6px;
+  padding:6px 10px;
+  cursor:pointer;
+  min-height:44px;
+  white-space:nowrap;
+}
+.copy-btn:hover{background:#e8f0f8; color:var(--navy); border-color:var(--navy);}
+.copy-status{font-size:12px; color:var(--green);}
+.url-text{
+  display:block;
+  margin-top:8px;
+  padding:7px 8px;
+  background:#f4f6f8;
+  border:1px solid var(--line);
+  border-radius:6px;
+  color:#445064;
+  font-size:12px;
+  overflow-wrap:anywhere;
+}
+.flow{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:14px 0;
+}
+.flow .node{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:var(--radius);
+  padding:12px;
+  min-height:92px;
+}
+.flow .node strong{display:block; color:var(--navy);}
+.flow.three{grid-template-columns:repeat(3,minmax(0,1fr));}
+.quick-nav{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin:16px 0 22px;
+}
+.quick-card{
+  display:block;
+  min-height:126px;
+  padding:14px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 2px 8px rgba(23,32,44,.04);
+  color:var(--ink);
+}
+.quick-card:hover{background:#f4f8fc; border-color:var(--navy-2); box-shadow:0 4px 14px rgba(23,32,44,.12);}
+.quick-card strong{display:block; color:var(--navy); font-size:15px; margin-bottom:4px;}
+.quick-card span{display:block; color:var(--muted); font-size:13px; line-height:1.55;}
+.jump-row{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0;}
+.jump-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:8px 13px;
+  border:1px solid var(--navy);
+  border-radius:7px;
+  background:#fff;
+  color:var(--navy);
+  font-weight:800;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 1px 2px rgba(24,50,79,.06);
+  transition:background-color .16s ease, color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.jump-btn.primary{background:#fff; color:var(--navy);}
+.jump-btn:hover,
+.jump-btn:focus-visible,
+.jump-btn.primary:hover,
+.jump-btn.primary:focus-visible{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+  box-shadow:0 5px 14px rgba(24,50,79,.22);
+  transform:translateY(-1px);
+}
+.jump-btn:active{transform:translateY(0); box-shadow:0 2px 7px rgba(24,50,79,.18);}
+.jump-btn:focus-visible{outline:3px solid rgba(31,96,145,.28); outline-offset:2px;}
+.chapter-summary{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:12px 0 18px;
+}
+.summary-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:11px 13px;
+}
+.summary-item strong{display:block; color:var(--navy); font-size:13px; white-space:nowrap;}
+.summary-item span{display:block; color:#344257; font-size:14px; line-height:1.55;}
+.manual-shot{
+  margin:14px 0 22px;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+.shot-scroll{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+  box-shadow:0 2px 8px rgba(23,32,44,.04);
+}
+.manual-shot img{
+  display:block;
+  width:100%;
+  min-width:760px;
+  height:auto;
+  background:#fff;
+}
+.shot-stack{
+  display:grid;
+  gap:18px;
+  margin:14px 0 22px;
+}
+.mock-screen{
+  position:relative;
+  min-width:760px;
+  padding:18px;
+  background:#f5f8fb;
+}
+.mock-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+  color:var(--navy);
+  font-weight:800;
+}
+.mock-title span:last-child{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+.mock-toolbar{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+  margin-bottom:12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+}
+.mock-search,.mock-field,.mock-upload,.mock-alert,.mock-row{
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:#fff;
+}
+.mock-search{
+  width:310px;
+  padding:9px 12px;
+  color:#657286;
+}
+.mock-btn{
+  display:inline-block;
+  min-width:76px;
+  padding:8px 13px;
+  border-radius:7px;
+  background:var(--navy);
+  color:#fff;
+  text-align:center;
+  font-weight:800;
+}
+.mock-btn.light{
+  background:#fff;
+  color:var(--navy);
+  border:1px solid var(--navy);
+}
+.mock-panel{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:12px;
+}
+.mock-card{
+  position:relative;
+  min-height:210px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+}
+.mock-card h4{
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:15px;
+}
+.mock-row{
+  display:grid;
+  grid-template-columns:1fr 120px 96px;
+  gap:10px;
+  align-items:center;
+  margin:8px 0;
+  padding:9px 10px;
+}
+.mock-field{
+  margin:8px 0;
+  padding:9px 11px;
+  color:#526176;
+}
+.mock-label{
+  display:block;
+  margin-bottom:4px;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:800;
+}
+.mock-upload{padding:12px; background:#f9fbfd;}
+.mock-alert{
+  margin-top:9px;
+  padding:8px 10px;
+  border-color:#d7b6a9;
+  background:#fff7f4;
+  color:#7c3b24;
+  font-size:13px;
+}
+.mask{
+  display:inline-block;
+  min-width:92px;
+  height:12px;
+  border-radius:999px;
+  vertical-align:middle;
+  background:repeating-linear-gradient(135deg,#d9e0e8 0,#d9e0e8 5px,#cbd5df 5px,#cbd5df 10px);
+}
+.mask.short{min-width:58px;}
+.mock-checkbox{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  margin-top:10px;
+  color:var(--navy);
+  font-weight:800;
+}
+.mock-checkbox::before{
+  content:"";
+  width:16px;
+  height:16px;
+  border:2px solid var(--navy);
+  border-radius:3px;
+  background:#fff;
+}
+.callout{
+  position:absolute;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  max-width:210px;
+  padding:6px 9px;
+  border:1px solid var(--navy);
+  border-radius:999px;
+  background:#fff;
+  color:var(--navy);
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 3px 10px rgba(23,32,44,.12);
+  white-space:nowrap;
+}
+.callout .num{
+  display:inline-grid;
+  place-items:center;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  font-size:11px;
+}
+.callout::after{
+  content:"";
+  position:absolute;
+  width:34px;
+  height:1px;
+  background:var(--navy);
+  opacity:.75;
+}
+.callout.right::after{left:-34px;}
+.callout.left::after{right:-34px;}
+.manual-shot figcaption{
+  margin-top:8px;
+  color:#334155;
+  font-size:13px;
+}
+.manual-shot figcaption strong{
+  display:block;
+  margin-bottom:4px;
+  color:var(--navy);
+}
+.shot-points{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin:8px 0 0;
+  padding:0;
+  list-style:none;
+}
+.shot-points li{
+  padding:8px 10px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:#fff;
+  color:#344257;
+}
+.fab-wrap{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  display:flex;
+  gap:8px;
+  z-index:10;
+}
+.fab{
+  border:1px solid var(--navy);
+  background:var(--navy);
+  color:#fff;
+  border-radius:999px;
+  padding:9px 14px;
+  box-shadow:0 4px 12px rgba(23,32,44,.18);
+  cursor:pointer;
+  font-weight:800;
+  font-size:13px;
+  min-height:44px;
+  white-space:nowrap;
+}
+.fab.secondary{background:#fff; color:var(--navy);}
+.source-list li{margin:5px 0;}
+
+@media(max-width:1024px){
+  .layout{display:block;}
+  .toc{
+    position:sticky;
+    top:0;
+    z-index:9;
+    height:auto;
+    max-height:none;
+    overflow-x:auto;
+    overflow-y:hidden;
+    white-space:nowrap;
+    padding:10px 12px;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+  .toc-title{display:inline-block; margin:0 10px 0 0; padding:0; border:0;}
+  .toc nav{display:inline-flex; gap:6px; vertical-align:middle;}
+  .toc a{display:inline-block; min-height:36px; padding:8px 10px; border-left:0; border-bottom:2px solid transparent; white-space:nowrap;}
+  .toc a.lv1{margin-top:0;}
+  .toc a.lv2{padding-left:10px;}
+  .toc a.lv3{padding-left:10px;}
+  .toc a:hover,.toc a.active{border-left-color:transparent; border-bottom-color:var(--navy);}
+  .content{padding:24px 18px 110px;}
+  .doc-header{padding:22px 20px;}
+  .doc-header h1{font-size:24px;}
+  .quick-nav{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .grid.three,.flow{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .chapter-summary{grid-template-columns:1fr;}
+}
+
+@media(max-width:640px){
+  body{font-size:15px; line-height:1.72;}
+  .content{padding:18px 12px 122px;}
+  .doc-header{padding:18px 16px; margin-bottom:18px;}
+  .doc-header h1{font-size:21px; line-height:1.3;}
+  .doc-header p{font-size:13px;}
+  .meta-row{gap:6px;}
+  .pill{font-size:11px; padding:3px 8px;}
+  h2.part{font-size:17px; padding:10px 12px; margin:28px 0 14px;}
+  h3.sec{font-size:16px; margin-top:24px;}
+  h5.field{font-size:14px;}
+  .grid.two,.grid.three,.url-panel,.flow,.flow.three,.quick-nav{grid-template-columns:1fr;}
+  .quick-card{min-height:auto;}
+  .tbl-wrap[data-scroll]::before{display:block;}
+  .tbl-wrap table{min-width:680px;}
+  .tbl-wrap .label-table{min-width:760px;}
+  .tbl-wrap .question-table{min-width:640px;}
+  .tbl-wrap .decision-table{min-width:760px;}
+  .tbl-wrap .evidence-table{min-width:760px;}
+  .mock-screen{min-width:720px;}
+  .shot-points{grid-template-columns:1fr;}
+  .url-action{display:grid; grid-template-columns:1fr; align-items:stretch;}
+  .open-link,.copy-btn,.jump-btn{text-align:center; width:100%;}
+  .jump-row{display:grid; grid-template-columns:1fr;}
+  .fab-wrap{
+    left:10px;
+    right:10px;
+    bottom:10px;
+    justify-content:stretch;
+  }
+  .fab{flex:1; padding:10px 8px;}
+}
+
+@page{
+  size:A4 portrait;
+  margin:14mm 12mm;
+}
+@media print{
+  html{font-size:10.5pt;}
+  body{background:#fff; color:#000; line-height:1.55;}
+  .toc,.fab-wrap,.screen-only,.copy-btn,.copy-status{display:none !important;}
+  .print-only{display:block !important;}
+  .layout{display:block; max-width:none;}
+  .content{padding:0; background:#fff;}
+  .doc-header{
+    color:#fff !important;
+    background:var(--navy) !important;
+    border-radius:0;
+    box-shadow:none;
+    padding:14mm 12mm 10mm;
+    margin:0 0 8mm;
+  }
+  h2.part{
+    break-before:page;
+    break-after:avoid;
+    page-break-before:always;
+    page-break-after:avoid;
+    border-radius:0;
+    box-shadow:none;
+    background:var(--navy) !important;
+    color:#fff !important;
+    margin-top:0;
+  }
+  #start h2.part,#urls h2.part{break-before:auto; page-break-before:auto;}
+  h3.sec,h4.sub,h5.field{break-after:avoid; page-break-after:avoid;}
+  p,li{orphans:2; widows:2;}
+  table{break-inside:auto; page-break-inside:auto;}
+  thead{display:table-header-group;}
+  tr,td,th{break-inside:avoid; page-break-inside:avoid;}
+  .card,.note,.steps li,.manual-shot,figure,.flow .node,.url-card{break-inside:avoid; page-break-inside:avoid;}
+  .grid.two,.grid.three,.url-panel,.flow,.flow.three{grid-template-columns:1fr 1fr;}
+  .source-list a,.url-text,a{color:#000; border-bottom:0;}
+  .open-link{background:none; color:#000; padding:0; font-weight:400;}
+  .shot-scroll{box-shadow:none;}
+  .mock-screen{min-width:0; padding:12px;}
+  .callout{position:static; margin:4px 5px 4px 0;}
+  .callout::after{display:none;}
+  .shot-points{grid-template-columns:1fr 1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="toc" aria-label="目次">
+    <p class="toc-title">目次</p>
+    <nav>
+      <a class="lv1" href="#purpose">本台帳の目的</a>
+      <a class="lv1" href="#urls">まず開くURL一覧</a>
+      <a class="lv3" href="#url-formbridge">FormBridge 入力フォーム</a>
+      <a class="lv3" href="#url-kviewer">kViewer 閲覧・編集用ビュー</a>
+      <a class="lv1" href="#prepare">入力前に準備する資料</a>
+      <a class="lv1" href="#start">3分で分かるルート判定</a>
+      <a class="lv1" href="#tools">FormBridge・kViewer基本</a>
+      <a class="lv3" href="#tool-kintone">kintone</a>
+      <a class="lv3" href="#tool-formbridge">FormBridge</a>
+      <a class="lv3" href="#tool-kviewer">kViewer</a>
+      <a class="lv1" href="#route-a">ルートA：kViewerで取り込み済み案件を編集する</a>
+      <a class="lv3" href="#route-a-flow">ルートAの全体手順</a>
+      <a class="lv3" href="#route-a-autofill">自動入力されている項目</a>
+      <a class="lv3" href="#route-a-missing">12節委託料の不足項目</a>
+      <a class="lv1" href="#route-a2">A-2：12節委託料以外を削除対象として送信する</a>
+      <a class="lv1" href="#route-bc">ルートB/C：FormBridgeで新規登録する案件</a>
+      <a class="lv3" href="#step-1">STEP 1 担当課の入力</a>
+      <a class="lv3" href="#step-2">STEP 2 案件の基本情報</a>
+      <a class="lv3" href="#step-3">STEP 3 業種の入力</a>
+      <a class="lv3" href="#step-4">STEP 4 積算方法の選択</a>
+      <a class="lv3" href="#step-5">STEP 5 契約・入札種別</a>
+      <a class="lv3" href="#step-6">STEP 6 日程の入力</a>
+      <a class="lv3" href="#step-7">STEP 7 業者情報の入力</a>
+      <a class="lv3" href="#step-8">STEP 8 契約金額の入力</a>
+      <a class="lv3" href="#step-9">STEP 9 各課入力事項</a>
+      <a class="lv3" href="#step-10">STEP 10 確認チェックと送信</a>
+      <a class="lv3" href="#evidence">入力欄と根拠資料</a>
+      <a class="lv1" href="#cases">ケース別入力</a>
+      <a class="lv3" href="#case-negotiated">随意契約・見積合わせ</a>
+      <a class="lv3" href="#case-open-bid">一般競争入札</a>
+      <a class="lv3" href="#case-multi-year">債務負担行為・長期継続契約</a>
+      <a class="lv3" href="#case-unit-price">単価契約</a>
+      <a class="lv3" href="#case-electronic">電子契約</a>
+      <a class="lv3" href="#case-disabled-employment">障害者雇用促進企業の指名</a>
+      <a class="lv1" href="#after">送信後・差戻し・削除依頼</a>
+      <a class="lv3" href="#after-confirm">送信後の確認</a>
+      <a class="lv3" href="#after-remand">差戻し対応</a>
+      <a class="lv3" href="#after-change">変更契約</a>
+      <a class="lv3" href="#after-cancel">契約解除</a>
+      <a class="lv3" href="#after-delete">誤登録・二重登録の削除依頼</a>
+      <a class="lv1" href="#pdf">PDF保存・印刷方法</a>
+      <a class="lv1" href="#appendix">FAQ・用語・チェックリスト</a>
+      <a class="lv3" href="#faq">よくある質問</a>
+      <a class="lv3" href="#terms">用語ミニ辞典</a>
+      <a class="lv3" href="#checklist">入力チェックリスト</a>
+      <a class="lv3" href="#contact">連絡先</a>
+      <a class="lv1" href="#sources">参考にした公式情報</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <header class="doc-header">
+      <h1>業務委託台帳 入力マニュアル</h1>
+      <p>業務委託契約実績台帳 Ver2.0｜登録・確認・送信まで迷わず進める実務手順書</p>
+      <div class="meta-row">
+        <span class="pill">令和8年5月版</span>
+        <span class="pill">HTML閲覧・PDF保存対応</span>
+        <span class="pill">初心者向け</span>
+      </div>
+    </header>
+
+    <section class="print-only" aria-label="PDF用概要">
+      <div class="note important">
+        <strong>PDF版の読み方</strong>
+        このPDFは、HTMLマニュアルをA4縦で保存したものです。最初に「本台帳の目的」「まず開くURL一覧」「3分で分かるルート判定」を確認し、自分のルートの章だけを重点的に読んでください。
+      </div>
+    </section>
+
+    <section id="purpose">
+      <h2 class="part">本台帳の目的</h2>
+      <p class="lead">業務委託契約実績台帳は、大分市の業務委託契約を一元的に把握し、契約事務の確認・公表・照会対応に使う基礎データです。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>目的</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>1 入札監視委員会の案件抽出</td><td>入札監視委員会で審議する業務委託契約の抽出資料として使います。</td></tr>
+            <tr><td>2 照会対応</td><td>契約内容、契約方法、金額、契約相手方などの照会に対応するための基礎情報として使います。</td></tr>
+            <tr><td>3 契約事務の改善検討</td><td>契約状況を整理し、契約事務の改善や庁内確認に使います。</td></tr>
+            <tr><td>4 随意契約のホームページ公表の案件抽出</td><td>業務委託契約に係る随意契約のホームページ公表対象案件を、この台帳から抽出します。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note important">
+        <strong>期限内に必ず入力してください</strong>
+        随意契約のホームページ公表対象は本台帳から抽出します。対象外と考える案件がある場合は、速やかに契約監理課へ連絡してください。
+      </div>
+      <div class="note important">
+        <strong>入札監視委員会が見ることを前提とした入力をしてください</strong>
+        各課内のメモではなく、第三者が契約内容、契約方法、理由を確認する資料として入力してください。
+      </div>
+    </section>
+
+    <section id="urls">
+      <h2 class="part">まず開くURL一覧</h2>
+      <p class="lead">入力作業で使う入口は2つです。自分の案件がどのルートかを判定してから、該当するURLを開いてください。</p>
+      <div class="url-panel">
+        <div class="url-card">
+          <h3 id="url-formbridge">FormBridge 入力フォーム</h3>
+          <p>新規に全項目を入力するフォームです。ルートB・Cで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
+          <div class="url-action">
+            <a class="open-link" href="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2" target="_blank" rel="noopener">FormBridgeを開く</a>
+            <button class="copy-btn" type="button" data-copy="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2">URLをコピー</button>
+            <span class="copy-status" aria-live="polite"></span>
+          </div>
+          <span class="url-text">https://oitacity.form.kintoneapp.com/public/outsourcing-ver2</span>
+        </div>
+        <div class="url-card">
+          <h3 id="url-kviewer">kViewer 閲覧・編集用ビュー</h3>
+          <p>財務会計システムから取り込まれた既存案件を探し、該当レコードの編集に進むための画面です。ルートAで使います。</p>
+          <div class="url-action">
+            <a class="open-link" href="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview" target="_blank" rel="noopener">kViewerを開く</a>
+            <button class="copy-btn" type="button" data-copy="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview">URLをコピー</button>
+            <span class="copy-status" aria-live="polite"></span>
+          </div>
+          <span class="url-text">https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview</span>
+        </div>
+      </div>
+      <div class="note warn">
+        <strong>公開URLの取扱い</strong>
+        FormBridgeとkViewerは、公開URLを通じて入力・閲覧する仕組みです。URL、画面キャプチャ、入力済み内容を不要な相手に共有しないでください。アクセス制御や公開範囲は契約監理課の案内に従います。
+      </div>
+    </section>
+
+    <section id="prepare">
+      <h2 class="part">入力前に準備する資料</h2>
+      <p>入力は推測で行いません。手元資料をそろえてからフォームを開くと、途中で迷う時間と差戻しを減らせます。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>資料</th><th>確認する主な項目</th><th>必要になる場面</th></tr></thead>
+          <tbody>
+            <tr><td>契約書・契約書案</td><td>件名、契約相手方、契約日、履行期間、契約金額、電子契約、契約解除条項</td><td>全ルート</td></tr>
+            <tr><td>起案文書・施行伺</td><td>業務区分、予算費目、積算方法、予定価格、契約種別、担当課</td><td>全ルート</td></tr>
+            <tr><td>入札・見積結果が分かる資料</td><td>入札種別、入札日、参加業者数、辞退・欠席・無効・くじ引きの有無</td><td>入札・見積合わせ案件</td></tr>
+            <tr><td>随意契約理由書</td><td>適用号、随意契約理由、相手方選定理由</td><td>随意契約案件</td></tr>
+            <tr><td>公告文PDF</td><td>公告文ファイル、ファイル名、添付後の表示</td><td>一般競争入札案件</td></tr>
+            <tr><td>変更契約・解除関係資料</td><td>変更内容、解除日、解除根拠、解除理由</td><td>変更契約・契約解除がある案件</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="start">
+      <h2 class="part">3分で分かるルート判定</h2>
+      <p class="lead">最初に次の3問を順番に確認してください。ここでルートを間違えると、入力する画面と入力項目が変わります。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table class="question-table">
+          <colgroup><col class="no"><col class="check"><col class="place"></colgroup>
+          <thead><tr><th>順番</th><th>確認すること</th><th>確認場所</th></tr></thead>
+          <tbody>
+            <tr><td>Q1</td><td>施行伺を財務会計システムで起票しましたか。</td><td>施行伺、起案文書、財務会計システム</td></tr>
+            <tr><td>Q2</td><td>業務区分は「業務委託」ですか。</td><td>財務会計システムの業務区分欄</td></tr>
+            <tr><td>Q3</td><td>予算費目は「12節 委託料」ですか。</td><td>起案文書、予算費目欄、kViewerの予算費目欄</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="jump-row" aria-label="判定結果から該当章へ移動">
+        <a class="jump-btn primary" href="#route-a">ルートA：取り込み済み案件へ</a>
+        <a class="jump-btn" href="#route-a2">A-2：12節委託料以外へ</a>
+        <a class="jump-btn" href="#route-bc">ルートB/C：新規登録へ</a>
+        <a class="jump-btn" href="#after">差戻し・削除へ</a>
+      </div>
+      <div class="tbl-wrap" data-scroll>
+        <table class="decision-table">
+          <colgroup><col class="result"><col class="screen"><col class="action"></colgroup>
+          <thead><tr><th>判定結果</th><th>使う画面</th><th>やること</th></tr></thead>
+          <tbody>
+            <tr><td>施行伺を財務会計システムで起票し、業務区分が「業務委託」、予算費目が「12節 委託料」</td><td><span class="route a">ルートA</span> kViewer</td><td>既存案件を検索し、編集ボタンから不足項目を入力して送信します。</td></tr>
+            <tr><td>施行伺を財務会計システムで起票し、業務区分が「業務委託」、予算費目が「12節 委託料以外」</td><td><span class="route a">A-2</span> kViewer</td><td>追加入力せず、「削除対象」にチェックして送信します。削除理由は不要です。</td></tr>
+            <tr><td>施行伺を財務会計システムで起票したが、業務区分が「業務委託」以外</td><td><span class="route b">ルートB</span> FormBridge</td><td>自動取込み対象外のため、FormBridgeで全項目を新規入力します。</td></tr>
+            <tr><td>財務会計システムで施行伺から起票せず、電算外で契約した案件</td><td><span class="route c">ルートC</span> FormBridge</td><td>FormBridgeで全項目を新規入力します。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note example">
+        <strong>財務会計システム画面について</strong>
+        財務会計システムは本HTMLから取得できないため、実画面画像は差し込んでいません。確認する場所は「業務区分」と「予算費目」です。画面を追加する場合は、件名、金額、業者名、認証情報を必ずマスクしてください。
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2 class="part">FormBridge・kViewer基本</h2>
+      <div class="grid three">
+        <div class="card">
+          <h3 id="tool-kintone">kintone</h3>
+          <p>台帳データの保管先です。各課は通常、kintone本体を直接操作しません。</p>
+        </div>
+        <div class="card">
+          <h3 id="tool-formbridge">FormBridge</h3>
+          <p>kintoneへ直接データを登録するWebフォームです。回答内容はkintone側に保存されます。新規入力、またはkViewerからの編集入力で使います。</p>
+        </div>
+        <div class="card">
+          <h3 id="tool-kviewer">kViewer</h3>
+          <p>kintone内の情報を、必要な項目だけ外部から閲覧できるビューです。本マニュアルでは既存案件の検索と編集入口として使います。</p>
+        </div>
+      </div>
+      <div class="flow">
+        <div class="node"><strong>1. kViewerで閲覧</strong>課名・件名などで該当案件を探します。</div>
+        <div class="node"><strong>2. 編集ボタン</strong>該当案件の編集画面へ進みます。</div>
+        <div class="node"><strong>3. FormBridgeで回答</strong>不足項目を入力し、回答ボタンで送信します。</div>
+        <div class="node"><strong>4. kintoneを更新</strong>送信内容が台帳データに反映されます。</div>
+      </div>
+      <div class="note warn">
+        <strong>公式情報を踏まえた注意</strong>
+        トヨクモ公式情報では、公開フォーム・公開ビューは便利な一方、意図しない情報公開、大量アクセス時の制限、アクセス制御の設計が重要とされています。本台帳では、契約監理課が案内したURL・手順・公開範囲だけを使用してください。
+      </div>
+    </section>
+
+    <section id="route-a">
+      <h2 class="part">ルートA：kViewerで取り込み済み案件を編集する</h2>
+      <div class="chapter-summary" aria-label="ルートAの要約">
+        <div class="summary-item"><strong>使う画面</strong><span>kViewer → FormBridge編集画面</span></div>
+        <div class="summary-item"><strong>やること</strong><span>検索、予算費目確認、不足項目入力</span></div>
+        <div class="summary-item"><strong>最後の操作</strong><span>回答送信後、一覧で更新確認</span></div>
+      </div>
+      <p>ルートAは、財務会計システムで業務区分「業務委託」として処理され、契約監理課が台帳へ取り込んだ案件です。各課はkViewerで自分の案件を探し、予算費目を確認してから入力します。</p>
+      <h3 class="sec" id="route-a-flow">ルートAの全体手順</h3>
+      <ol class="steps">
+        <li><span class="st-title">契約監理課から取込み通知を受ける</span>取込み前はkViewerで案件が見つからない場合があります。通知後に作業してください。</li>
+        <li><span class="st-title">kViewerを開く</span>「まず開くURL一覧」からkViewerを開きます。</li>
+        <li><span class="st-title">課名または件名で検索する</span>検索結果が多い場合は、件名の特徴語、施設名、年度、課名など検索語を変えて確認します。</li>
+        <li><span class="st-title">該当案件を開き、予算費目を確認する</span>最初に「12節 委託料」か「12節 委託料以外」かを確認します。</li>
+        <li><span class="st-title">編集ボタンからFormBridge入力画面へ進む</span>予算費目が12節委託料なら、不足項目を入力します。</li>
+        <li><span class="st-title">回答ボタンで送信し、一覧で更新を確認する</span>送信後はkViewer一覧に戻り、更新内容が反映されているか確認します。</li>
+      </ol>
+      <div class="note important">
+        <strong>kViewer検索の実務ポイント</strong>
+        kViewerの検索は、kintoneの検索仕様に準じる部分があります。見つからないときは、長い件名を丸ごと入れず、2文字以上の特徴語、課名、施設名などに分けて探してください。
+      </div>
+      <div class="shot-stack">
+        <figure class="manual-shot" aria-label="kViewer一覧画面">
+          <div class="shot-scroll"><img src="manual-assets/kviewer-01-list-redacted.png" alt="kViewer一覧画面。実データをマスクし、詳細リンクと一覧確認箇所を示した画像。"></div>
+          <figcaption>
+            <strong>kViewer一覧で見る場所</strong>
+            <ul class="shot-points">
+              <li>左端の「詳細」から案件を開く</li>
+              <li>一覧で対象案件を探す</li>
+              <li>実データはマスクして扱う</li>
+            </ul>
+          </figcaption>
+        </figure>
+        <figure class="manual-shot" aria-label="kViewer詳細画面">
+          <div class="shot-scroll"><img src="manual-assets/kviewer-02-detail-redacted.png" alt="kViewer詳細画面。項目名と実データのマスク位置を示した画像。"></div>
+          <figcaption>
+            <strong>kViewer詳細で見る場所</strong>
+            <ul class="shot-points">
+              <li>項目名を上から確認する</li>
+              <li>予算費目と契約情報を確認する</li>
+              <li>実データは共有時にマスクする</li>
+            </ul>
+          </figcaption>
+        </figure>
+        <figure class="manual-shot" aria-label="kViewerからFormBridge編集画面へ進んだ画面">
+          <div class="shot-scroll"><img src="manual-assets/kviewer-04-edit-form-entry-redacted.png" alt="kViewerからFormBridge編集画面へ進んだ画面。課名検索結果、案件情報、入力欄を示した画像。"></div>
+          <figcaption>
+            <strong>編集画面で見る場所</strong>
+            <ul class="shot-points">
+              <li>課名検索結果を確認する</li>
+              <li>案件情報は既存値を確認する</li>
+              <li>必要な入力欄だけ追記する</li>
+            </ul>
+          </figcaption>
+        </figure>
+      </div>
+
+      <h3 class="sec" id="route-a-autofill">自動入力されている項目</h3>
+      <p>次の13項目は、財務会計システムから取り込まれた時点で入力済みです。明らかな誤りがある場合は各課で直接修正せず、契約監理課へ連絡してください。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>#</th><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>所属情報</td><td>部No・部・課No・課</td></tr>
+            <tr><td>2</td><td>件名</td><td>契約の正式名称</td></tr>
+            <tr><td>3</td><td>履行場所</td><td>業務を行う場所</td></tr>
+            <tr><td>4</td><td>業種情報</td><td>業種No・契約業種名称など</td></tr>
+            <tr><td>5</td><td>入札日</td><td>入札を実施した日</td></tr>
+            <tr><td>6</td><td>契約日</td><td>契約を締結した日</td></tr>
+            <tr><td>7</td><td>期間開始</td><td>履行期間の開始日</td></tr>
+            <tr><td>8</td><td>期間終了</td><td>履行期間の終了日</td></tr>
+            <tr><td>9</td><td>入札参加業者数</td><td>入札に参加した業者の総数</td></tr>
+            <tr><td>10</td><td>契約業者名称</td><td>契約相手の正式名称</td></tr>
+            <tr><td>11</td><td>所在地</td><td>契約業者の所在地</td></tr>
+            <tr><td>12</td><td>予定価格（税込）</td><td>設定した予定価格</td></tr>
+            <tr><td>13</td><td>契約金額（税込）</td><td>当初契約の契約金額</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sec" id="route-a-missing">12節委託料の不足項目</h3>
+      <div class="tbl-wrap" data-scroll>
+        <table class="three-col-label">
+          <colgroup><col class="no"><col class="item"><col class="kind"><col></colgroup>
+          <thead><tr><th>#</th><th>項目</th><th>区分</th><th>入力のヒント</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>予算費目</td><td><span class="badge req">必須</span></td><td>「12節 委託料」を選択</td></tr>
+            <tr><td>2</td><td>スライド条項の適用</td><td><span class="badge req">必須</span></td><td>複数年契約でスライド条項を適用している場合のみ「有」</td></tr>
+            <tr><td>3</td><td>その他（業種）</td><td><span class="badge cond">条件付き</span></td><td>業種が空欄、または一覧に該当がない場合のみ記入</td></tr>
+            <tr><td>4</td><td>積算方法</td><td><span class="badge req">必須</span></td><td>本市積算基準、参考見積、過年度実績、その他から選択</td></tr>
+            <tr><td>5</td><td>積算根拠</td><td><span class="badge cond">条件付き</span></td><td>積算方法で「その他」を選んだとき具体内容を記入</td></tr>
+            <tr><td>6</td><td>契約種別</td><td><span class="badge req">必須</span></td><td>単年度契約、債務負担行為、長期継続契約から契約書・予算資料に合うものを選択</td></tr>
+            <tr><td>7</td><td>随意契約による適用号</td><td><span class="badge cond">条件付き</span></td><td>入札種別が随意契約または見積合わせのとき、1号から9号の中から選択。少額随契・見積合わせは1号、その他は理由書の号を確認</td></tr>
+            <tr><td>8</td><td>辞退・欠席業者数</td><td><span class="badge cond">条件付き</span></td><td>辞退または欠席した業者がいるとき人数を入力。いない場合は0を入力</td></tr>
+            <tr><td>9</td><td>くじ引き業者数</td><td><span class="badge cond">条件付き</span></td><td>くじ引きを行ったとき、くじを引いた業者数を入力。行っていない場合は0を入力</td></tr>
+            <tr><td>10</td><td>無効業者数</td><td><span class="badge cond">条件付き</span></td><td>無効となった業者がいるとき人数を入力。いない場合は0を入力</td></tr>
+            <tr><td>11</td><td>障害者雇用促進企業指名業者数</td><td><span class="badge cond">条件付き</span></td><td>障害者雇用促進企業を指名したとき、指名した業者数を入力。指名していない場合は0を入力</td></tr>
+            <tr><td>12</td><td>契約手続方法</td><td><span class="badge req">必須</span></td><td>電子契約システムで締結した場合は「電子契約」、それ以外は「紙契約」を選択</td></tr>
+            <tr><td>13</td><td>予定価格の設定方法</td><td><span class="badge req">必須</span></td><td>予定価格を総額で設定した場合は「総価」、単価で設定した場合は「単価」を選択</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="route-a2">
+      <h2 class="part">A-2：12節委託料以外を削除対象として送信する</h2>
+      <div class="chapter-summary" aria-label="A-2の要約">
+        <div class="summary-item"><strong>使う画面</strong><span>kViewer → FormBridge編集画面</span></div>
+        <div class="summary-item"><strong>やること</strong><span>予算費目確認、削除対象チェック</span></div>
+        <div class="summary-item"><strong>最後の操作</strong><span>追加入力せず回答送信</span></div>
+      </div>
+      <p>業務区分が「業務委託」でも、予算費目が「12節 委託料」以外の案件は台帳本登録の対象外です。この場合は不足項目を入力せず、削除対象として契約監理課へ知らせます。</p>
+      <ol class="steps">
+        <li><span class="st-title">kViewerで該当案件を開く</span>課名・件名で検索し、対象案件を開きます。</li>
+        <li><span class="st-title">予算費目が12節委託料以外であることを確認</span>ここを確認せずに削除対象にしないでください。</li>
+        <li><span class="st-title">編集ボタンを押す</span>入力画面に進みます。</li>
+        <li><span class="st-title">追加入力はしない</span>随意契約理由、積算根拠、公告文PDF、各課入力事項などは入力しません。</li>
+        <li><span class="st-title">削除対象にチェックして回答送信</span>「削除対象」にチェックし、回答ボタンで送信します。</li>
+      </ol>
+      <div class="note warn">
+        <strong>A-2では削除理由を書かない</strong>
+        12節委託料以外で削除対象にする場合、削除理由は不要です。二重登録・誤登録など別理由の削除依頼とは手順が異なります。
+      </div>
+    </section>
+
+    <section id="route-bc">
+      <h2 class="part">ルートB/C：FormBridgeで新規登録する案件</h2>
+      <div class="chapter-summary" aria-label="ルートB/Cの要約">
+        <div class="summary-item"><strong>使う画面</strong><span>FormBridge入力フォーム</span></div>
+        <div class="summary-item"><strong>やること</strong><span>STEP 1から10まで全項目入力</span></div>
+        <div class="summary-item"><strong>最後の操作</strong><span>内容確認済にチェックし回答送信</span></div>
+      </div>
+      <p>ルートB・Cは、財務会計システムから自動取込みされない案件です。特にルートCは、財務会計システムで施行伺から起票せず、電算外で契約した案件です。FormBridgeを開き、STEP 1からSTEP 10まで上から順に入力します。</p>
+      <div class="flow">
+        <div class="node"><strong>STEP 1</strong>担当課</div>
+        <div class="node"><strong>STEP 2</strong>基本情報</div>
+        <div class="node"><strong>STEP 3</strong>業種</div>
+        <div class="node"><strong>STEP 4</strong>積算方法</div>
+        <div class="node"><strong>STEP 5</strong>契約・入札種別</div>
+        <div class="node"><strong>STEP 6</strong>日程</div>
+        <div class="node"><strong>STEP 7</strong>業者情報</div>
+        <div class="node"><strong>STEP 8</strong>契約金額</div>
+        <div class="node"><strong>STEP 9</strong>各課入力事項</div>
+        <div class="node"><strong>STEP 10</strong>確認・送信</div>
+      </div>
+      <div class="shot-stack">
+        <figure class="manual-shot" aria-label="FormBridge冒頭画面">
+          <div class="shot-scroll"><img src="manual-assets/formbridge-01-top-search-annotated.png" alt="FormBridge冒頭画面。課名検索、基本項目、必須項目を示した画像。"></div>
+          <figcaption>
+            <strong>FormBridge冒頭で見る場所</strong>
+            <ul class="shot-points">
+              <li>課名検索で所属を表示する</li>
+              <li>件名・履行場所を入力する</li>
+              <li>必須項目を残さない</li>
+            </ul>
+          </figcaption>
+        </figure>
+        <figure class="manual-shot" aria-label="FormBridge契約種別入力画面">
+          <div class="shot-scroll"><img src="manual-assets/formbridge-03-basic-contract-annotated.png" alt="FormBridge契約種別入力画面。業種選択、積算方法、契約種別を示した画像。"></div>
+          <figcaption>
+            <strong>契約情報で見る場所</strong>
+            <ul class="shot-points">
+              <li>業種を検索・選択する</li>
+              <li>積算方法を選ぶ</li>
+              <li>契約種別を誤らない</li>
+            </ul>
+          </figcaption>
+        </figure>
+        <figure class="manual-shot" aria-label="FormBridge確認送信画面">
+          <div class="shot-scroll"><img src="manual-assets/formbridge-06-confirm-submit-annotated.png" alt="FormBridge確認送信画面。金額入力、各課入力事項、回答ボタンを示した画像。"></div>
+          <figcaption>
+            <strong>送信前に見る場所</strong>
+            <ul class="shot-points">
+              <li>金額は税込で入力する</li>
+              <li>各課入力事項を確認する</li>
+              <li>最後に回答ボタンを押す</li>
+            </ul>
+          </figcaption>
+        </figure>
+      </div>
+
+      <h3 class="sec" id="step-1">STEP 1 担当課の入力</h3>
+      <p>「課名検索」欄にキーワードを入力し、検索ボタンで該当する課の情報を表示します。表示された部No・部・課No・課が自分の所属と一致しているか確認してください。</p>
+      <h3 class="sec" id="step-2">STEP 2 案件の基本情報</h3>
+      <h5 class="field">件名 <span class="badge req">必須</span></h5>
+      <p>契約書または施行伺の正式名称を入力します。同一・類似案件が複数ある場合は「その1」「その2」、対象施設名、対象地区名、業務内容の違いなどを加え、案件の違いが分かる名称にしてください。</p>
+      <div class="note example"><strong>良い例・避けたい例</strong>良い例：東部地区除草業務委託その1、大分市立〇〇小学校樹木剪定業務委託。避けたい例：除草業務委託、介護審査料4月分。</div>
+      <h5 class="field">履行場所 <span class="badge req">必須</span></h5>
+      <p>業務を実際に行う場所を入力します。例：大分市役所本庁舎、大分市内一円、対象施設名。</p>
+      <h5 class="field">予算費目 <span class="badge req">必須</span></h5>
+      <p>起案文書の予算費目欄を確認し、「12節 委託料」または「12節 委託料以外」を選択します。</p>
+      <div class="note example">
+        <strong>要確認：文字入力ルール</strong>
+        環境依存文字を使わない、半角英数字記号で入力するなどの制限を設ける対象項目は、契約監理課の運用確認後に確定してください。
+      </div>
+      <h5 class="field">スライド条項の適用 <span class="badge req">必須</span></h5>
+      <p>複数年契約でスライド条項を適用している場合のみ「有」を選択します。それ以外は「無」を選択します。</p>
+
+      <h3 class="sec" id="step-3">STEP 3 業種の入力</h3>
+      <ul class="bullets">
+        <li>業種No・契約業種名称：該当する業種の番号と名称を入力します。</li>
+        <li>詳細業種No・契約詳細業種名称：詳細業種の指定がある場合のみ入力します。</li>
+        <li>その他：業種一覧に該当がない場合に自由記述で入力します。</li>
+      </ul>
+
+      <h3 class="sec" id="step-4">STEP 4 積算方法の選択</h3>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>選択肢</th><th>判断の目安</th></tr></thead>
+          <tbody>
+            <tr><td>本市積算基準</td><td>大分市が提供する積算基準をもとに積算した場合</td></tr>
+            <tr><td>参考見積</td><td>業者等からの見積書を参考に積算した場合</td></tr>
+            <tr><td>過年度実績</td><td>過年度の契約実績を踏まえて積算した場合</td></tr>
+            <tr><td>その他</td><td>国・県・外部団体の単価、独自資料などを参考に積算した場合。積算根拠欄に具体内容を記入します。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sec" id="step-5">STEP 5 契約・入札種別</h3>
+      <h5 class="field">契約種別 <span class="badge req">必須</span></h5>
+      <p>単年度契約、債務負担行為、長期継続契約から選びます。複数年度にまたがる場合は契約書・予算資料で根拠を確認してください。</p>
+      <div class="note example">
+        <strong>要確認：年度をまたぐ契約の扱い</strong>
+        履行期間が1会計年度以内で、契約日だけが前年度にある案件の登録要否・登録年度は、契約監理課の運用確認後に確定してください。
+      </div>
+      <h5 class="field">入札種別名称 <span class="badge req">必須</span></h5>
+      <p>一般競争入札、指名競争入札、随意契約、見積合わせのいずれかを選びます。随意契約・見積合わせの場合は適用号と理由の要否に注意してください。</p>
+
+      <h3 class="sec" id="step-6">STEP 6 日程の入力</h3>
+      <p>入札日、契約日、期間開始、期間終了を入力します。契約書、入札結果、施行伺の日付と矛盾しないか確認してください。</p>
+      <h3 class="sec" id="step-7">STEP 7 業者情報の入力</h3>
+      <div class="tbl-wrap" data-scroll>
+        <table class="three-col-label">
+          <colgroup><col class="item"><col class="kind"><col></colgroup>
+          <thead><tr><th>項目</th><th>区分</th><th>入力内容</th></tr></thead>
+          <tbody>
+            <tr><td>入札参加業者数</td><td><span class="badge req">必須</span></td><td>入札に参加した業者、または指名した業者の総数</td></tr>
+            <tr><td>辞退・欠席業者数</td><td><span class="badge cond">条件付き</span></td><td>辞退・欠席した業者がいるとき人数を入力。いない場合は0を入力</td></tr>
+            <tr><td>くじ引き業者数</td><td><span class="badge cond">条件付き</span></td><td>くじ引きを行ったとき、くじを引いた業者数を入力。行っていない場合は0を入力</td></tr>
+            <tr><td>無効業者数</td><td><span class="badge cond">条件付き</span></td><td>無効となった業者がいるとき人数を入力。いない場合は0を入力</td></tr>
+            <tr><td>障害者雇用促進企業指名業者数</td><td><span class="badge cond">条件付き</span></td><td>障害者雇用促進企業を指名したとき、指名した業者数を入力。指名していない場合は0を入力</td></tr>
+            <tr><td>契約業者名称</td><td><span class="badge req">必須</span></td><td>契約相手方の正式名称。株式会社等の法人格を省略しない</td></tr>
+            <tr><td>所在地</td><td><span class="badge req">必須</span></td><td>契約書または業者登録情報に記載された所在地を入力</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sec" id="step-8">STEP 8 契約金額の入力</h3>
+      <p>予定価格・契約金額は税込で入力します。税抜金額と混同しないでください。</p>
+      <div class="note example">
+        <strong>要確認：単価契約の計算方法</strong>
+        予算額を予定単価で割って数量を出し、その数量に契約単価を掛ける方法を使うかは、契約監理課の運用確認後に確定してください。
+      </div>
+      <div class="tbl-wrap" data-scroll>
+        <table class="label-table">
+          <colgroup><col class="item"><col class="kind"><col></colgroup>
+          <thead><tr><th>項目</th><th>区分</th><th>入力内容</th></tr></thead>
+          <tbody>
+            <tr><td>契約手続方法</td><td><span class="badge req">必須</span></td><td>紙契約または電子契約</td></tr>
+            <tr><td>予定価格の設定方法</td><td><span class="badge req">必須</span></td><td>総価または単価</td></tr>
+            <tr><td>予定価格（税込）</td><td><span class="badge req">必須</span></td><td>設定した予定価格を税込金額で入力</td></tr>
+            <tr><td>契約金額（税込）</td><td><span class="badge req">必須</span></td><td>当初契約の契約金額を税込金額で入力。変更契約後の金額と混同しない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sec" id="step-9">STEP 9 各課入力事項</h3>
+      <p>次に当てはまるときは、後で第三者が見て判断できるように補足します。発注経緯が通常と異なるとき、単価契約で予算配分額を使ったとき、契約解除があるときです。変更契約の追記要否は、契約監理課の修正依頼がある場合に確認します。</p>
+      <div class="note example">
+        <strong>入力例</strong>
+        「予定数量が不明のため、予算配分額で予定価格・契約金額を入力」／「災害対応のため緊急発注。発注経緯は別添資料のとおり」／「令和7年9月30日付けで契約解除」
+      </div>
+
+      <h3 class="sec" id="step-10">STEP 10 確認チェックと送信</h3>
+      <p>入力内容を確認し、該当するチェックボックスを入れてから、ページ下部の回答ボタンで送信します。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>チェック項目</th><th>使う場面</th></tr></thead>
+          <tbody>
+            <tr><td>内容確認済（各課対応）</td><td>新規登録または不足項目の入力が完了し、根拠資料との照合が終わったとき</td></tr>
+            <tr><td>修正対応済（各課対応）</td><td>契約監理課からの修正依頼に対応し終えたとき</td></tr>
+            <tr><td>削除対象（各課対応）</td><td>12節委託料以外、二重登録、誤登録、本来登録すべきでない案件を契約監理課へ知らせるとき</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sec" id="evidence">入力欄と根拠資料</h3>
+      <p>どの資料を見て入力するかを先に決めると、推測入力や差戻しを減らせます。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table class="evidence-table">
+          <colgroup><col class="field"><col class="source"><col class="point"></colgroup>
+          <thead><tr><th>入力欄</th><th>主な根拠資料</th><th>確認ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>件名・履行場所</td><td>契約書、施行伺</td><td>正式名称、対象施設、対象地区を確認</td></tr>
+            <tr><td>予算費目</td><td>起案文書、予算費目欄</td><td>12節委託料か、それ以外かを確認</td></tr>
+            <tr><td>契約種別</td><td>契約書、予算資料</td><td>単年度、債務負担行為、長期継続を確認</td></tr>
+            <tr><td>入札種別・参加者数</td><td>入札結果、見積結果</td><td>一般競争、指名競争、随意契約、見積合わせを確認</td></tr>
+            <tr><td>随意契約理由</td><td>随意契約理由書</td><td>適用号と具体的な理由を照合</td></tr>
+            <tr><td>金額・日程</td><td>契約書、入札結果、起案文書</td><td>税込金額、契約日、履行期間を確認</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cases">
+      <h2 class="part">ケース別入力</h2>
+      <p>自分の案件に該当するケースだけ確認してください。複数該当する場合は、それぞれの節を確認します。</p>
+
+      <h3 class="sec" id="case-negotiated">随意契約・見積合わせ</h3>
+      <p>入札種別で随意契約または見積合わせを選ぶ場合は、根拠条文と理由の入力要否を確認します。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>区分</th><th>適用号</th><th>随意契約理由欄</th><th>注意点</th></tr></thead>
+          <tbody>
+            <tr><td>少額随契・見積合わせ</td><td>1号</td><td>詳細記入は不要。適用号欄が表示されている場合は1号を選択</td><td>入札参加業者数・見積業者数の入力を忘れない</td></tr>
+            <tr><td>2号から9号の随意契約</td><td>理由書の該当号</td><td>具体的な理由を記入</td><td>決裁時の随意契約理由書を基本に、第三者が読んで理解できる文章にする</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note example"><strong>良い例</strong>本業務は、当該設備の製造元である〇〇株式会社にのみ技術仕様が開示されており、保守用部品の供給も同社からのみ可能であるため、他に契約の相手方となりうる業者が存在しない。よって地方自治法施行令第167条の2第1項第2号により随意契約とした。</div>
+      <div class="note warn"><strong>避けたい例</strong>「特殊な技術が必要なため、随意契約とした。」だけでは具体性が不足します。</div>
+      <div class="note important"><strong>ホームページ公表を前提に記入</strong>随意契約理由はホームページ公表で使う可能性があります。公開されても理由が伝わるよう、契約の相手方を選んだ根拠を具体的に書いてください。</div>
+
+      <h3 class="sec" id="case-open-bid">一般競争入札</h3>
+      <p>一般競争入札の場合は、公告文PDFを添付します。公告文PDFがLGWAN環境や庁内フォルダにある場合、そのままFormBridgeへ添付できないことがあります。庁内の情報持出し・ファイル移送ルールを確認し、インターネット環境で添付できる状態にしてから作業してください。</p>
+      <ol class="steps">
+        <li><span class="st-title">公告文PDFを準備</span>財務会計システムや庁内ファイルサーバから取得します。</li>
+        <li><span class="st-title">紙公告しかない場合</span>紙公告しか残っていない場合は、スキャンしてPDF化してよいか契約監理課または情報管理担当へ確認します。</li>
+        <li><span class="st-title">ファイルサイズ・形式を確認</span>フォーム上に制限表示がある場合は、その制限を優先します。制限表示が見当たらない場合は、10MB以下のPDFを目安にします。</li>
+        <li><span class="st-title">FormBridgeの公告文欄に添付</span>添付後、ファイル名が表示されていることを確認します。</li>
+      </ol>
+
+      <h3 class="sec" id="case-multi-year">債務負担行為・長期継続契約</h3>
+      <p>複数年度にまたがる契約でも、台帳への登録は契約年度の1件のみです。年度ごとに重複登録しません。スライド条項の適用有無は契約書の条文で確認してください。</p>
+
+      <h3 class="sec" id="case-unit-price">単価契約</h3>
+      <p>単価契約では、予定価格・契約金額に単価そのものではなく、合計金額を入力します。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>入力欄</th><th>入力する金額</th></tr></thead>
+          <tbody>
+            <tr><td>予定価格（税込）</td><td>予定単価 × 予定数量の税込金額</td></tr>
+            <tr><td>契約金額（税込）</td><td>契約単価 × 予定数量の税込金額</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>予定数量が明確に決まらない場合は、案件ごとの予算配分額を予定価格・契約金額に入力し、各課入力事項にその旨を記載します。</p>
+
+      <h3 class="sec" id="case-electronic">電子契約</h3>
+      <p>電子契約システムを使って締結した場合は、契約手続方法で電子契約を選択します。紙契約の場合は紙契約を選択します。</p>
+
+      <h3 class="sec" id="case-disabled-employment">障害者雇用促進企業の指名</h3>
+      <p>指名した業者の正式名称を入力します。「株式会社」「有限会社」を省略せず、法人格の前後位置も正確に記入してください。複数業者を指名した場合は、カンマ区切りまたは改行区切りで記入します。</p>
+    </section>
+
+    <section id="after">
+      <h2 class="part">送信後・差戻し・削除依頼</h2>
+      <h3 class="sec" id="after-confirm">送信後の確認</h3>
+      <p>回答ボタンで送信した後は、確認画面または完了表示を確認します。ルートAや差戻し対応では、kViewer一覧に戻り、該当案件が更新されているか確認してください。</p>
+      <h3 class="sec" id="after-remand">差戻し対応</h3>
+      <ol class="steps">
+        <li><span class="st-title">契約監理課から修正依頼を受ける</span>指摘内容を確認します。</li>
+        <li><span class="st-title">kViewerで該当案件を開く</span>検索して対象案件を開きます。</li>
+        <li><span class="st-title">修正事項欄を確認</span>修正事項欄は契約監理課が使う欄です。各課が新たに書き込む欄ではありません。</li>
+        <li><span class="st-title">編集ボタンから修正</span>指摘された箇所だけを修正します。</li>
+        <li><span class="st-title">修正対応済にチェックして送信</span>回答ボタンで送信します。</li>
+      </ol>
+      <h3 class="sec" id="after-change">変更契約</h3>
+      <p>当初契約の情報が台帳にすべて入力されている場合、変更契約分を別案件として新規登録しません。契約監理課から個別修正依頼がある場合や当初入力に誤りがある場合のみ、該当案件を修正します。</p>
+      <div class="note example">
+        <strong>要確認：変更契約時の修正登録</strong>
+        変更契約後の金額・期間を台帳へ修正登録するケースの線引きは、契約監理課の運用確認後に確定してください。
+      </div>
+      <h3 class="sec" id="after-cancel">契約解除</h3>
+      <p>契約解除案件は「削除対象」にチェックを入れないでください。解除日、契約解除の根拠条文、解除理由または解除概要を各課入力事項に記載し、契約経過として台帳に残します。削除処理ができるのは契約監理課のみです。</p>
+      <div class="note example"><strong>入力例</strong>令和7年9月30日付けで契約解除。契約書第〇条に基づき、受託者からの申出により解除。解除日以降の業務履行はなし。</div>
+      <h3 class="sec" id="after-delete">誤登録・二重登録の削除依頼</h3>
+      <p>12節委託料以外ではなく、過去案件の誤登録、二重登録、本来登録すべきでない案件などを削除依頼する場合は、削除理由を記載します。各課では削除処理そのものはできません。契約監理課が確認後に処理します。</p>
+      <ol class="steps">
+        <li><span class="st-title">kViewerで該当案件を開く</span>対象案件を確認します。</li>
+        <li><span class="st-title">編集ボタンをクリック</span>入力画面に進みます。</li>
+        <li><span class="st-title">削除対象にチェック</span>削除対象（各課対応）にチェックします。</li>
+        <li><span class="st-title">各課入力事項に削除理由を記入</span>例：「二重登録のため削除対象の処理」。</li>
+        <li><span class="st-title">回答ボタンで送信</span>契約監理課が確認後に処理します。</li>
+      </ol>
+    </section>
+
+    <section id="pdf">
+      <h2 class="part">PDF保存・印刷方法</h2>
+      <p>このマニュアルはHTMLでの閲覧を基本にしています。PDFで共有・保管する場合は、ブラウザの印刷機能からPDF保存してください。</p>
+      <ol class="steps">
+        <li><span class="st-title">このHTMLをブラウザで開く</span>ChromeまたはEdgeで開くことを推奨します。</li>
+        <li><span class="st-title">印刷を開く</span>画面右下の「PDF保存/印刷」ボタン、またはブラウザの印刷機能を使います。</li>
+        <li><span class="st-title">送信先をPDFにする</span>「PDFに保存」または同等の項目を選びます。</li>
+        <li><span class="st-title">用紙と余白を確認</span>A4、縦、既定または印刷CSS指定の余白で出力します。</li>
+        <li><span class="st-title">プレビューで崩れを確認</span>表、注意枠、手順、チェックリストが不自然に切れていないか確認して保存します。</li>
+      </ol>
+      <div class="note check">
+        <strong>PDF用の自動改ページ</strong>
+        このHTMLにはA4縦用の印刷CSSを組み込んでいます。章見出しは原則として新しいページから始まり、表の見出し行はページをまたいでも繰り返されます。手順・注意枠・チェックリストは途中で分断されにくい設定にしています。
+      </div>
+    </section>
+
+    <section id="appendix">
+      <h2 class="part">FAQ・用語・チェックリスト</h2>
+      <h3 class="sec" id="faq">よくある質問</h3>
+      <div class="grid two">
+        <div class="card">
+          <h4 class="sub">入力前</h4>
+          <p><strong>自分のルートが分かりません。</strong><br>「3分で分かるルート判定」のQ1からQ3を順番に確認してください。不明な場合は施行伺と予算費目欄を確認し、契約監理課へ問い合わせます。</p>
+          <p><strong>スマートフォンで入力できますか。</strong><br>画面上は利用できる場合がありますが、必須項目が多く、資料確認も必要なためPCでの入力を推奨します。</p>
+        </div>
+        <div class="card">
+          <h4 class="sub">入力中</h4>
+          <p><strong>FormBridgeで途中保存できますか。</strong><br>このマニュアルでは一度で送信する前提です。画面上に一時保存の案内がない場合は、資料をそろえてから入力してください。</p>
+          <p><strong>同じ案件を複数人で編集できますか。</strong><br>推奨しません。1案件1担当者で入力してください。同時編集や別タブ編集は不整合につながる可能性があります。</p>
+        </div>
+        <div class="card">
+          <h4 class="sub">送信後</h4>
+          <p><strong>自動入力情報が間違っています。</strong><br>各課で直接修正せず、契約監理課へ連絡してください。財務会計システム側のデータ確認が必要です。</p>
+          <p><strong>過去案件を間違えて登録しました。</strong><br>各課で直接削除できません。削除対象にチェックし、各課入力事項に理由を記載して回答送信してください。</p>
+        </div>
+        <div class="card">
+          <h4 class="sub">困ったとき</h4>
+          <p><strong>kViewerで案件が見つかりません。</strong><br>取込み前の可能性、検索語が合っていない可能性があります。課名・件名の一部・施設名など検索語を変えて確認してください。</p>
+          <p><strong>12節委託料以外は何を入力しますか。</strong><br>追加入力は不要です。削除対象にチェックして回答送信します。削除理由も不要です。</p>
+          <p><strong>公告文PDF以外も移す必要がありますか。</strong><br>入力フォームで添付を求められている公告文PDFのみを移します。他資料の添付が必要に見える場合は、作業前に情報管理担当または契約監理課へ確認してください。</p>
+        </div>
+      </div>
+
+      <h3 class="sec" id="terms">用語ミニ辞典</h3>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>用語</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>12節 委託料</td><td>歳出予算の節区分のひとつ。委託料のための予算費目を指します。</td></tr>
+            <tr><td>業務委託</td><td>職員として雇用する契約ではなく、業務の遂行や目的物の完成を外部事業者へ依頼する契約です。</td></tr>
+            <tr><td>施行伺</td><td>契約や支出などを行う際に、上位の決裁権者の承認を求める文書です。</td></tr>
+            <tr><td>随意契約</td><td>競争入札によらず、特定の相手方を選定して契約する方式です。</td></tr>
+            <tr><td>見積合わせ</td><td>複数業者から見積書を取り、条件を比較して契約する方式です。少額随契で多く使われます。</td></tr>
+            <tr><td>債務負担行為</td><td>複数年度にまたがる支出をあらかじめ予算で議決し、将来年度の支出を約束する行為です。</td></tr>
+            <tr><td>長期継続契約</td><td>複数年にわたり継続して締結できる契約です。</td></tr>
+            <tr><td>単価契約</td><td>単価を定め、実際の数量に応じて支払金額が決まる契約です。</td></tr>
+            <tr><td>LGWAN</td><td>地方公共団体を相互に接続する行政専用ネットワークです。</td></tr>
+            <tr><td>kintone</td><td>台帳データの保管先となる業務アプリ基盤です。</td></tr>
+            <tr><td>FormBridge</td><td>kintoneへ直接データを登録するWebフォームです。</td></tr>
+            <tr><td>kViewer</td><td>kintone内の情報を必要な形で外部閲覧できるビューです。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sec" id="checklist">入力チェックリスト</h3>
+      <ul class="checklist">
+        <li class="group-h">共通チェック</li>
+        <li>自分のルート（A / A-2 / B / C）を確認した</li>
+        <li>契約書、起案文書、入札・見積結果、随意契約理由書など根拠資料を確認した</li>
+        <li>確認できない内容を推測で入力していない</li>
+        <li>金額は税込で入力した</li>
+        <li>件名・業者名は正式名称で入力した</li>
+        <li>支払月・支出負担行為・支払伝票単位ではなく、契約案件単位で登録した</li>
+        <li>修正事項欄には書き込んでいない</li>
+        <li class="group-h">随意契約・見積合わせ</li>
+        <li>適用号を理由書または少額随契の区分で確認した</li>
+        <li>2号から9号の場合、随意契約理由を第三者が読んで分かる文章にした</li>
+        <li class="group-h">一般競争入札</li>
+        <li>公告文PDFを添付した</li>
+        <li>添付後にファイル名が表示されていることを確認した</li>
+        <li class="group-h">単価契約</li>
+        <li>予定価格・契約金額を単価そのものではなく合計金額で入力した</li>
+        <li>予定数量不明の場合、予算配分額で入力した旨を各課入力事項に記載した</li>
+        <li class="group-h">変更契約・契約解除</li>
+        <li>変更契約分を別案件として新規登録していない</li>
+        <li>契約解除案件を削除対象にしていない</li>
+        <li>契約解除の場合、解除日・根拠条文・解除理由または概要を記載した</li>
+        <li class="group-h">削除対象</li>
+        <li>12節委託料以外の場合、追加入力せず削除対象にチェックした</li>
+        <li>誤登録・二重登録の場合、削除理由を各課入力事項に記載した</li>
+        <li class="group-h">最終チェック</li>
+        <li>新規登録または不足項目の入力が完了した場合は内容確認済にチェックした</li>
+        <li>回答ボタンで送信した</li>
+        <li>送信後、kViewer一覧または完了画面で更新を確認した</li>
+      </ul>
+
+      <h3 class="sec" id="contact">連絡先</h3>
+      <p>入力方法、ルート判定、差戻し、削除対象の判断に迷った場合は、契約監理課へ問い合わせてください。</p>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>連絡先</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>契約監理課</td><td>大分市契約監理課</td></tr>
+            <tr><td>電話</td><td>契約監理課の最新通知を確認</td></tr>
+            <tr><td>メール</td><td>契約監理課の最新通知を確認</td></tr>
+            <tr><td>内線</td><td>契約監理課の最新通知を確認</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note check">
+        <strong>問い合わせ前に伝える情報</strong>
+        所属、件名、作業中のルート、困っている画面、エラーメッセージ、確認済み資料を整理してから問い合わせると対応が早くなります。
+      </div>
+      <div class="note warn">
+        <strong>正式版で差し替えが必要</strong>
+        電話、メール、内線は仮置きです。配布前に契約監理課の正式な連絡先へ差し替えてください。
+      </div>
+    </section>
+
+    <section id="sources">
+      <h2 class="part">参考にした公式情報</h2>
+      <ul class="source-list">
+        <li><a href="https://www.kintoneapp.com/form-bridge/about" target="_blank" rel="noopener">FormBridgeとは｜トヨクモのkintone連携サービス</a></li>
+        <li><a href="https://www.kintoneapp.com/kviewer/features" target="_blank" rel="noopener">kViewerの機能｜トヨクモのkintone連携サービス</a></li>
+        <li><a href="https://toyokumo-blog.kintoneapp.com/kviewer_formbridge-t/" target="_blank" rel="noopener">kintoneの情報を外部から安全に閲覧・編集｜kViewer×FormBridge連携ガイド</a></li>
+        <li><a href="https://guide.kintoneapp.com/formbridge/important-note/" target="_blank" rel="noopener">トヨクモ製品利用時の注意点｜kintone連携サービス操作ガイド</a></li>
+      </ul>
+      <p style="text-align:center; margin-top:38px; color:var(--muted); font-size:13px;">このマニュアルは定期的に更新されます。最新版は契約監理課からの通知を確認してください。</p>
+    </section>
+  </main>
+</div>
+
+<div class="fab-wrap screen-only">
+  <button class="fab secondary" type="button" id="printBtn">PDF保存/印刷</button>
+  <button class="fab" type="button" id="topBtn">先頭へ</button>
+</div>
+
+<script>
+(function(){
+  const copyButtons = document.querySelectorAll(".copy-btn");
+  copyButtons.forEach((button) => {
+    button.addEventListener("click", async () => {
+      const text = button.getAttribute("data-copy") || "";
+      const status = button.parentElement.querySelector(".copy-status");
+      try{
+        await navigator.clipboard.writeText(text);
+        if(status){
+          status.textContent = "コピーしました";
+          window.setTimeout(() => { status.textContent = ""; }, 1800);
+        }
+      }catch(error){
+        if(status){
+          status.textContent = "コピーできない場合はURLを選択してコピーしてください";
+        }
+      }
+    });
+  });
+
+  const printBtn = document.getElementById("printBtn");
+  if(printBtn){
+    printBtn.addEventListener("click", () => window.print());
+  }
+  const topBtn = document.getElementById("topBtn");
+  if(topBtn){
+    topBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+  }
+
+  const links = Array.from(document.querySelectorAll(".toc a"));
+  const sections = links
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
+  if("IntersectionObserver" in window){
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          links.forEach((link) => link.classList.remove("active"));
+          const active = links.find((link) => link.hash === "#" + entry.target.id);
+          if(active){
+            active.classList.add("active");
+          }
+        }
+      });
+    }, {rootMargin:"-25% 0px -65% 0px", threshold:0.01});
+    sections.forEach((section) => observer.observe(section));
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" font-family="'Noto Sans CJK JP', 'Noto Sans JP', sans-serif">
+  <rect width="1000" height="800" fill="#FBFBF9"/>
+  <text x="500" y="40" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">図2: あなたはどのルート? 最初に確認するフローチャート</text>
+  <text x="500" y="65" font-size="13" text-anchor="middle" fill="#6B7280">Yes / No に答えるだけで、自分が進むべきルートが決まります</text>
+
+  <!-- Start -->
+  <g>
+    <ellipse cx="500" cy="110" rx="90" ry="28" fill="#1F2937"/>
+    <text x="500" y="116" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">スタート</text>
+  </g>
+  <line x1="500" y1="138" x2="500" y2="170" stroke="#374151" stroke-width="2"/>
+
+  <!-- Q1 diamond -->
+  <g>
+    <polygon points="500,175 720,255 500,335 280,255" fill="#FFFFFF" stroke="#475569" stroke-width="2"/>
+    <text x="500" y="240" font-size="14" font-weight="700" text-anchor="middle" fill="#1E3A8A">質問1</text>
+    <text x="500" y="265" font-size="14" text-anchor="middle" fill="#1F2937">財務会計システムで</text>
+    <text x="500" y="285" font-size="14" text-anchor="middle" fill="#1F2937">起票しましたか?</text>
+  </g>
+
+  <!-- Q1 No: 左へ → 下へ → ルートCへ -->
+  <line x1="280" y1="255" x2="120" y2="255" stroke="#374151" stroke-width="2"/>
+  <line x1="120" y1="255" x2="120" y2="445" stroke="#374151" stroke-width="2"/>
+  <line x1="120" y1="445" x2="120" y2="480" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <g>
+    <rect x="155" y="240" width="50" height="22" rx="3" fill="#FBFBF9"/>
+    <text x="180" y="256" font-size="13" font-weight="700" text-anchor="middle" fill="#B91C1C">いいえ</text>
+  </g>
+
+  <!-- Q1 Yes: 下へ -->
+  <line x1="500" y1="335" x2="500" y2="380" stroke="#374151" stroke-width="2"/>
+  <g>
+    <rect x="513" y="345" width="40" height="22" rx="3" fill="#FBFBF9"/>
+    <text x="533" y="361" font-size="13" font-weight="700" text-anchor="middle" fill="#047857">はい</text>
+  </g>
+
+  <!-- Q2 diamond -->
+  <g>
+    <polygon points="500,385 720,465 500,545 280,465" fill="#FFFFFF" stroke="#475569" stroke-width="2"/>
+    <text x="500" y="450" font-size="14" font-weight="700" text-anchor="middle" fill="#1E3A8A">質問2</text>
+    <text x="500" y="475" font-size="14" text-anchor="middle" fill="#1F2937">業務区分は</text>
+    <text x="500" y="495" font-size="14" text-anchor="middle" fill="#1F2937">「業務委託」でしたか?</text>
+  </g>
+
+  <!-- Q2 No: 左→下→ルートB -->
+  <line x1="280" y1="465" x2="245" y2="465" stroke="#374151" stroke-width="2"/>
+  <line x1="245" y1="465" x2="245" y2="585" stroke="#374151" stroke-width="2"/>
+  <line x1="245" y1="585" x2="200" y2="585" stroke="#374151" stroke-width="2"/>
+  <line x1="200" y1="585" x2="200" y2="595" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <g>
+    <rect x="252" y="450" width="50" height="22" rx="3" fill="#FBFBF9"/>
+    <text x="277" y="466" font-size="13" font-weight="700" text-anchor="middle" fill="#B91C1C">いいえ</text>
+  </g>
+
+  <!-- Q2 Yes: 右→下→ルートA -->
+  <line x1="720" y1="465" x2="755" y2="465" stroke="#374151" stroke-width="2"/>
+  <line x1="755" y1="465" x2="755" y2="630" stroke="#374151" stroke-width="2"/>
+  <line x1="755" y1="630" x2="720" y2="630" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
+  <g>
+    <rect x="730" y="450" width="40" height="22" rx="3" fill="#FBFBF9"/>
+    <text x="750" y="466" font-size="13" font-weight="700" text-anchor="middle" fill="#047857">はい</text>
+  </g>
+
+  <!-- Route A (right) -->
+  <g>
+    <rect x="540" y="600" width="180" height="120" rx="8" fill="#FFFFFF" stroke="#1E40AF" stroke-width="2"/>
+    <rect x="540" y="600" width="180" height="30" rx="8" fill="#1E40AF"/>
+    <rect x="540" y="623" width="180" height="7" fill="#1E40AF"/>
+    <text x="630" y="621" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルート A</text>
+    <text x="630" y="657" font-size="12" text-anchor="middle" fill="#1F2937">財務会計システム取込み</text>
+    <text x="630" y="678" font-size="12" text-anchor="middle" fill="#1F2937">→ Kviewerで「追記」</text>
+    <text x="630" y="704" font-size="12" font-weight="700" text-anchor="middle" fill="#1E40AF">→ 第2部へ</text>
+  </g>
+
+  <!-- Route B (center-left) -->
+  <g>
+    <rect x="100" y="600" width="180" height="120" rx="8" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
+    <rect x="100" y="600" width="180" height="30" rx="8" fill="#B45309"/>
+    <rect x="100" y="623" width="180" height="7" fill="#B45309"/>
+    <text x="190" y="621" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルート B</text>
+    <text x="190" y="657" font-size="12" text-anchor="middle" fill="#1F2937">区分が「業務委託」以外</text>
+    <text x="190" y="678" font-size="12" text-anchor="middle" fill="#1F2937">→ FormBridgeで全入力</text>
+    <text x="190" y="704" font-size="12" font-weight="700" text-anchor="middle" fill="#B45309">→ 第3部へ</text>
+  </g>
+
+  <!-- Route C (far left, upper) -->
+  <g>
+    <rect x="30" y="450" width="180" height="120" rx="8" fill="#FFFFFF" stroke="#991B1B" stroke-width="2"/>
+    <rect x="30" y="450" width="180" height="30" rx="8" fill="#991B1B"/>
+    <rect x="30" y="473" width="180" height="7" fill="#991B1B"/>
+    <text x="120" y="471" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルート C</text>
+    <text x="120" y="507" font-size="12" text-anchor="middle" fill="#1F2937">電算外で契約処理した</text>
+    <text x="120" y="528" font-size="12" text-anchor="middle" fill="#1F2937">→ FormBridgeで全入力</text>
+    <text x="120" y="554" font-size="12" font-weight="700" text-anchor="middle" fill="#991B1B">→ 第3部へ</text>
+  </g>
+
+  <!-- Bottom note -->
+  <g>
+    <rect x="50" y="745" width="900" height="35" rx="4" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="65" y="767" font-size="12" fill="#475569">※「電算外」とは、財務会計システムを使用せずに契約手続きを行ったケースを指します。</text>
+  </g>
+
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151"/>
+    </marker>
+  </defs>
+</svg>
