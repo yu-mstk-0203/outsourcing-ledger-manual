@@ -1,4 +1,4 @@
-name: Check Pages assets
+name: Pages アセットチェック
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Verify local asset references
+      - name: ローカルアセット参照の検証
         run: |
           node <<'NODE'
           const fs = require("fs");
@@ -30,9 +30,9 @@ jobs:
             .filter(Boolean);
           const missing = refs.filter((ref) => !fs.existsSync(path.join(process.cwd(), ref)));
           if (missing.length) {
-            console.error("Missing local assets:");
+            console.error("不足しているローカルアセット:");
             for (const ref of missing) console.error(`- ${ref}`);
             process.exit(1);
           }
-          console.log(`Checked ${refs.length} local references.`);
+          console.log(`${refs.length} 件のローカル参照を検証しました。`);
           NODE
