@@ -414,7 +414,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
 .manual-shot img{
   display:block;
   width:100%;
-  min-width:760px;
+  max-width:100%;
   height:auto;
   background:#fff;
 }
@@ -425,7 +425,8 @@ tbody tr:nth-child(even){background:#fafbfc;}
 }
 .mock-screen{
   position:relative;
-  min-width:760px;
+  width:100%;
+  min-width:0;
   padding:18px;
   background:#f5f8fb;
 }
@@ -702,7 +703,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
   .tbl-wrap .decision-table{min-width:600px;}
   .tbl-wrap .evidence-table{min-width:600px;}
   th,td{padding:7px 8px; font-size:13px;}
-  .mock-screen{min-width:560px; padding:12px;}
+  .mock-screen{width:100%; min-width:0; padding:12px;}
   .shot-points{grid-template-columns:1fr;}
   .shot-points li{padding:6px 8px; font-size:13px;}
   .manual-shot figcaption{font-size:12px;}
