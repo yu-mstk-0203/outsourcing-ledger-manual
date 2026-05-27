@@ -661,6 +661,9 @@ tbody tr:nth-child(even){background:#fafbfc;}
 }
 
 /* ── ルートモーダル / PDF ガイドモーダル ── */
+/* dialog:not([open]) — browsers without native <dialog> support render
+   dialogs as visible block elements; this hides them explicitly */
+dialog:not([open]){display:none;}
 dialog{
   border:none;
   border-radius:12px;
@@ -753,7 +756,6 @@ dialog::backdrop{
   font-weight:800;
   font-size:14px;
   cursor:pointer;
-  border-bottom:none;
 }
 .modal-link-sub:hover{background:var(--blue-soft);}
 
