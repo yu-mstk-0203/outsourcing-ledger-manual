@@ -737,6 +737,12 @@ tbody tr:nth-child(even){background:#fafbfc;}
   .fab{flex:1; padding:8px 6px; font-size:12px; min-height:40px;}
 }
 
+
+.search-panel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 0;}
+.search-input{flex:1;min-width:220px;min-height:44px;padding:9px 11px;border:1px solid var(--line-strong);border-radius:7px;background:#fff;}
+.search-meta{font-size:12px;color:#dce6f0;}
+mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px;}
+
 @page{
   size:A4 portrait;
   margin:14mm 12mm;
@@ -848,6 +854,13 @@ tbody tr:nth-child(even){background:#fafbfc;}
         <span class="pill">令和8年5月版</span>
         <span class="pill">HTML閲覧・PDF保存対応</span>
         <span class="pill">初心者向け</span>
+      </div>
+      <div class="search-panel screen-only" role="search" aria-label="マニュアル内検索">
+        <input id="manualSearchInput" class="search-input" type="search" placeholder="マニュアル内を検索（例：随意契約、公告文PDF）" aria-label="マニュアル内検索">
+        <button class="jump-btn" type="button" id="searchPrevBtn">前へ</button>
+        <button class="jump-btn" type="button" id="searchNextBtn">次へ</button>
+        <button class="jump-btn" type="button" id="searchClearBtn">クリア</button>
+        <span class="search-meta" id="searchStatus" aria-live="polite"></span>
       </div>
     </header>
 
@@ -1027,7 +1040,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
               <li>左端の「詳細」から案件を開く</li>
               <li>一覧で対象案件を探す</li>
               <li>実データはマスクして扱う</li>
-            </ul>
+              </ul>
           </figcaption>
         </figure>
         <figure class="manual-shot" aria-label="kViewer詳細画面">
@@ -1389,7 +1402,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
       <p>このマニュアルはHTMLでの閲覧を基本にしています。PDFで共有・保管する場合は、ブラウザの印刷機能からPDF保存してください。</p>
       <ol class="steps">
         <li><span class="st-title">このHTMLをブラウザで開く</span>ChromeまたはEdgeで開くことを推奨します。</li>
-        <li><span class="st-title">印刷を開く</span>画面右下の「PDF保存/印刷」ボタン、またはブラウザの印刷機能を使います。</li>
+        <li><span class="st-title">印刷を開く</span>画面右下の「PDF保存/印刷」ボタン、またはブラウザの印刷機能を使います。PCでは各OSの印刷設定画面へ、スマートフォンでは共有先や「ファイルに保存」「PDF保存」等の保存先画面へ遷移します。</li>
         <li><span class="st-title">送信先をPDFにする</span>「PDFに保存」または同等の項目を選びます。</li>
         <li><span class="st-title">用紙と余白を確認</span>A4、縦、既定または印刷CSS指定の余白で出力します。</li>
         <li><span class="st-title">プレビューで崩れを確認</span>表、注意枠、手順、チェックリストが不自然に切れていないか確認して保存します。</li>
@@ -1510,6 +1523,8 @@ tbody tr:nth-child(even){background:#fafbfc;}
         <li><a href="https://www.kintoneapp.com/kviewer/features" target="_blank" rel="noopener">kViewerの機能｜トヨクモのkintone連携サービス</a></li>
         <li><a href="https://toyokumo-blog.kintoneapp.com/kviewer_formbridge-t/" target="_blank" rel="noopener">kintoneの情報を外部から安全に閲覧・編集｜kViewer×FormBridge連携ガイド</a></li>
         <li><a href="https://guide.kintoneapp.com/formbridge/important-note/" target="_blank" rel="noopener">トヨクモ製品利用時の注意点｜kintone連携サービス操作ガイド</a></li>
+        <li><a href="https://developer.mozilla.org/ja/docs/Web/API/Window/print" target="_blank" rel="noopener">Window.print()｜MDN Web Docs</a></li>
+        <li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/search" target="_blank" rel="noopener">&lt;input type="search"&gt;｜MDN Web Docs</a></li>
       </ul>
       <p style="text-align:center; margin-top:38px; color:var(--muted); font-size:13px;">このマニュアルは定期的に更新されます。最新版は契約監理課からの通知を確認してください。</p>
     </section>
@@ -1549,6 +1564,106 @@ tbody tr:nth-child(even){background:#fafbfc;}
   const topBtn = document.getElementById("topBtn");
   if(topBtn){
     topBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+  }
+
+  const searchInput = document.getElementById("manualSearchInput");
+  const searchPrevBtn = document.getElementById("searchPrevBtn");
+  const searchNextBtn = document.getElementById("searchNextBtn");
+  const searchClearBtn = document.getElementById("searchClearBtn");
+  const searchStatus = document.getElementById("searchStatus");
+  const searchScope = document.querySelector("main.content");
+  let searchHits = [];
+  let hitIndex = -1;
+
+  const clearHighlights = () => {
+    if(!searchScope){ return; }
+    searchScope.querySelectorAll("mark.search-hit").forEach((mark) => {
+      const parent = mark.parentNode;
+      if(!parent){ return; }
+      parent.replaceChild(document.createTextNode(mark.textContent || ""), mark);
+      parent.normalize();
+    });
+    searchHits = [];
+    hitIndex = -1;
+  };
+
+  const updateStatus = () => {
+    if(!searchStatus){ return; }
+    searchStatus.textContent = searchHits.length ? `${hitIndex + 1}/${searchHits.length} 件` : "一致なし";
+  };
+
+  const jumpToHit = (index) => {
+    if(!searchHits.length){ return; }
+    hitIndex = (index + searchHits.length) % searchHits.length;
+    const hit = searchHits[hitIndex];
+    if(hit){
+      hit.scrollIntoView({behavior:"smooth", block:"center"});
+      updateStatus();
+    }
+  };
+
+  const runSearch = () => {
+    if(!searchScope || !searchInput){ return; }
+    const query = searchInput.value.trim();
+    clearHighlights();
+    if(!query){
+      if(searchStatus){ searchStatus.textContent = ""; }
+      return;
+    }
+    const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+    const walker = document.createTreeWalker(searchScope, NodeFilter.SHOW_TEXT, {
+      acceptNode(node){
+        if(!node.nodeValue || !node.nodeValue.trim()){ return NodeFilter.FILTER_REJECT; }
+        const parent = node.parentElement;
+        if(!parent){ return NodeFilter.FILTER_REJECT; }
+        if(["SCRIPT","STYLE","MARK"].includes(parent.tagName)){ return NodeFilter.FILTER_REJECT; }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const targets = [];
+    while(walker.nextNode()){ targets.push(walker.currentNode); }
+    targets.forEach((node) => {
+      const text = node.nodeValue || "";
+      let matched = false;
+      const frag = document.createDocumentFragment();
+      let lastIdx = 0;
+      text.replace(regex, (m, offset) => {
+        matched = true;
+        frag.appendChild(document.createTextNode(text.slice(lastIdx, offset)));
+        const mark = document.createElement("mark");
+        mark.className = "search-hit";
+        mark.textContent = m;
+        frag.appendChild(mark);
+        searchHits.push(mark);
+        lastIdx = offset + m.length;
+        return m;
+      });
+      if(matched){
+        frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+        if(node.parentNode){ node.parentNode.replaceChild(frag, node); }
+      }
+    });
+    hitIndex = 0;
+    if(searchHits.length){ jumpToHit(0); } else { updateStatus(); }
+  };
+
+  if(searchInput){
+    searchInput.addEventListener("input", runSearch);
+    searchInput.addEventListener("keydown", (event) => {
+      if(event.key === "Enter"){
+        event.preventDefault();
+        jumpToHit(hitIndex + 1);
+      }
+    });
+  }
+  if(searchPrevBtn){ searchPrevBtn.addEventListener("click", () => jumpToHit(hitIndex - 1)); }
+  if(searchNextBtn){ searchNextBtn.addEventListener("click", () => jumpToHit(hitIndex + 1)); }
+  if(searchClearBtn){
+    searchClearBtn.addEventListener("click", () => {
+      if(searchInput){ searchInput.value = ""; }
+      clearHighlights();
+      if(searchStatus){ searchStatus.textContent = ""; }
+    });
   }
 
   const links = Array.from(document.querySelectorAll(".toc a"));
