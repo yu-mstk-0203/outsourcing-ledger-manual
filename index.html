@@ -735,21 +735,73 @@ tbody tr:nth-child(even){background:#fafbfc;}
     gap:6px;
   }
   .fab{flex:1; padding:8px 6px; font-size:12px; min-height:40px;}
-  .search-floating{left:8px;right:8px;bottom:54px;transform:none;justify-content:space-between;border-radius:12px;padding:8px;gap:6px;}
-  .search-floating .jump-btn{flex:1;min-width:0;min-height:36px;padding:6px 4px;font-size:12px;}
-  .search-floating .search-meta{min-width:auto;font-size:11px;}
+  .search-overlay{padding:6px;}
+  .search-bar{width:100%;max-width:100%;padding:6px 8px;gap:4px;border-radius:8px;}
+  .search-bar input{height:34px;font-size:13px;}
+  .search-count{font-size:11px;min-width:44px;}
+  .search-btn{width:30px;height:30px;}
 }
 
 
-.search-panel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 0;}
-.search-input{flex:1;min-width:220px;min-height:44px;padding:9px 11px;border:1px solid var(--line-strong);border-radius:7px;background:#fff;}
-.search-meta{font-size:12px;color:#dce6f0;}
 mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px;}
 mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201,56,.35);}
-.search-floating{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:none;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,.96);border:1px solid var(--line-strong);border-radius:999px;box-shadow:0 10px 24px rgba(23,32,44,.18);z-index:12;}
-.search-floating.show{display:flex;}
-.search-floating .jump-btn{min-height:38px;padding:6px 11px;min-width:64px;width:auto;}
-.search-floating .search-meta{color:var(--navy);font-weight:700;min-width:80px;text-align:center;}
+.search-overlay{display:none;position:fixed;top:0;right:0;z-index:100;padding:12px;}
+.search-overlay.open{display:block;}
+.search-bar{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  width:420px;
+  max-width:calc(100vw - 24px);
+  padding:8px 10px;
+  background:#fff;
+  border:1px solid var(--line-strong);
+  border-radius:10px;
+  box-shadow:0 8px 28px rgba(23,32,44,.18);
+}
+.search-bar input{
+  flex:1;
+  min-width:0;
+  height:36px;
+  padding:0 8px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  font-size:14px;
+  font-family:inherit;
+  background:#fafbfc;
+  color:var(--ink);
+  outline:none;
+}
+.search-bar input:focus{border-color:var(--navy-2);background:#fff;}
+.search-bar input::placeholder{color:#9aa5b4;}
+.search-count{
+  font-size:12px;
+  font-weight:700;
+  color:var(--navy);
+  white-space:nowrap;
+  min-width:56px;
+  text-align:center;
+}
+.search-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:32px;
+  height:32px;
+  padding:0;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:#fff;
+  color:var(--navy);
+  cursor:pointer;
+  flex-shrink:0;
+  font-size:16px;
+  line-height:1;
+}
+.search-btn:hover{background:var(--blue-soft);border-color:var(--navy-2);}
+.search-btn:active{background:#d8e4f0;}
+.search-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.search-sep{width:1px;height:22px;background:var(--line);flex-shrink:0;}
 
 @page{
   size:A4 portrait;
@@ -863,20 +915,7 @@ mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201
         <span class="pill">HTML閲覧・PDF保存対応</span>
         <span class="pill">初心者向け</span>
       </div>
-      <div class="search-panel screen-only" role="search" aria-label="マニュアル内検索">
-        <input id="manualSearchInput" class="search-input" type="search" placeholder="マニュアル内を検索（例：随意契約、公告文PDF）" aria-label="マニュアル内検索">
-        <button class="jump-btn" type="button" id="searchPrevBtn">前へ</button>
-        <button class="jump-btn" type="button" id="searchNextBtn">次へ</button>
-        <button class="jump-btn" type="button" id="searchClearBtn">クリア</button>
-        <span class="search-meta" id="searchStatus" aria-live="polite"></span>
-      </div>
     </header>
-    <div class="search-floating screen-only" id="searchFloatingNav" aria-label="検索ナビゲーション">
-      <button class="jump-btn" type="button" id="searchPrevFab">前へ</button>
-      <span class="search-meta" id="searchStatusFab" aria-live="polite"></span>
-      <button class="jump-btn" type="button" id="searchNextFab">次へ</button>
-      <button class="jump-btn" type="button" id="searchClearFab">クリア</button>
-    </div>
 
     <section class="print-only" aria-label="PDF用概要">
       <div class="note important">
@@ -1545,8 +1584,21 @@ mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201
   </main>
 </div>
 
+<div class="search-overlay screen-only" id="searchOverlay" role="search" aria-label="マニュアル内検索">
+  <div class="search-bar">
+    <input id="searchInput" type="search" placeholder="検索…" aria-label="マニュアル内検索" autocomplete="off">
+    <span class="search-count" id="searchCount" aria-live="polite"></span>
+    <div class="search-sep"></div>
+    <button class="search-btn" type="button" id="searchPrevBtn" title="前の結果"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+    <button class="search-btn" type="button" id="searchNextBtn" title="次の結果"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="search-sep"></div>
+    <button class="search-btn" type="button" id="searchCloseBtn" title="閉じる (Esc)"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+</div>
+
 <div class="fab-wrap screen-only">
   <button class="fab secondary" type="button" id="printBtn">PDF保存/印刷</button>
+  <button class="fab secondary" type="button" id="searchFab">検索</button>
   <button class="fab" type="button" id="topBtn">先頭へ</button>
 </div>
 
@@ -1580,25 +1632,31 @@ mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201
     topBtn.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
   }
 
-  const searchInput = document.getElementById("manualSearchInput");
-  const searchPrevBtn = document.getElementById("searchPrevBtn");
-  const searchNextBtn = document.getElementById("searchNextBtn");
-  const searchClearBtn = document.getElementById("searchClearBtn");
-  const searchFloatingNav = document.getElementById("searchFloatingNav");
-  const searchPrevFab = document.getElementById("searchPrevFab");
-  const searchNextFab = document.getElementById("searchNextFab");
-  const searchClearFab = document.getElementById("searchClearFab");
-  const searchStatusFab = document.getElementById("searchStatusFab");
-  const searchStatus = document.getElementById("searchStatus");
+  const overlay = document.getElementById("searchOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const searchCount = document.getElementById("searchCount");
   const searchScope = document.querySelector("main.content");
   let searchHits = [];
   let hitIndex = -1;
 
+  const openSearch = () => {
+    if(!overlay) return;
+    overlay.classList.add("open");
+    if(searchInput){ searchInput.focus(); searchInput.select(); }
+  };
+  const closeSearch = () => {
+    if(!overlay) return;
+    overlay.classList.remove("open");
+    clearHighlights();
+    if(searchInput) searchInput.value = "";
+    if(searchCount) searchCount.textContent = "";
+  };
+
   const clearHighlights = () => {
-    if(!searchScope){ return; }
+    if(!searchScope) return;
     searchScope.querySelectorAll("mark.search-hit").forEach((mark) => {
       const parent = mark.parentNode;
-      if(!parent){ return; }
+      if(!parent) return;
       parent.replaceChild(document.createTextNode(mark.textContent || ""), mark);
       parent.normalize();
     });
@@ -1606,48 +1664,43 @@ mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201
     hitIndex = -1;
   };
 
-  const updateStatus = () => {
-    if(!searchStatus){ return; }
-    const text = searchHits.length ? `${hitIndex + 1}/${searchHits.length} 件` : "一致なし";
-    searchStatus.textContent = text;
-    if(searchStatusFab){ searchStatusFab.textContent = text; }
-    if(searchFloatingNav){ searchFloatingNav.classList.toggle("show", !!searchHits.length); }
+  const updateCount = () => {
+    if(!searchCount) return;
+    if(searchHits.length){
+      searchCount.textContent = (hitIndex + 1) + " / " + searchHits.length;
+    } else if(searchInput && searchInput.value.trim()){
+      searchCount.textContent = "0 件";
+    } else {
+      searchCount.textContent = "";
+    }
   };
 
   const jumpToHit = (index) => {
-    if(!searchHits.length){ return; }
+    if(!searchHits.length) return;
     hitIndex = (index + searchHits.length) % searchHits.length;
-    const hit = searchHits[hitIndex];
-    if(hit){
-      searchHits.forEach((item) => item.classList.remove("current-hit"));
-      hit.classList.add("current-hit");
-      hit.scrollIntoView({behavior:"smooth", block:"center"});
-      updateStatus();
-    }
+    searchHits.forEach((item) => item.classList.remove("current-hit"));
+    searchHits[hitIndex].classList.add("current-hit");
+    searchHits[hitIndex].scrollIntoView({behavior:"smooth", block:"center"});
+    updateCount();
   };
 
   const runSearch = () => {
-    if(!searchScope || !searchInput){ return; }
+    if(!searchScope || !searchInput) return;
     const query = searchInput.value.trim();
     clearHighlights();
-    if(!query){
-      if(searchStatus){ searchStatus.textContent = ""; }
-      if(searchStatusFab){ searchStatusFab.textContent = ""; }
-      if(searchFloatingNav){ searchFloatingNav.classList.remove("show"); }
-      return;
-    }
+    if(!query){ updateCount(); return; }
     const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
     const walker = document.createTreeWalker(searchScope, NodeFilter.SHOW_TEXT, {
       acceptNode(node){
-        if(!node.nodeValue || !node.nodeValue.trim()){ return NodeFilter.FILTER_REJECT; }
-        const parent = node.parentElement;
-        if(!parent){ return NodeFilter.FILTER_REJECT; }
-        if(["SCRIPT","STYLE","MARK"].includes(parent.tagName)){ return NodeFilter.FILTER_REJECT; }
+        if(!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        const p = node.parentElement;
+        if(!p) return NodeFilter.FILTER_REJECT;
+        if(["SCRIPT","STYLE","MARK"].includes(p.tagName)) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
     const targets = [];
-    while(walker.nextNode()){ targets.push(walker.currentNode); }
+    while(walker.nextNode()) targets.push(walker.currentNode);
     targets.forEach((node) => {
       const text = node.nodeValue || "";
       let matched = false;
@@ -1666,44 +1719,38 @@ mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201
       });
       if(matched){
         frag.appendChild(document.createTextNode(text.slice(lastIdx)));
-        if(node.parentNode){ node.parentNode.replaceChild(frag, node); }
+        if(node.parentNode) node.parentNode.replaceChild(frag, node);
       }
     });
     hitIndex = 0;
-    if(searchHits.length){ jumpToHit(0); } else { updateStatus(); }
+    if(searchHits.length) jumpToHit(0); else updateCount();
   };
 
   if(searchInput){
     searchInput.addEventListener("input", runSearch);
-    searchInput.addEventListener("keydown", (event) => {
-      if(event.key === "Enter"){
-        event.preventDefault();
-        jumpToHit(hitIndex + 1);
-      }
+    searchInput.addEventListener("keydown", (e) => {
+      if(e.key === "Enter"){ e.preventDefault(); jumpToHit(e.shiftKey ? hitIndex - 1 : hitIndex + 1); }
+      if(e.key === "Escape"){ e.preventDefault(); closeSearch(); }
     });
   }
-  if(searchPrevBtn){ searchPrevBtn.addEventListener("click", () => jumpToHit(hitIndex - 1)); }
-  if(searchNextBtn){ searchNextBtn.addEventListener("click", () => jumpToHit(hitIndex + 1)); }
-  if(searchPrevFab){ searchPrevFab.addEventListener("click", () => jumpToHit(hitIndex - 1)); }
-  if(searchNextFab){ searchNextFab.addEventListener("click", () => jumpToHit(hitIndex + 1)); }
-  if(searchClearBtn){
-    searchClearBtn.addEventListener("click", () => {
-      if(searchInput){ searchInput.value = ""; }
-      clearHighlights();
-      if(searchStatus){ searchStatus.textContent = ""; }
-      if(searchStatusFab){ searchStatusFab.textContent = ""; }
-      if(searchFloatingNav){ searchFloatingNav.classList.remove("show"); }
-    });
-  }
-  if(searchClearFab){
-    searchClearFab.addEventListener("click", () => {
-      if(searchInput){ searchInput.value = ""; }
-      clearHighlights();
-      if(searchStatus){ searchStatus.textContent = ""; }
-      if(searchStatusFab){ searchStatusFab.textContent = ""; }
-      if(searchFloatingNav){ searchFloatingNav.classList.remove("show"); }
-    });
-  }
+  const prevBtn = document.getElementById("searchPrevBtn");
+  const nextBtn = document.getElementById("searchNextBtn");
+  const closeBtn = document.getElementById("searchCloseBtn");
+  const searchFab = document.getElementById("searchFab");
+  if(prevBtn) prevBtn.addEventListener("click", () => jumpToHit(hitIndex - 1));
+  if(nextBtn) nextBtn.addEventListener("click", () => jumpToHit(hitIndex + 1));
+  if(closeBtn) closeBtn.addEventListener("click", closeSearch);
+  if(searchFab) searchFab.addEventListener("click", openSearch);
+
+  document.addEventListener("keydown", (e) => {
+    if((e.ctrlKey || e.metaKey) && e.key === "f"){
+      e.preventDefault();
+      openSearch();
+    }
+    if(e.key === "Escape" && overlay && overlay.classList.contains("open")){
+      closeSearch();
+    }
+  });
 
   const links = Array.from(document.querySelectorAll(".toc a"));
   const sections = links
