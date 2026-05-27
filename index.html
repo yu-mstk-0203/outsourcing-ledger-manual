@@ -735,6 +735,9 @@ tbody tr:nth-child(even){background:#fafbfc;}
     gap:6px;
   }
   .fab{flex:1; padding:8px 6px; font-size:12px; min-height:40px;}
+  .search-floating{left:8px;right:8px;bottom:54px;transform:none;justify-content:space-between;border-radius:12px;padding:8px;gap:6px;}
+  .search-floating .jump-btn{flex:1;min-width:0;min-height:36px;padding:6px 4px;font-size:12px;}
+  .search-floating .search-meta{min-width:auto;font-size:11px;}
 }
 
 
@@ -742,6 +745,11 @@ tbody tr:nth-child(even){background:#fafbfc;}
 .search-input{flex:1;min-width:220px;min-height:44px;padding:9px 11px;border:1px solid var(--line-strong);border-radius:7px;background:#fff;}
 .search-meta{font-size:12px;color:#dce6f0;}
 mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px;}
+mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201,56,.35);}
+.search-floating{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:none;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,.96);border:1px solid var(--line-strong);border-radius:999px;box-shadow:0 10px 24px rgba(23,32,44,.18);z-index:12;}
+.search-floating.show{display:flex;}
+.search-floating .jump-btn{min-height:38px;padding:6px 11px;min-width:64px;width:auto;}
+.search-floating .search-meta{color:var(--navy);font-weight:700;min-width:80px;text-align:center;}
 
 @page{
   size:A4 portrait;
@@ -863,6 +871,12 @@ mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px
         <span class="search-meta" id="searchStatus" aria-live="polite"></span>
       </div>
     </header>
+    <div class="search-floating screen-only" id="searchFloatingNav" aria-label="検索ナビゲーション">
+      <button class="jump-btn" type="button" id="searchPrevFab">前へ</button>
+      <span class="search-meta" id="searchStatusFab" aria-live="polite"></span>
+      <button class="jump-btn" type="button" id="searchNextFab">次へ</button>
+      <button class="jump-btn" type="button" id="searchClearFab">クリア</button>
+    </div>
 
     <section class="print-only" aria-label="PDF用概要">
       <div class="note important">
@@ -1570,6 +1584,11 @@ mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px
   const searchPrevBtn = document.getElementById("searchPrevBtn");
   const searchNextBtn = document.getElementById("searchNextBtn");
   const searchClearBtn = document.getElementById("searchClearBtn");
+  const searchFloatingNav = document.getElementById("searchFloatingNav");
+  const searchPrevFab = document.getElementById("searchPrevFab");
+  const searchNextFab = document.getElementById("searchNextFab");
+  const searchClearFab = document.getElementById("searchClearFab");
+  const searchStatusFab = document.getElementById("searchStatusFab");
   const searchStatus = document.getElementById("searchStatus");
   const searchScope = document.querySelector("main.content");
   let searchHits = [];
@@ -1589,7 +1608,10 @@ mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px
 
   const updateStatus = () => {
     if(!searchStatus){ return; }
-    searchStatus.textContent = searchHits.length ? `${hitIndex + 1}/${searchHits.length} 件` : "一致なし";
+    const text = searchHits.length ? `${hitIndex + 1}/${searchHits.length} 件` : "一致なし";
+    searchStatus.textContent = text;
+    if(searchStatusFab){ searchStatusFab.textContent = text; }
+    if(searchFloatingNav){ searchFloatingNav.classList.toggle("show", !!searchHits.length); }
   };
 
   const jumpToHit = (index) => {
@@ -1597,6 +1619,8 @@ mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px
     hitIndex = (index + searchHits.length) % searchHits.length;
     const hit = searchHits[hitIndex];
     if(hit){
+      searchHits.forEach((item) => item.classList.remove("current-hit"));
+      hit.classList.add("current-hit");
       hit.scrollIntoView({behavior:"smooth", block:"center"});
       updateStatus();
     }
@@ -1608,6 +1632,8 @@ mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px
     clearHighlights();
     if(!query){
       if(searchStatus){ searchStatus.textContent = ""; }
+      if(searchStatusFab){ searchStatusFab.textContent = ""; }
+      if(searchFloatingNav){ searchFloatingNav.classList.remove("show"); }
       return;
     }
     const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
@@ -1658,11 +1684,24 @@ mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px
   }
   if(searchPrevBtn){ searchPrevBtn.addEventListener("click", () => jumpToHit(hitIndex - 1)); }
   if(searchNextBtn){ searchNextBtn.addEventListener("click", () => jumpToHit(hitIndex + 1)); }
+  if(searchPrevFab){ searchPrevFab.addEventListener("click", () => jumpToHit(hitIndex - 1)); }
+  if(searchNextFab){ searchNextFab.addEventListener("click", () => jumpToHit(hitIndex + 1)); }
   if(searchClearBtn){
     searchClearBtn.addEventListener("click", () => {
       if(searchInput){ searchInput.value = ""; }
       clearHighlights();
       if(searchStatus){ searchStatus.textContent = ""; }
+      if(searchStatusFab){ searchStatusFab.textContent = ""; }
+      if(searchFloatingNav){ searchFloatingNav.classList.remove("show"); }
+    });
+  }
+  if(searchClearFab){
+    searchClearFab.addEventListener("click", () => {
+      if(searchInput){ searchInput.value = ""; }
+      clearHighlights();
+      if(searchStatus){ searchStatus.textContent = ""; }
+      if(searchStatusFab){ searchStatusFab.textContent = ""; }
+      if(searchFloatingNav){ searchFloatingNav.classList.remove("show"); }
     });
   }
 
