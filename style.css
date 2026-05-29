@@ -194,8 +194,11 @@ tbody tr:nth-child(even){background:#fafbfc;}
 .decision-table col.result{width:42%;}
 .decision-table col.screen{width:180px;}
 .decision-table col.action{width:auto;}
-.decision-table th:nth-child(2),.decision-table td:nth-child(2){
+.decision-table th:nth-child(2){
   text-align:center;
+}
+.decision-table td:nth-child(2){
+  text-align:left;
   white-space:nowrap;
 }
 .evidence-table col.field{width:190px;}
