@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>業務委託契約実績台帳 Ver2.0 入力マニュアル</title>
+<title>業務委託契約実績台帳 入力マニュアル（Ver2.0）</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
       <a class="lv3" href="#url-kviewer">kViewer 閲覧・編集用ビュー</a>
       <a class="lv1" href="#prepare">入力前に準備する資料</a>
       <a class="lv1" href="#start">入力ルートの判定</a>
-      <a class="lv1" href="#tools">FormBridge・kViewer基本</a>
+      <a class="lv1" href="#tools">FormBridge と kViewer の基本</a>
       <a class="lv3" href="#tool-kintone">kintone</a>
       <a class="lv3" href="#tool-formbridge">FormBridge</a>
       <a class="lv3" href="#tool-kviewer">kViewer</a>
@@ -81,6 +81,29 @@
       <div class="note important">
         <strong>PDF版の読み方</strong>
         このPDFは、HTMLマニュアルをA4縦で保存したものです。最初に「本台帳の目的」「まず開くURL一覧」「入力ルートの判定」を確認し、自分のルートの章だけを重点的に読んでください。
+      </div>
+    </section>
+
+    <section class="screen-only" aria-label="クイックナビ">
+      <h2 class="part">まずここから：自分はどの章を読む？</h2>
+      <p class="lead">初めての方は、まず「入力ルートの判定」で自分のルートを確認してから、該当する章へ進んでください。</p>
+      <div class="quick-nav">
+        <a class="quick-card" href="#start">
+          <strong>① ルートを判定する</strong>
+          <span>Q1→Q2→Q3 に答えて、自分がA1／A2／B／Cのどれかを確認します。最初に必ずここ。</span>
+        </a>
+        <a class="quick-card" href="#route-a">
+          <strong>ルートA1：取込済を編集</strong>
+          <span>12節 委託料で財務会計システムから取込まれた案件。kViewerで不足項目を追記します。</span>
+        </a>
+        <a class="quick-card" href="#route-a2">
+          <strong>ルートA2：委託料以外</strong>
+          <span>12節 委託料以外の案件。追加入力せず「削除対象」にチェックして送信します。</span>
+        </a>
+        <a class="quick-card" href="#route-bc">
+          <strong>ルートB／C：新規登録</strong>
+          <span>自動取込み対象外の案件。FormBridgeで全項目を新規入力します。</span>
+        </a>
       </div>
     </section>
 
@@ -155,7 +178,14 @@
 
     <section id="start">
       <h2 class="part">入力ルートの判定</h2>
-      <p class="lead">次の3問を確認して、ルートを判定してください。</p>
+      <p class="lead">次の3問を確認して、ルートを判定してください。まずは下の図でYes/Noをたどると、自分のルート（A1／A2／B／C）が分かります。</p>
+      <figure class="manual-shot" aria-label="ルート判定フローチャート">
+        <div class="shot-scroll"><img src="fig2_route_flowchart.svg" alt="ルート判定フローチャート。Q1財務会計システムで起票したか→Q2業務区分は業務委託か→Q3予算費目は12節委託料か、の順に判定。いいえで右の結果（C・B・A2）へ、すべてはいでルートA1になる。"></div>
+        <figcaption>
+          <strong>図：Q1→Q2→Q3 で進むルート判定</strong>
+          下の表は同じ判定を文章で示したものです。図と合わせて確認してください。
+        </figcaption>
+      </figure>
       <div class="tbl-wrap" data-scroll>
         <table class="question-table">
           <colgroup><col class="no"><col class="check"><col class="place"></colgroup>
@@ -192,7 +222,7 @@
     </section>
 
     <section id="tools">
-      <h2 class="part">FormBridge・kViewer基本</h2>
+      <h2 class="part">FormBridge と kViewer の基本</h2>
       <div class="grid three">
         <div class="card">
           <h3 id="tool-kintone">kintone</h3>
@@ -224,6 +254,7 @@
       </div>
       <p>ルートA1は、予算費目が「12節 委託料」のうち財務会計システムで施行伺の業務区分を「業務委託」として処理され、契約監理課が台帳へ取込んだ案件です。各課はkViewerで自分の案件を探し、予算費目を確認してから入力します。</p>
       <h3 class="sec" id="route-a-flow">ルートA1の作業STEP</h3>
+      <p>まず下のリストで<strong>全体の流れ</strong>をつかんでください。各ステップの<strong>くわしい操作と画面</strong>は、この後の「STEP A1-1〜A1-5」で順に説明します。</p>
       <ol class="steps">
         <li><span class="st-title">契約監理課から取込み通知を受ける</span>財務会計システムから定期的に案件情報が取込まれます。通知後に作業してください。</li>
         <li><span class="st-title">kViewerを開く</span>「まず開くURL一覧」からkViewerを開きます。</li>
@@ -337,7 +368,7 @@
     </section>
 
     <section id="route-a2">
-      <h2 class="part">ルートA2：kViewerから案件を編集する（「12節 委託料以外」を選択）</h2>
+      <h2 class="part">ルートA2：12節 委託料以外を削除対象として送信する</h2>
       <div class="chapter-summary" aria-label="ルートA2の要約">
         <div class="summary-item"><strong>使う画面</strong><span>kViewer → FormBridge編集画面</span></div>
         <div class="summary-item"><strong>やること</strong><span>予算費目確認、削除対象チェック</span></div>
