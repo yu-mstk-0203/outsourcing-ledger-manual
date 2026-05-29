@@ -9,12 +9,6 @@
   --navy:#18324f;
   --navy-2:#254c73;
   --blue-soft:#e8f0f8;
-  --amber:#8b6417;
-  --amber-soft:#fbf5e8;
-  --red:#9d352f;
-  --red-soft:#f8eceb;
-  --green:#2f614c;
-  --green-soft:#e9f2ee;
   --shadow:0 10px 30px rgba(23,32,44,.08);
   --radius:8px;
 }
@@ -29,6 +23,18 @@ body{
   font-size:16px;
   line-height:1.82;
   letter-spacing:0;
+  /* 日本語の改行整形：禁則を厳格化し、行末1〜2文字のぶら下がり（泣き別れ）を抑制 */
+  word-break:normal;
+  line-break:strict;
+}
+
+/* 本文・セル・キャプションは text-wrap:pretty で末尾の孤立文字を減らす */
+p,li,td,th,figcaption,.lead,.summary-item span,.shot-points li,.note,.flow .node{
+  text-wrap:pretty;
+}
+/* 見出し・短いラベルは text-wrap:balance で行ごとの文字数を均す */
+h1,h2.part,h3.sec,h4.sub,h5.field,.doc-header h1,.modal-header h2,.st-title,.quick-card strong,.url-card h3{
+  text-wrap:balance;
 }
 a{
   color:var(--navy-2);
@@ -74,7 +80,6 @@ button{font:inherit;}
 }
 .toc a:hover,.toc a.active{background:#e2e8f0; border-left-color:var(--navy); color:var(--navy);}
 .toc a.lv1{font-weight:800; margin-top:12px; color:var(--navy);}
-.toc a.lv2{padding-left:22px;}
 .toc a.lv3{padding-left:36px; font-size:12px; color:#4f5d70;}
 .content{min-width:0; padding:38px 48px 110px;}
 .doc-header{
@@ -152,17 +157,18 @@ p{margin:8px 0;}
 .card h3,.card h4{margin-top:0;}
 .note{
   border:1px solid var(--line);
-  border-left:5px solid var(--navy-2);
-  background:#fff;
+  border-left:4px solid var(--navy);
+  background:#fafafa;
   border-radius:var(--radius);
   padding:14px 16px;
   margin:14px 0;
 }
 .note strong,.box-title{display:block; color:var(--navy); margin-bottom:3px;}
-.note.important{background:var(--blue-soft); border-left-color:var(--navy);}
-.note.warn{background:var(--red-soft); border-left-color:var(--red);}
-.note.check{background:var(--green-soft); border-left-color:var(--green);}
-.note.example{background:var(--amber-soft); border-left-color:var(--amber);}
+/* 色を使わず、左罫線スタイルでコールアウト種別を差別化（CLAUDE.md §3.2） */
+.note.important{border-left-style:solid; border-left-width:4px;}
+.note.warn{border-left-style:double; border-left-width:6px;}
+.note.check{border-left-style:dotted; border-left-width:5px;}
+.note.example{border-left-style:groove; border-left-width:6px;}
 .tbl-wrap{overflow-x:auto; margin:12px 0 18px;}
 .tbl-wrap[data-scroll]::before{
   content:"横にスクロールできます";
@@ -218,9 +224,10 @@ tbody tr:nth-child(even){background:#fafbfc;}
   -webkit-print-color-adjust:exact;
   print-color-adjust:exact;
 }
-.route.a{background:var(--navy);}
-.route.b{background:var(--amber);}
-.route.c{background:var(--green);}
+/* 色相に依存せず字形・装飾で差別化（CLAUDE.md §3.3／色覚アクセシビリティ対応） */
+.route.a{background:var(--navy); color:#fff; border:1.5px solid var(--navy);}
+.route.b{background:#fff; color:var(--navy); border:1.5px solid var(--navy);}
+.route.c{background:#fff; color:var(--navy); border:1.5px dotted var(--navy);}
 .route[data-modal]:hover{
   opacity:.85;
   box-shadow:0 2px 8px rgba(23,32,44,.22);
@@ -229,7 +236,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
 }
 .badge{display:inline-block; padding:2px 7px; border-radius:5px; font-size:12px; font-weight:800; white-space:nowrap;}
 .req{background:#eef2f6; color:var(--navy); border:1px solid var(--line-strong);}
-.cond{background:#fbf5e8; color:var(--amber); border:1px solid #dcc58d;}
+.cond{background:#fff; color:var(--navy); border:1px dashed var(--navy-2);}
 .steps{counter-reset:step; list-style:none; margin:12px 0; padding:0;}
 .steps li{
   counter-increment:step;
@@ -322,7 +329,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
   white-space:nowrap;
 }
 .copy-btn:hover{background:#e8f0f8; color:var(--navy); border-color:var(--navy);}
-.copy-status{font-size:12px; color:var(--green);}
+.copy-status{font-size:12px; color:var(--navy-2);}
 .url-text{
   display:block;
   margin-top:8px;
@@ -348,7 +355,6 @@ tbody tr:nth-child(even){background:#fafbfc;}
   min-height:92px;
 }
 .flow .node strong{display:block; color:var(--navy);}
-.flow.three{grid-template-columns:repeat(3,minmax(0,1fr));}
 .quick-nav{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -436,171 +442,7 @@ tbody tr:nth-child(even){background:#fafbfc;}
   gap:18px;
   margin:14px 0 22px;
 }
-.mock-screen{
-  position:relative;
-  width:100%;
-  min-width:0;
-  padding:18px;
-  background:#f5f8fb;
-}
-.mock-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-bottom:12px;
-  color:var(--navy);
-  font-weight:800;
-}
-.mock-title span:last-child{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:700;
-}
-.mock-toolbar{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  padding:10px;
-  margin-bottom:12px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:#fff;
-}
-.mock-search,.mock-field,.mock-upload,.mock-alert,.mock-row{
-  border:1px solid var(--line);
-  border-radius:7px;
-  background:#fff;
-}
-.mock-search{
-  width:310px;
-  padding:9px 12px;
-  color:#657286;
-}
-.mock-btn{
-  display:inline-block;
-  min-width:76px;
-  padding:8px 13px;
-  border-radius:7px;
-  background:var(--navy);
-  color:#fff;
-  text-align:center;
-  font-weight:800;
-}
-.mock-btn.light{
-  background:#fff;
-  color:var(--navy);
-  border:1px solid var(--navy);
-}
-.mock-panel{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:12px;
-}
-.mock-card{
-  position:relative;
-  min-height:210px;
-  padding:14px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:#fff;
-}
-.mock-card h4{
-  margin:0 0 10px;
-  color:var(--navy);
-  font-size:15px;
-}
-.mock-row{
-  display:grid;
-  grid-template-columns:1fr 120px 96px;
-  gap:10px;
-  align-items:center;
-  margin:8px 0;
-  padding:9px 10px;
-}
-.mock-field{
-  margin:8px 0;
-  padding:9px 11px;
-  color:#526176;
-}
-.mock-label{
-  display:block;
-  margin-bottom:4px;
-  color:var(--navy);
-  font-size:12px;
-  font-weight:800;
-}
-.mock-upload{padding:12px; background:#f9fbfd;}
-.mock-alert{
-  margin-top:9px;
-  padding:8px 10px;
-  border-color:#d7b6a9;
-  background:#fff7f4;
-  color:#7c3b24;
-  font-size:13px;
-}
-.mask{
-  display:inline-block;
-  min-width:92px;
-  height:12px;
-  border-radius:999px;
-  vertical-align:middle;
-  background:repeating-linear-gradient(135deg,#d9e0e8 0,#d9e0e8 5px,#cbd5df 5px,#cbd5df 10px);
-}
-.mask.short{min-width:58px;}
-.mock-checkbox{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  margin-top:10px;
-  color:var(--navy);
-  font-weight:800;
-}
-.mock-checkbox::before{
-  content:"";
-  width:16px;
-  height:16px;
-  border:2px solid var(--navy);
-  border-radius:3px;
-  background:#fff;
-}
-.callout{
-  position:absolute;
-  z-index:2;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  max-width:210px;
-  padding:6px 9px;
-  border:1px solid var(--navy);
-  border-radius:999px;
-  background:#fff;
-  color:var(--navy);
-  font-size:12px;
-  font-weight:800;
-  box-shadow:0 3px 10px rgba(23,32,44,.12);
-  white-space:nowrap;
-}
-.callout .num{
-  display:inline-grid;
-  place-items:center;
-  width:20px;
-  height:20px;
-  border-radius:50%;
-  background:var(--navy);
-  color:#fff;
-  font-size:11px;
-}
-.callout::after{
-  content:"";
-  position:absolute;
-  width:34px;
-  height:1px;
-  background:var(--navy);
-  opacity:.75;
-}
-.callout.right::after{left:-34px;}
-.callout.left::after{right:-34px;}
+/* （旧モック画面・コールアウト用 .mock-* / .mask / .callout は未使用のため削除） */
 .manual-shot figcaption{
   margin-top:8px;
   color:#334155;
@@ -811,7 +653,6 @@ dialog::backdrop{
   .toc nav{display:inline-flex; gap:6px; vertical-align:middle;}
   .toc a{display:inline-block; min-height:36px; padding:8px 10px; border-left:0; border-bottom:2px solid transparent; white-space:nowrap;}
   .toc a.lv1{margin-top:0;}
-  .toc a.lv2{padding-left:10px;}
   .toc a.lv3{display:none;}
   .toc a:hover,.toc a.active{border-left-color:transparent; border-bottom-color:var(--navy);}
   .content{padding:24px 18px 110px;}
@@ -839,7 +680,7 @@ dialog::backdrop{
   section{margin:18px 0;}
   .card{padding:12px 12px;}
   .note{padding:10px 12px; margin:10px 0;}
-  .grid.two,.grid.three,.url-panel,.flow,.flow.three,.quick-nav{grid-template-columns:1fr;}
+  .grid.two,.grid.three,.url-panel,.flow,.quick-nav{grid-template-columns:1fr;}
   .grid{gap:10px;}
   .quick-card{min-height:auto; padding:10px 12px;}
   .quick-card strong{font-size:14px;}
@@ -850,7 +691,6 @@ dialog::backdrop{
   .checklist li{padding:6px 8px 6px 28px;}
   .checklist li::before{left:8px; top:6px;}
   .checklist .group-h{padding:6px 10px; font-size:13px;}
-  .toc a.lv2{display:none;}
   .tbl-wrap[data-scroll]::before{display:block;}
   .tbl-wrap table{min-width:520px;}
   .tbl-wrap .label-table{min-width:600px;}
@@ -858,7 +698,6 @@ dialog::backdrop{
   .tbl-wrap .decision-table{min-width:600px;}
   .tbl-wrap .evidence-table{min-width:600px;}
   th,td{padding:7px 8px; font-size:13px;}
-  .mock-screen{width:100%; min-width:0; padding:12px;}
   .shot-points{grid-template-columns:1fr;}
   .shot-points li{padding:6px 8px; font-size:13px;}
   .manual-shot figcaption{font-size:12px;}
@@ -898,8 +737,8 @@ dialog::backdrop{
 }
 
 
-mark.search-hit{background:#ffe58a;color:#1f2b3a;padding:0 1px;border-radius:2px;}
-mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201,56,.35);}
+mark.search-hit{background:var(--blue-soft);color:var(--navy);padding:0 1px;border-radius:2px;box-shadow:inset 0 -2px 0 var(--navy-2);}
+mark.search-hit.current-hit{background:#cfe0f0;box-shadow:0 0 0 2px rgba(24,50,79,.45);}
 .search-overlay{display:none;position:fixed;top:0;right:0;z-index:100;padding:12px;}
 .search-overlay.open{display:block;}
 .search-bar{
@@ -1000,13 +839,10 @@ mark.search-hit.current-hit{background:#ffc938;box-shadow:0 0 0 2px rgba(255,201
   thead{display:table-header-group;}
   tr,td,th{break-inside:avoid; page-break-inside:avoid;}
   .card,.note,.steps li,.manual-shot,figure,.flow .node,.url-card{break-inside:avoid; page-break-inside:avoid;}
-  .grid.two,.grid.three,.url-panel,.flow,.flow.three{grid-template-columns:1fr 1fr;}
+  .grid.two,.grid.three,.url-panel,.flow{grid-template-columns:1fr 1fr;}
   .source-list a,.url-text,a{color:#000; border-bottom:0;}
   .open-link{background:none; color:#000; padding:0; font-weight:400;}
   .shot-scroll{box-shadow:none;}
-  .mock-screen{min-width:0; padding:12px;}
-  .callout{position:static; margin:4px 5px 4px 0;}
-  .callout::after{display:none;}
   .shot-points{grid-template-columns:1fr 1fr 1fr;}
   .steps li::before{
     background:var(--navy) !important;
