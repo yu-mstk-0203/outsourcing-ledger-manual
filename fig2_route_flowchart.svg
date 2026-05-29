@@ -1,109 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" font-family="'Noto Sans CJK JP', 'Noto Sans JP', sans-serif">
-  <rect width="1000" height="800" fill="#FBFBF9"/>
-  <text x="500" y="40" font-size="22" font-weight="700" text-anchor="middle" fill="#1F2937">図2: あなたはどのルート? 最初に確認するフローチャート</text>
-  <text x="500" y="65" font-size="13" text-anchor="middle" fill="#6B7280">Yes / No に答えるだけで、自分が進むべきルートが決まります</text>
-
-  <!-- Start -->
-  <g>
-    <ellipse cx="500" cy="110" rx="90" ry="28" fill="#1F2937"/>
-    <text x="500" y="116" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">スタート</text>
-  </g>
-  <line x1="500" y1="138" x2="500" y2="170" stroke="#374151" stroke-width="2"/>
-
-  <!-- Q1 diamond -->
-  <g>
-    <polygon points="500,175 720,255 500,335 280,255" fill="#FFFFFF" stroke="#475569" stroke-width="2"/>
-    <text x="500" y="240" font-size="14" font-weight="700" text-anchor="middle" fill="#1E3A8A">質問1</text>
-    <text x="500" y="265" font-size="14" text-anchor="middle" fill="#1F2937">財務会計システムで</text>
-    <text x="500" y="285" font-size="14" text-anchor="middle" fill="#1F2937">起票しましたか?</text>
-  </g>
-
-  <!-- Q1 No: 左へ → 下へ → ルートCへ -->
-  <line x1="280" y1="255" x2="120" y2="255" stroke="#374151" stroke-width="2"/>
-  <line x1="120" y1="255" x2="120" y2="445" stroke="#374151" stroke-width="2"/>
-  <line x1="120" y1="445" x2="120" y2="480" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
-  <g>
-    <rect x="155" y="240" width="50" height="22" rx="3" fill="#FBFBF9"/>
-    <text x="180" y="256" font-size="13" font-weight="700" text-anchor="middle" fill="#B91C1C">いいえ</text>
-  </g>
-
-  <!-- Q1 Yes: 下へ -->
-  <line x1="500" y1="335" x2="500" y2="380" stroke="#374151" stroke-width="2"/>
-  <g>
-    <rect x="513" y="345" width="40" height="22" rx="3" fill="#FBFBF9"/>
-    <text x="533" y="361" font-size="13" font-weight="700" text-anchor="middle" fill="#047857">はい</text>
-  </g>
-
-  <!-- Q2 diamond -->
-  <g>
-    <polygon points="500,385 720,465 500,545 280,465" fill="#FFFFFF" stroke="#475569" stroke-width="2"/>
-    <text x="500" y="450" font-size="14" font-weight="700" text-anchor="middle" fill="#1E3A8A">質問2</text>
-    <text x="500" y="475" font-size="14" text-anchor="middle" fill="#1F2937">業務区分は</text>
-    <text x="500" y="495" font-size="14" text-anchor="middle" fill="#1F2937">「業務委託」でしたか?</text>
-  </g>
-
-  <!-- Q2 No: 左→下→ルートB -->
-  <line x1="280" y1="465" x2="245" y2="465" stroke="#374151" stroke-width="2"/>
-  <line x1="245" y1="465" x2="245" y2="585" stroke="#374151" stroke-width="2"/>
-  <line x1="245" y1="585" x2="200" y2="585" stroke="#374151" stroke-width="2"/>
-  <line x1="200" y1="585" x2="200" y2="595" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
-  <g>
-    <rect x="252" y="450" width="50" height="22" rx="3" fill="#FBFBF9"/>
-    <text x="277" y="466" font-size="13" font-weight="700" text-anchor="middle" fill="#B91C1C">いいえ</text>
-  </g>
-
-  <!-- Q2 Yes: 右→下→ルートA -->
-  <line x1="720" y1="465" x2="755" y2="465" stroke="#374151" stroke-width="2"/>
-  <line x1="755" y1="465" x2="755" y2="630" stroke="#374151" stroke-width="2"/>
-  <line x1="755" y1="630" x2="720" y2="630" stroke="#374151" stroke-width="2" marker-end="url(#arrow2)"/>
-  <g>
-    <rect x="730" y="450" width="40" height="22" rx="3" fill="#FBFBF9"/>
-    <text x="750" y="466" font-size="13" font-weight="700" text-anchor="middle" fill="#047857">はい</text>
-  </g>
-
-  <!-- Route A (right) -->
-  <g>
-    <rect x="540" y="600" width="180" height="120" rx="8" fill="#FFFFFF" stroke="#1E40AF" stroke-width="2"/>
-    <rect x="540" y="600" width="180" height="30" rx="8" fill="#1E40AF"/>
-    <rect x="540" y="623" width="180" height="7" fill="#1E40AF"/>
-    <text x="630" y="621" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルート A</text>
-    <text x="630" y="657" font-size="12" text-anchor="middle" fill="#1F2937">財務会計システム取込み</text>
-    <text x="630" y="678" font-size="12" text-anchor="middle" fill="#1F2937">→ Kviewerで「追記」</text>
-    <text x="630" y="704" font-size="12" font-weight="700" text-anchor="middle" fill="#1E40AF">→ 第2部へ</text>
-  </g>
-
-  <!-- Route B (center-left) -->
-  <g>
-    <rect x="100" y="600" width="180" height="120" rx="8" fill="#FFFFFF" stroke="#B45309" stroke-width="2"/>
-    <rect x="100" y="600" width="180" height="30" rx="8" fill="#B45309"/>
-    <rect x="100" y="623" width="180" height="7" fill="#B45309"/>
-    <text x="190" y="621" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルート B</text>
-    <text x="190" y="657" font-size="12" text-anchor="middle" fill="#1F2937">区分が「業務委託」以外</text>
-    <text x="190" y="678" font-size="12" text-anchor="middle" fill="#1F2937">→ FormBridgeで全入力</text>
-    <text x="190" y="704" font-size="12" font-weight="700" text-anchor="middle" fill="#B45309">→ 第3部へ</text>
-  </g>
-
-  <!-- Route C (far left, upper) -->
-  <g>
-    <rect x="30" y="450" width="180" height="120" rx="8" fill="#FFFFFF" stroke="#991B1B" stroke-width="2"/>
-    <rect x="30" y="450" width="180" height="30" rx="8" fill="#991B1B"/>
-    <rect x="30" y="473" width="180" height="7" fill="#991B1B"/>
-    <text x="120" y="471" font-size="16" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルート C</text>
-    <text x="120" y="507" font-size="12" text-anchor="middle" fill="#1F2937">電算外で契約処理した</text>
-    <text x="120" y="528" font-size="12" text-anchor="middle" fill="#1F2937">→ FormBridgeで全入力</text>
-    <text x="120" y="554" font-size="12" font-weight="700" text-anchor="middle" fill="#991B1B">→ 第3部へ</text>
-  </g>
-
-  <!-- Bottom note -->
-  <g>
-    <rect x="50" y="745" width="900" height="35" rx="4" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
-    <text x="65" y="767" font-size="12" fill="#475569">※「電算外」とは、財務会計システムを使用せずに契約手続きを行ったケースを指します。</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 860" font-family="'Yu Gothic','Noto Sans JP',sans-serif" role="img" aria-label="ルート判定フローチャート。Q1財務会計システムで起票したか、Q2業務区分は業務委託か、Q3予算費目は12節委託料か、の順に判定し、ルートA1・A2・B・Cのいずれかになる。">
+  <rect width="1000" height="860" fill="#FAFAFA"/>
+  <text x="500" y="34" font-size="20" font-weight="700" text-anchor="middle" fill="#1A1A1A">あなたはどのルート？（Q1 → Q2 → Q3 で判定）</text>
+  <text x="500" y="58" font-size="13" text-anchor="middle" fill="#666666">「はい」は下へ、「いいえ」は右の結果へ進みます</text>
 
   <defs>
-    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#374151"/>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#18324f"/>
     </marker>
   </defs>
+
+  <!-- Start -->
+  <ellipse cx="400" cy="104" rx="82" ry="24" fill="#18324f"/>
+  <text x="400" y="109" font-size="14" font-weight="700" text-anchor="middle" fill="#FFFFFF">スタート</text>
+  <line x1="400" y1="128" x2="400" y2="148" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+
+  <!-- Q1 -->
+  <polygon points="400,150 560,212 400,274 240,212" fill="#FFFFFF" stroke="#18324f" stroke-width="2"/>
+  <text x="400" y="197" font-size="12" font-weight="700" text-anchor="middle" fill="#18324f">Q1</text>
+  <text x="400" y="217" font-size="13" text-anchor="middle" fill="#1A1A1A">財務会計システムで</text>
+  <text x="400" y="236" font-size="13" text-anchor="middle" fill="#1A1A1A">起票しましたか？</text>
+  <line x1="560" y1="212" x2="638" y2="212" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="599" y="203" font-size="12" font-weight="700" text-anchor="middle" fill="#666666">いいえ</text>
+  <line x1="400" y1="274" x2="400" y2="322" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="414" y="304" font-size="12" font-weight="700" fill="#18324f">はい</text>
+
+  <!-- Q2 -->
+  <polygon points="400,334 560,396 400,458 240,396" fill="#FFFFFF" stroke="#18324f" stroke-width="2"/>
+  <text x="400" y="381" font-size="12" font-weight="700" text-anchor="middle" fill="#18324f">Q2</text>
+  <text x="400" y="401" font-size="13" text-anchor="middle" fill="#1A1A1A">業務区分は</text>
+  <text x="400" y="420" font-size="13" text-anchor="middle" fill="#1A1A1A">「業務委託」ですか？</text>
+  <line x1="560" y1="396" x2="638" y2="396" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="599" y="387" font-size="12" font-weight="700" text-anchor="middle" fill="#666666">いいえ</text>
+  <line x1="400" y1="458" x2="400" y2="506" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="414" y="488" font-size="12" font-weight="700" fill="#18324f">はい</text>
+
+  <!-- Q3 -->
+  <polygon points="400,518 560,580 400,642 240,580" fill="#FFFFFF" stroke="#18324f" stroke-width="2"/>
+  <text x="400" y="565" font-size="12" font-weight="700" text-anchor="middle" fill="#18324f">Q3</text>
+  <text x="400" y="585" font-size="13" text-anchor="middle" fill="#1A1A1A">予算費目は</text>
+  <text x="400" y="604" font-size="13" text-anchor="middle" fill="#1A1A1A">「12節 委託料」ですか？</text>
+  <line x1="560" y1="580" x2="638" y2="580" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="599" y="571" font-size="12" font-weight="700" text-anchor="middle" fill="#666666">いいえ</text>
+  <line x1="400" y1="642" x2="400" y2="688" stroke="#18324f" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="414" y="672" font-size="12" font-weight="700" fill="#18324f">はい</text>
+
+  <!-- Route C (Q1 No) -->
+  <rect x="640" y="166" width="340" height="92" rx="6" fill="#FFFFFF" stroke="#18324f" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="658" y="194" font-size="14" font-weight="700" fill="#18324f">ルートC</text>
+  <text x="658" y="218" font-size="12" fill="#1A1A1A">電算外で契約した案件</text>
+  <text x="658" y="240" font-size="12" fill="#1A1A1A">→ FormBridgeで全項目を新規入力</text>
+
+  <!-- Route B (Q2 No) -->
+  <rect x="640" y="350" width="340" height="92" rx="6" fill="#FFFFFF" stroke="#18324f" stroke-width="2"/>
+  <text x="658" y="378" font-size="14" font-weight="700" fill="#18324f">ルートB</text>
+  <text x="658" y="402" font-size="12" fill="#1A1A1A">業務区分が「業務委託」以外</text>
+  <text x="658" y="424" font-size="12" fill="#1A1A1A">→ FormBridgeで全項目を新規入力</text>
+
+  <!-- Route A2 (Q3 No) -->
+  <rect x="640" y="534" width="340" height="92" rx="6" fill="#FFFFFF" stroke="#18324f" stroke-width="2"/>
+  <text x="658" y="562" font-size="14" font-weight="700" fill="#18324f">ルートA2</text>
+  <text x="658" y="586" font-size="12" fill="#1A1A1A">12節 委託料以外の案件</text>
+  <text x="658" y="608" font-size="12" fill="#1A1A1A">→ kViewerで「削除対象」のみ送信</text>
+
+  <!-- Route A1 (Q3 Yes) -->
+  <rect x="230" y="690" width="340" height="104" rx="6" fill="#FFFFFF" stroke="#18324f" stroke-width="2"/>
+  <rect x="230" y="690" width="340" height="30" rx="6" fill="#18324f"/>
+  <rect x="230" y="713" width="340" height="7" fill="#18324f"/>
+  <text x="400" y="711" font-size="14" font-weight="700" text-anchor="middle" fill="#FFFFFF">ルートA1（基本ルート）</text>
+  <text x="400" y="746" font-size="12" text-anchor="middle" fill="#1A1A1A">12節 委託料で財務会計システムから取込み済み</text>
+  <text x="400" y="768" font-size="12" text-anchor="middle" fill="#1A1A1A">→ kViewerで不足項目を追記して送信</text>
+
+  <!-- note -->
+  <rect x="40" y="814" width="940" height="34" rx="4" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+  <text x="56" y="836" font-size="12" fill="#666666">※「電算外」＝財務会計システムを使用せずに契約手続きを行ったケース。判定は必ず Q1→Q2→Q3 の順で確認します。</text>
 </svg>

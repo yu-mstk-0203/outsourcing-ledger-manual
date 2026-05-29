@@ -122,15 +122,15 @@
       }
       ul, ol { padding-left: 18pt; margin: 5pt 0; }
       li { margin-bottom: 2pt; line-height: 1.7; }
+      /* Wordでは罫線スタイル差(double/dotted/groove)が不安定なため、
+         淡いネイビー地＋実線の太い左バーで確実に区切る */
       .note {
-        border-left: 4pt solid #254c73;
-        background: #e8f0f8;
+        border: 1pt solid #c7d4e3;
+        border-left: 5pt solid #18324f;
+        background: #eef2f6;
         padding: 6pt 10pt;
         margin: 7pt 0;
       }
-      .note.warn { border-left-color: #9d352f; background: #f8eceb; }
-      .note.check { border-left-color: #2f614c; background: #e9f2ee; }
-      .note.example { border-left-color: #8b6417; background: #fbf5e8; }
       .note strong { display: block; color: #18324f; margin-bottom: 2pt; font-weight: bold; }
       .route {
         display: inline;
@@ -138,9 +138,9 @@
         padding: 1pt 5pt;
         border-radius: 3pt;
       }
-      .route.a { color: #18324f; border: 1pt solid #18324f; }
-      .route.b { color: #8b6417; border: 1pt solid #8b6417; }
-      .route.c { color: #2f614c; border: 1pt solid #2f614c; }
+      .route.a { color: #fff; background: #18324f; border: 1pt solid #18324f; }
+      .route.b { color: #18324f; border: 1pt solid #18324f; }
+      .route.c { color: #18324f; border: 1pt dotted #18324f; }
       .steps {
         list-style: decimal;
         padding-left: 20pt;
