@@ -16,16 +16,21 @@
       <a class="lv3" href="#url-formbridge">FormBridge 入力フォーム</a>
       <a class="lv3" href="#url-kviewer">kViewer 閲覧・編集用ビュー</a>
       <a class="lv1" href="#prepare">入力前に準備する資料</a>
-      <a class="lv1" href="#start">3分で分かるルート判定</a>
+      <a class="lv1" href="#start">入力ルートの判定</a>
       <a class="lv1" href="#tools">FormBridge・kViewer基本</a>
       <a class="lv3" href="#tool-kintone">kintone</a>
       <a class="lv3" href="#tool-formbridge">FormBridge</a>
       <a class="lv3" href="#tool-kviewer">kViewer</a>
-      <a class="lv1" href="#route-a">ルートA：kViewerで取り込み済み案件を編集する</a>
-      <a class="lv3" href="#route-a-flow">ルートAの全体手順</a>
-      <a class="lv3" href="#route-a-autofill">自動入力されている項目</a>
-      <a class="lv3" href="#route-a-missing">12節委託料の不足項目</a>
-      <a class="lv1" href="#route-a2">A-2：12節委託料以外を削除対象として送信する</a>
+      <a class="lv1" href="#route-a">ルートA1：kViewerから案件を編集する</a>
+      <a class="lv3" href="#route-a-flow">ルートA1の作業STEP</a>
+      <a class="lv3" href="#route-a-search">A1：検索・詳細確認</a>
+      <a class="lv3" href="#route-a-edit">A1：編集画面へ進む</a>
+      <a class="lv3" href="#route-a-autofill">A1：自動入力項目の確認</a>
+      <a class="lv3" href="#route-a-missing">A1：各所属の入力項目</a>
+      <a class="lv3" href="#route-a-submit">A1：確認・送信</a>
+      <a class="lv1" href="#route-a2">ルートA2：12節 委託料以外を削除対象として送信する</a>
+      <a class="lv3" href="#route-a2-flow">ルートA2の作業STEP</a>
+      <a class="lv3" href="#route-a2-difference">A2：削除理由・契約解除との違い</a>
       <a class="lv1" href="#route-bc">ルートB/C：FormBridgeで新規登録する案件</a>
       <a class="lv3" href="#step-1">STEP 1 担当課の入力</a>
       <a class="lv3" href="#step-2">STEP 2 案件の基本情報</a>
@@ -36,7 +41,7 @@
       <a class="lv3" href="#step-7">STEP 7 業者情報の入力</a>
       <a class="lv3" href="#step-8">STEP 8 契約金額の入力</a>
       <a class="lv3" href="#step-9">STEP 9 各課入力事項</a>
-      <a class="lv3" href="#step-10">STEP 10 確認チェックと送信</a>
+      <a class="lv3" href="#step-submit">送信前の確認</a>
       <a class="lv3" href="#evidence">入力欄と根拠資料</a>
       <a class="lv1" href="#cases">ケース別入力</a>
       <a class="lv3" href="#case-negotiated">随意契約・見積合わせ</a>
@@ -63,10 +68,10 @@
 
   <main class="content">
     <header class="doc-header">
-      <h1>業務委託台帳 入力マニュアル</h1>
+      <h1>業務委託契約実績台帳 入力マニュアル</h1>
       <p>業務委託契約実績台帳 Ver2.0｜登録・確認・送信まで迷わず進める実務手順書</p>
       <div class="meta-row">
-        <span class="pill">令和8年5月版</span>
+        <span class="pill">令和8年版</span>
         <span class="pill">HTML閲覧・PDF保存対応</span>
         <span class="pill">初心者向け</span>
       </div>
@@ -75,7 +80,7 @@
     <section class="print-only" aria-label="PDF用概要">
       <div class="note important">
         <strong>PDF版の読み方</strong>
-        このPDFは、HTMLマニュアルをA4縦で保存したものです。最初に「本台帳の目的」「まず開くURL一覧」「3分で分かるルート判定」を確認し、自分のルートの章だけを重点的に読んでください。
+        このPDFは、HTMLマニュアルをA4縦で保存したものです。最初に「本台帳の目的」「まず開くURL一覧」「入力ルートの判定」を確認し、自分のルートの章だけを重点的に読んでください。
       </div>
     </section>
 
@@ -94,11 +99,11 @@
         </table>
       </div>
       <div class="note important">
-        <strong>期限内に必ず入力してください</strong>
-        随意契約のホームページ公表対象は本台帳から抽出します。対象外と考える案件がある場合は、速やかに契約監理課へ連絡してください。
+        <strong>契約締結後1か月以内に情報を台帳に入力してください</strong>
+        入力の対象は「12節 委託料」で執行した業務委託契約です。
       </div>
       <div class="note important">
-        <strong>入札監視委員会が見ることを前提とした入力をしてください</strong>
+        <strong>入札監視委員会で審議されることを前提とした入力をしてください</strong>
         各課内のメモではなく、第三者が契約内容、契約方法、理由を確認する資料として入力してください。
       </div>
     </section>
@@ -109,7 +114,7 @@
       <div class="url-panel">
         <div class="url-card">
           <h3 id="url-formbridge">FormBridge 入力フォーム</h3>
-          <p>新規に全項目を入力するフォームです。ルートB・Cで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
+          <p>新規に全項目を入力するフォームです。ルートB/Cで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
           <div class="url-action">
             <a class="open-link" href="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2" target="_blank" rel="noopener">FormBridgeを開く</a>
             <button class="copy-btn" type="button" data-copy="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2">URLをコピー</button>
@@ -119,7 +124,7 @@
         </div>
         <div class="url-card">
           <h3 id="url-kviewer">kViewer 閲覧・編集用ビュー</h3>
-          <p>財務会計システムから取り込まれた既存案件を探し、該当レコードの編集に進むための画面です。ルートAで使います。</p>
+          <p>財務会計システムから取込まれた既存案件を探し、該当レコードの編集に進むための画面です。ルートA1で使います。</p>
           <div class="url-action">
             <a class="open-link" href="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview" target="_blank" rel="noopener">kViewerを開く</a>
             <button class="copy-btn" type="button" data-copy="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview">URLをコピー</button>
@@ -128,33 +133,29 @@
           <span class="url-text">https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview</span>
         </div>
       </div>
-      <div class="note warn">
-        <strong>公開URLの取扱い</strong>
-        FormBridgeとkViewerは、公開URLを通じて入力・閲覧する仕組みです。URL、画面キャプチャ、入力済み内容を不要な相手に共有しないでください。アクセス制御や公開範囲は契約監理課の案内に従います。
-      </div>
     </section>
 
     <section id="prepare">
       <h2 class="part">入力前に準備する資料</h2>
-      <p>入力は推測で行いません。手元資料をそろえてからフォームを開くと、途中で迷う時間と差戻しを減らせます。</p>
+      <p>入力する際は、手元に資料をそろえてから入力してください。</p>
       <div class="tbl-wrap" data-scroll>
         <table>
           <thead><tr><th>資料</th><th>確認する主な項目</th><th>必要になる場面</th></tr></thead>
           <tbody>
-            <tr><td>契約書・契約書案</td><td>件名、契約相手方、契約日、履行期間、契約金額、電子契約、契約解除条項</td><td>全ルート</td></tr>
-            <tr><td>起案文書・施行伺</td><td>業務区分、予算費目、積算方法、予定価格、契約種別、担当課</td><td>全ルート</td></tr>
-            <tr><td>入札・見積結果が分かる資料</td><td>入札種別、入札日、参加業者数、辞退・欠席・無効・くじ引きの有無</td><td>入札・見積合わせ案件</td></tr>
+            <tr><td>契約書・契約書案</td><td>件名、契約相手方、契約日、履行期間、契約金額、電子契約、スライド条項など</td><td>全ルート</td></tr>
+            <tr><td>起案文書・施行伺</td><td>担当課、業務区分、予算費目、積算方法、予定価格、契約種別、予定価格の設定方法</td><td>全ルート</td></tr>
+            <tr><td>入札・見積結果が分かる資料</td><td>入札種別、入札日、参加業者数、辞退・欠席・無効・くじ引きの有無、障害者雇用促進企業指名業者名、電子入札</td><td>入札・見積合わせ案件</td></tr>
             <tr><td>随意契約理由書</td><td>適用号、随意契約理由、相手方選定理由</td><td>随意契約案件</td></tr>
             <tr><td>公告文PDF</td><td>公告文ファイル、ファイル名、添付後の表示</td><td>一般競争入札案件</td></tr>
-            <tr><td>変更契約・解除関係資料</td><td>変更内容、解除日、解除根拠、解除理由</td><td>変更契約・契約解除がある案件</td></tr>
+            <tr><td>契約解除関係資料</td><td>契約解除日、契約解除根拠、契約解除理由</td><td>契約解除がある案件</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
     <section id="start">
-      <h2 class="part">3分で分かるルート判定</h2>
-      <p class="lead">最初に次の3問を順番に確認してください。ここでルートを間違えると、入力する画面と入力項目が変わります。</p>
+      <h2 class="part">入力ルートの判定</h2>
+      <p class="lead">次の3問を確認して、ルートを判定してください。</p>
       <div class="tbl-wrap" data-scroll>
         <table class="question-table">
           <colgroup><col class="no"><col class="check"><col class="place"></colgroup>
@@ -167,8 +168,8 @@
         </table>
       </div>
       <div class="jump-row" aria-label="判定結果から該当章へ移動">
-        <a class="jump-btn primary" href="#route-a" data-modal="dlg-route-a">ルートA：取り込み済み案件へ</a>
-        <a class="jump-btn" href="#route-a2" data-modal="dlg-route-a2">A-2：12節委託料以外へ</a>
+        <a class="jump-btn primary" href="#route-a" data-modal="dlg-route-a">ルートA1：取込済案件へ</a>
+        <a class="jump-btn" href="#route-a2" data-modal="dlg-route-a2">ルートA2：12節 委託料以外へ</a>
         <a class="jump-btn" href="#route-bc" data-modal="dlg-route-bc">ルートB/C：新規登録へ</a>
         <a class="jump-btn" href="#after">差戻し・削除へ</a>
       </div>
@@ -177,16 +178,16 @@
           <colgroup><col class="result"><col class="screen"><col class="action"></colgroup>
           <thead><tr><th>判定結果</th><th>使う画面</th><th>やること</th></tr></thead>
           <tbody>
-            <tr><td>施行伺を財務会計システムで起票し、業務区分が「業務委託」、予算費目が「12節 委託料」</td><td><span class="route a" data-modal="dlg-route-a" title="ルートAの手順を確認（クリック）" style="cursor:pointer">ルートA</span> kViewer</td><td>既存案件を検索し、編集ボタンから不足項目を入力して送信します。</td></tr>
-            <tr><td>施行伺を財務会計システムで起票し、業務区分が「業務委託」、予算費目が「12節 委託料以外」</td><td><span class="route a" data-modal="dlg-route-a2" title="A-2の手順を確認（クリック）" style="cursor:pointer">A-2</span> kViewer</td><td>追加入力せず、「削除対象」にチェックして送信します。削除理由は不要です。</td></tr>
-            <tr><td>施行伺を財務会計システムで起票したが、業務区分が「業務委託」以外</td><td><span class="route b" data-modal="dlg-route-bc" title="ルートBの手順を確認（クリック）" style="cursor:pointer">ルートB</span> FormBridge</td><td>自動取込み対象外のため、FormBridgeで全項目を新規入力します。</td></tr>
-            <tr><td>財務会計システムで施行伺から起票せず、電算外で契約した案件</td><td><span class="route c" data-modal="dlg-route-bc" title="ルートCの手順を確認（クリック）" style="cursor:pointer">ルートC</span> FormBridge</td><td>FormBridgeで全項目を新規入力します。</td></tr>
+            <tr><td>予算費目が「12節 委託料」で施行伺を財務会計システムで起票し、施行伺の業務区分が「業務委託」で契約した案件</td><td><span class="route a" data-modal="dlg-route-a" title="ルートA1の手順を確認（クリック）" style="cursor:pointer">ルートA1</span> kViewer</td><td>既存案件を検索し、編集ボタンから不足項目を入力して送信します。</td></tr>
+            <tr><td>予算費目が「12節 委託料以外」で施行伺を財務会計システムで起票し、施行伺の業務区分が「業務委託」で契約した案件</td><td><span class="route a" data-modal="dlg-route-a2" title="ルートA2の手順を確認（クリック）" style="cursor:pointer">ルートA2</span> kViewer</td><td>追加入力せず、「削除対象」にチェックして送信します。削除理由は不要です。</td></tr>
+            <tr><td>予算費目が「12節 委託料」で施行伺を財務会計システムで起票し、施行伺の業務区分が「業務委託」以外で契約した案件</td><td><span class="route b" data-modal="dlg-route-bc" title="ルートBの手順を確認（クリック）" style="cursor:pointer">ルートB</span> FormBridge</td><td>自動取込み対象外のため、FormBridgeで全項目を新規入力します。</td></tr>
+            <tr><td>予算費目が「12節 委託料」で財務会計システムで施行伺から起票せず、電算外で契約した案件</td><td><span class="route c" data-modal="dlg-route-bc" title="ルートCの手順を確認（クリック）" style="cursor:pointer">ルートC</span> FormBridge</td><td>FormBridgeで全項目を新規入力します。</td></tr>
           </tbody>
         </table>
       </div>
       <div class="note example">
         <strong>財務会計システム画面について</strong>
-        財務会計システムは本HTMLから取得できないため、実画面画像は差し込んでいません。確認する場所は「業務区分」と「予算費目」です。画面を追加する場合は、件名、金額、業者名、認証情報を必ずマスクしてください。
+        確認する場所は財務会計システムで施行伺を起票した際の「業務区分」と「予算費目」です。
       </div>
     </section>
 
@@ -212,42 +213,45 @@
         <div class="node"><strong>3. FormBridgeで回答</strong>不足項目を入力し、回答ボタンで送信します。</div>
         <div class="node"><strong>4. kintoneを更新</strong>送信内容が台帳データに反映されます。</div>
       </div>
-      <div class="note warn">
-        <strong>公式情報を踏まえた注意</strong>
-        トヨクモ公式情報では、公開フォーム・公開ビューは便利な一方、意図しない情報公開、大量アクセス時の制限、アクセス制御の設計が重要とされています。本台帳では、契約監理課が案内したURL・手順・公開範囲だけを使用してください。
-      </div>
     </section>
 
     <section id="route-a">
-      <h2 class="part">ルートA：kViewerで取り込み済み案件を編集する</h2>
-      <div class="chapter-summary" aria-label="ルートAの要約">
+      <h2 class="part">ルートA1：kViewerから案件を編集する</h2>
+      <div class="chapter-summary" aria-label="ルートA1の要約">
         <div class="summary-item"><strong>使う画面</strong><span>kViewer → FormBridge編集画面</span></div>
         <div class="summary-item"><strong>やること</strong><span>検索、予算費目確認、不足項目入力</span></div>
         <div class="summary-item"><strong>最後の操作</strong><span>回答送信後、一覧で更新確認</span></div>
       </div>
-      <p>ルートAは、財務会計システムで業務区分「業務委託」として処理され、契約監理課が台帳へ取り込んだ案件です。各課はkViewerで自分の案件を探し、予算費目を確認してから入力します。</p>
-      <h3 class="sec" id="route-a-flow">ルートAの全体手順</h3>
+      <p>ルートA1は、予算費目が「12節 委託料」のうち財務会計システムで施行伺の業務区分を「業務委託」として処理され、契約監理課が台帳へ取込んだ案件です。各課はkViewerで自分の案件を探し、予算費目を確認してから入力します。</p>
+      <h3 class="sec" id="route-a-flow">ルートA1の作業STEP</h3>
       <ol class="steps">
-        <li><span class="st-title">契約監理課から取込み通知を受ける</span>取込み前はkViewerで案件が見つからない場合があります。通知後に作業してください。</li>
+        <li><span class="st-title">契約監理課から取込み通知を受ける</span>財務会計システムから定期的に案件情報が取込まれます。通知後に作業してください。</li>
         <li><span class="st-title">kViewerを開く</span>「まず開くURL一覧」からkViewerを開きます。</li>
         <li><span class="st-title">課名または件名で検索する</span>検索結果が多い場合は、件名の特徴語、施設名、年度、課名など検索語を変えて確認します。</li>
-        <li><span class="st-title">該当案件を開き、予算費目を確認する</span>最初に「12節 委託料」か「12節 委託料以外」かを確認します。</li>
-        <li><span class="st-title">編集ボタンからFormBridge入力画面へ進む</span>予算費目が12節委託料なら、不足項目を入力します。</li>
-        <li><span class="st-title">回答ボタンで送信し、一覧で更新を確認する</span>送信後はkViewer一覧に戻り、更新内容が反映されているか確認します。</li>
+        <li><span class="st-title">詳細画面で対象案件か確認する</span>件名、所属、契約相手方、契約日などを根拠資料と見比べ、別案件を開いていないか確認します。</li>
+        <li><span class="st-title">予算費目を確認する</span>「12節 委託料」ならルートA1のまま進みます。「12節 委託料以外」ならルートA2に切り替えます。</li>
+        <li><span class="st-title">編集ボタンからFormBridge入力画面へ進む</span>既存値を消さず、空欄や各所属で入力する項目だけを確認します。</li>
+        <li><span class="st-title">自動入力項目を確認する</span>財務会計システムから取込まれた項目に明らかな誤りがあれば、各課で直接直さず契約監理課へ連絡します。</li>
+        <li><span class="st-title">各所属で入力する項目を入力する</span>予算費目、積算方法、契約種別、随意契約理由、手続方法など、必要な項目を根拠資料に基づいて入力します。</li>
+        <li><span class="st-title">回答ボタンで送信する</span>送信後はkViewer一覧に戻り、更新内容が反映されているか確認します。</li>
       </ol>
       <div class="note important">
-        <strong>kViewer検索の実務ポイント</strong>
-        kViewerの検索は、kintoneの検索仕様に準じる部分があります。見つからないときは、長い件名を丸ごと入れず、2文字以上の特徴語、課名、施設名などに分けて探してください。
+        <strong>契約監理課が案件を取込むタイミング</strong>
+        契約監理課が財務会計システムから、毎月数回の定期的なタイミングで案件を台帳に取込みます。取込み後Chatluckで契約連絡担当者へ通知しますので、通知を受けてから作業してください。
       </div>
+      <h3 class="sec" id="route-a-search">STEP A1-1 kViewerで検索し、詳細画面で対象案件を確認する</h3>
+      <p>kViewer一覧では、課名だけでなく件名の一部、施設名、年度、契約相手方など複数の検索語で絞り込みます。該当しそうな案件を開いたら、詳細画面で件名、所属、契約日、履行期間、契約相手方を根拠資料と照合し、別案件を編集しないようにします。</p>
+      <h3 class="sec" id="route-a-edit">STEP A1-2 編集ボタンからFormBridge入力画面へ進む</h3>
+      <p>詳細画面の編集ボタンからFormBridge入力画面を開きます。編集画面では、すでに入っている値をむやみに書き換えず、まず予算費目が「12節 委託料」か確認してください。予算費目が「12節 委託料以外」だった場合は、ルートA2の手順に進みます。</p>
       <div class="shot-stack">
         <figure class="manual-shot" aria-label="kViewer一覧画面">
           <div class="shot-scroll"><img src="manual-assets/kviewer-01-list-redacted.png" alt="kViewer一覧画面。実データをマスクし、詳細リンクと一覧確認箇所を示した画像。"></div>
           <figcaption>
             <strong>kViewer一覧で見る場所</strong>
             <ul class="shot-points">
+              <li>一覧で自分の所属先を探す</li>
+              <li>一覧で入力の対象案件を探す</li>
               <li>左端の「詳細」から案件を開く</li>
-              <li>一覧で対象案件を探す</li>
-              <li>実データはマスクして扱う</li>
               </ul>
           </figcaption>
         </figure>
@@ -257,8 +261,8 @@
             <strong>kViewer詳細で見る場所</strong>
             <ul class="shot-points">
               <li>項目名を上から確認する</li>
-              <li>予算費目と契約情報を確認する</li>
-              <li>実データは共有時にマスクする</li>
+              <li>案件や契約に関する情報を確認する</li>
+              <li>左下の編集ボタンをクリックする</li>
             </ul>
           </figcaption>
         </figure>
@@ -275,8 +279,8 @@
         </figure>
       </div>
 
-      <h3 class="sec" id="route-a-autofill">自動入力されている項目</h3>
-      <p>次の13項目は、財務会計システムから取り込まれた時点で入力済みです。明らかな誤りがある場合は各課で直接修正せず、契約監理課へ連絡してください。</p>
+      <h3 class="sec" id="route-a-autofill">STEP A1-3 自動入力されている項目を確認する</h3>
+      <p>次の14項目は、財務会計システムから取込まれた時点で入力済みです。明らかな誤りがある場合は各課で直接修正せず、契約監理課へ連絡してください。</p>
       <div class="tbl-wrap" data-scroll>
         <table>
           <thead><tr><th>#</th><th>項目</th><th>内容</th></tr></thead>
@@ -285,20 +289,21 @@
             <tr><td>2</td><td>件名</td><td>契約の正式名称</td></tr>
             <tr><td>3</td><td>履行場所</td><td>業務を行う場所</td></tr>
             <tr><td>4</td><td>業種情報</td><td>業種No・契約業種名称など</td></tr>
-            <tr><td>5</td><td>入札日</td><td>入札を実施した日</td></tr>
-            <tr><td>6</td><td>契約日</td><td>契約を締結した日</td></tr>
-            <tr><td>7</td><td>期間開始</td><td>履行期間の開始日</td></tr>
-            <tr><td>8</td><td>期間終了</td><td>履行期間の終了日</td></tr>
-            <tr><td>9</td><td>入札参加業者数</td><td>入札に参加した業者の総数</td></tr>
-            <tr><td>10</td><td>契約業者名称</td><td>契約相手の正式名称</td></tr>
-            <tr><td>11</td><td>所在地</td><td>契約業者の所在地</td></tr>
-            <tr><td>12</td><td>予定価格（税込）</td><td>設定した予定価格</td></tr>
-            <tr><td>13</td><td>契約金額（税込）</td><td>当初契約の契約金額</td></tr>
+            <tr><td>5</td><td>入札種別名称</td><td>入札の種別</td></tr>
+            <tr><td>6</td><td>入札日</td><td>入札を実施した日</td></tr>
+            <tr><td>7</td><td>契約日</td><td>契約を締結した日</td></tr>
+            <tr><td>8</td><td>期間開始</td><td>履行期間の開始日</td></tr>
+            <tr><td>9</td><td>期間終了</td><td>履行期間の終了日</td></tr>
+            <tr><td>10</td><td>入札参加業者数</td><td>入札に参加した業者の総数</td></tr>
+            <tr><td>11</td><td>契約業者名称</td><td>契約相手の正式名称</td></tr>
+            <tr><td>12</td><td>所在地</td><td>契約業者の所在地</td></tr>
+            <tr><td>13</td><td>予定価格（税込）</td><td>設定した予定価格</td></tr>
+            <tr><td>14</td><td>契約金額（税込）</td><td>当初契約の契約金額</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h3 class="sec" id="route-a-missing">12節委託料の不足項目</h3>
+      <h3 class="sec" id="route-a-missing">STEP A1-4 各所属で入力する項目</h3>
       <div class="tbl-wrap" data-scroll>
         <table class="three-col-label">
           <colgroup><col class="no"><col class="item"><col class="kind"><col></colgroup>
@@ -306,40 +311,63 @@
           <tbody>
             <tr><td>1</td><td>予算費目</td><td><span class="badge req">必須</span></td><td>「12節 委託料」を選択</td></tr>
             <tr><td>2</td><td>スライド条項の適用</td><td><span class="badge req">必須</span></td><td>複数年契約でスライド条項を適用している場合のみ「有」</td></tr>
-            <tr><td>3</td><td>その他（業種）</td><td><span class="badge cond">条件付き</span></td><td>業種が空欄、または一覧に該当がない場合のみ記入</td></tr>
+            <tr><td>3</td><td>その他（業種）</td><td><span class="badge cond">条件付き</span></td><td>業種が空欄、または一覧に該当がない場合のみ入力</td></tr>
             <tr><td>4</td><td>積算方法</td><td><span class="badge req">必須</span></td><td>本市積算基準、参考見積、過年度実績、その他から選択</td></tr>
-            <tr><td>5</td><td>積算根拠</td><td><span class="badge cond">条件付き</span></td><td>積算方法で「その他」を選んだとき具体内容を記入</td></tr>
-            <tr><td>6</td><td>契約種別</td><td><span class="badge req">必須</span></td><td>単年度契約、債務負担行為、長期継続契約から契約書・予算資料に合うものを選択</td></tr>
+            <tr><td>5</td><td>積算根拠</td><td><span class="badge cond">条件付き</span></td><td>積算方法で「その他」を選んだとき具体内容を入力</td></tr>
+            <tr><td>6</td><td>契約種別</td><td><span class="badge req">必須</span></td><td>単年度契約、債務負担行為、長期継続契約、指定管理者から契約書・予算資料に合うものを選択</td></tr>
             <tr><td>7</td><td>随意契約による適用号</td><td><span class="badge cond">条件付き</span></td><td>入札種別が随意契約または見積合わせのとき、1号から9号の中から選択。少額随契・見積合わせは1号、その他は理由書の号を確認</td></tr>
-            <tr><td>8</td><td>辞退・欠席業者数</td><td><span class="badge cond">条件付き</span></td><td>辞退または欠席した業者がいるとき人数を入力。いない場合は0を入力</td></tr>
-            <tr><td>9</td><td>くじ引き業者数</td><td><span class="badge cond">条件付き</span></td><td>くじ引きを行ったとき、くじを引いた業者数を入力。行っていない場合は0を入力</td></tr>
-            <tr><td>10</td><td>無効業者数</td><td><span class="badge cond">条件付き</span></td><td>無効となった業者がいるとき人数を入力。いない場合は0を入力</td></tr>
-            <tr><td>11</td><td>障害者雇用促進企業指名業者数</td><td><span class="badge cond">条件付き</span></td><td>障害者雇用促進企業を指名したとき、指名した業者数を入力。指名していない場合は0を入力</td></tr>
-            <tr><td>12</td><td>契約手続方法</td><td><span class="badge req">必須</span></td><td>電子契約システムで締結した場合は「電子契約」、それ以外は「紙契約」を選択</td></tr>
-            <tr><td>13</td><td>予定価格の設定方法</td><td><span class="badge req">必須</span></td><td>予定価格を総額で設定した場合は「総価」、単価で設定した場合は「単価」を選択</td></tr>
+            <tr><td>8</td><td>随意契約の理由</td><td><span class="badge cond">条件付き</span></td><td>随意契約の2号から9号のいずれかを選択した場合は理由を入力</td></tr>
+            <tr><td>9</td><td>公告文</td><td><span class="badge cond">条件付き</span></td><td>一般競争入札のみ公告文のデータを添付</td></tr>
+            <tr><td>10</td><td>辞退・欠席業者数</td><td><span class="badge cond">条件付き</span></td><td>辞退または欠席した業者がいるとき人数を入力。いない場合は0を入力</td></tr>
+            <tr><td>11</td><td>くじ引き業者数</td><td><span class="badge cond">条件付き</span></td><td>くじ引きを行ったとき、くじを引いた業者数を入力。行っていない場合は0を入力</td></tr>
+            <tr><td>12</td><td>無効業者数</td><td><span class="badge cond">条件付き</span></td><td>無効となった業者がいるとき人数を入力。いない場合は0を入力</td></tr>
+            <tr><td>13</td><td>障害者雇用促進企業指名業者名</td><td><span class="badge cond">条件付き</span></td><td>障害者雇用促進企業を指名したとき、指名業者名を入力</td></tr>
+            <tr><td>14</td><td>入札手続方法</td><td><span class="badge req">必須</span></td><td>電子入札システムで入札（見積合わせ等含む。）した場合は「電子入札」、それ以外は「紙入札」を選択</td></tr>
+            <tr><td>15</td><td>契約手続方法</td><td><span class="badge req">必須</span></td><td>電子契約システムで締結した場合は「電子契約」、それ以外は「紙契約」を選択</td></tr>
+            <tr><td>16</td><td>予定価格の設定方法</td><td><span class="badge req">必須</span></td><td>予定価格を総額で設定した場合は「総価」、単価で設定した場合は「単価」を選択</td></tr>
           </tbody>
         </table>
+      </div>
+      <h3 class="sec" id="route-a-submit">STEP A1-5 入力内容を確認して回答送信する</h3>
+      <p>入力後は、根拠資料と照合してからページ下部の回答ボタンで送信します。</p>
+      <div class="note check">
+        <strong>送信後に確認すること</strong>
+        kViewer一覧または詳細画面に戻り、入力した内容が反映されているか確認してください。反映が確認できない場合は、同じ案件を再登録せず、送信完了画面や入力内容を確認してから契約監理課へ問い合わせます。
       </div>
     </section>
 
     <section id="route-a2">
-      <h2 class="part">A-2：12節委託料以外を削除対象として送信する</h2>
-      <div class="chapter-summary" aria-label="A-2の要約">
+      <h2 class="part">ルートA2：kViewerから案件を編集する（「12節 委託料以外」を選択）</h2>
+      <div class="chapter-summary" aria-label="ルートA2の要約">
         <div class="summary-item"><strong>使う画面</strong><span>kViewer → FormBridge編集画面</span></div>
         <div class="summary-item"><strong>やること</strong><span>予算費目確認、削除対象チェック</span></div>
         <div class="summary-item"><strong>最後の操作</strong><span>追加入力せず回答送信</span></div>
       </div>
-      <p>業務区分が「業務委託」でも、予算費目が「12節 委託料」以外の案件は台帳本登録の対象外です。この場合は不足項目を入力せず、削除対象として契約監理課へ知らせます。</p>
+      <p>業務区分が「業務委託」でも、予算費目が「12節 委託料」以外の案件は台帳の登録対象外です。この場合は不足項目を入力せず、回答してください。</p>
+      <h3 class="sec" id="route-a2-flow">ルートA2の作業STEP</h3>
       <ol class="steps">
-        <li><span class="st-title">kViewerで該当案件を開く</span>課名・件名で検索し、対象案件を開きます。</li>
-        <li><span class="st-title">予算費目が12節委託料以外であることを確認</span>ここを確認せずに削除対象にしないでください。</li>
-        <li><span class="st-title">編集ボタンを押す</span>入力画面に進みます。</li>
+        <li><span class="st-title">kViewerで検索する</span>課名、件名、施設名、年度などで対象案件を探します。</li>
+        <li><span class="st-title">詳細画面で対象案件か確認する</span>件名、所属、契約相手方、契約日などを根拠資料と照合します。</li>
+        <li><span class="st-title">編集ボタンを押す</span>FormBridge入力画面に進みます。</li>
+        <li><span class="st-title">予算費目が「12節 委託料以外」であることを確認する</span>予算費目欄を確認し、必要に応じて「12節 委託料以外」を選択します。</li>
         <li><span class="st-title">追加入力はしない</span>随意契約理由、積算根拠、公告文PDF、各課入力事項などは入力しません。</li>
-        <li><span class="st-title">削除対象にチェックして回答送信</span>「削除対象」にチェックし、回答ボタンで送信します。</li>
+        <li><span class="st-title">削除対象にチェックする</span>「削除対象（各課対応）」にチェックします。</li>
+        <li><span class="st-title">回答ボタンで送信する</span>削除理由は入力せず、回答ボタンで送信します。</li>
       </ol>
       <div class="note warn">
-        <strong>A-2では削除理由を書かない</strong>
-        12節委託料以外で削除対象にする場合、削除理由は不要です。二重登録・誤登録など別理由の削除依頼とは手順が異なります。
+        <strong>ルートA2では削除理由を書かない</strong>
+        「12節 委託料以外」で削除対象にする場合、削除理由は不要です。二重登録・誤登録など別理由の削除依頼とは手順が異なります。
+      </div>
+      <h3 class="sec" id="route-a2-difference">削除理由・誤登録・契約解除との違い</h3>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>場面</th><th>チェック</th><th>各課入力事項・削除理由</th></tr></thead>
+          <tbody>
+            <tr><td>ルートA2：12節 委託料以外</td><td>削除対象（各課対応）にチェック</td><td>入力不要。削除理由も書きません。</td></tr>
+            <tr><td>誤登録・二重登録</td><td>削除対象（各課対応）にチェック</td><td>各課入力事項に削除理由を書きます。</td></tr>
+            <tr><td>契約解除</td><td>削除対象にチェックしない</td><td>解除日、根拠条文、解除理由または概要を各課入力事項に書き、契約経過として残します。</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -347,10 +375,10 @@
       <h2 class="part">ルートB/C：FormBridgeで新規登録する案件</h2>
       <div class="chapter-summary" aria-label="ルートB/Cの要約">
         <div class="summary-item"><strong>使う画面</strong><span>FormBridge入力フォーム</span></div>
-        <div class="summary-item"><strong>やること</strong><span>STEP 1から10まで全項目入力</span></div>
-        <div class="summary-item"><strong>最後の操作</strong><span>内容確認済にチェックし回答送信</span></div>
+        <div class="summary-item"><strong>やること</strong><span>STEP 1から9まで入力</span></div>
+        <div class="summary-item"><strong>最後の操作</strong><span>入力内容を確認して回答送信</span></div>
       </div>
-      <p>ルートB・Cは、財務会計システムから自動取込みされない案件です。特にルートCは、財務会計システムで施行伺から起票せず、電算外で契約した案件です。FormBridgeを開き、STEP 1からSTEP 10まで上から順に入力します。</p>
+      <p>ルートB/Cは、財務会計システムから自動取込みされない案件です。特にルートCは、財務会計システムで施行伺から起票せず、電算外で契約した案件です。FormBridgeを開き、STEP 1からSTEP 9まで上から順に入力します。</p>
       <div class="flow">
         <div class="node"><strong>STEP 1</strong>担当課</div>
         <div class="node"><strong>STEP 2</strong>基本情報</div>
@@ -361,7 +389,6 @@
         <div class="node"><strong>STEP 7</strong>業者情報</div>
         <div class="node"><strong>STEP 8</strong>契約金額</div>
         <div class="node"><strong>STEP 9</strong>各課入力事項</div>
-        <div class="node"><strong>STEP 10</strong>確認・送信</div>
       </div>
       <div class="shot-stack">
         <figure class="manual-shot" aria-label="FormBridge冒頭画面">
@@ -401,17 +428,17 @@
 
       <h3 class="sec" id="step-1">STEP 1 担当課の入力</h3>
       <p>「課名検索」欄にキーワードを入力し、検索ボタンで該当する課の情報を表示します。表示された部No・部・課No・課が自分の所属と一致しているか確認してください。</p>
-      <h3 class="sec" id="step-2">STEP 2 案件の基本情報</h3>
+      <h3 class="sec" id="step-2">STEP 2 基本情報の入力</h3>
       <h5 class="field">件名 <span class="badge req">必須</span></h5>
       <p>契約書または施行伺の正式名称を入力します。同一・類似案件が複数ある場合は「その1」「その2」、対象施設名、対象地区名、業務内容の違いなどを加え、案件の違いが分かる名称にしてください。</p>
-      <div class="note example"><strong>良い例・避けたい例</strong>良い例：東部地区除草業務委託その1、大分市立〇〇小学校樹木剪定業務委託。避けたい例：除草業務委託、介護審査料4月分。</div>
+      <div class="note example"><strong>良い例・悪い例</strong>良い例：東部地区除草業務委託その1、大分市立〇〇小学校樹木剪定業務委託。悪い例：除草業務委託、介護審査料4月分。</div>
       <h5 class="field">履行場所 <span class="badge req">必須</span></h5>
       <p>業務を実際に行う場所を入力します。例：大分市役所本庁舎、大分市内一円、対象施設名。</p>
       <h5 class="field">予算費目 <span class="badge req">必須</span></h5>
       <p>起案文書の予算費目欄を確認し、「12節 委託料」または「12節 委託料以外」を選択します。</p>
       <div class="note example">
         <strong>要確認：文字入力ルール</strong>
-        環境依存文字を使わない、半角英数字記号で入力するなどの制限を設ける対象項目は、契約監理課の運用確認後に確定してください。
+        環境依存文字を使わない、全角スペースを使わない。起案文書の予算費目欄にある文字を正確に確認して選択してください。
       </div>
       <h5 class="field">スライド条項の適用 <span class="badge req">必須</span></h5>
       <p>複数年契約でスライド条項を適用している場合のみ「有」を選択します。それ以外は「無」を選択します。</p>
@@ -420,7 +447,7 @@
       <ul class="bullets">
         <li>業種No・契約業種名称：該当する業種の番号と名称を入力します。</li>
         <li>詳細業種No・契約詳細業種名称：詳細業種の指定がある場合のみ入力します。</li>
-        <li>その他：業種一覧に該当がない場合に自由記述で入力します。</li>
+        <li>業務委託以外の業種：業務委託の業種一覧に該当がない場合にプルダウンから選択します。</li>
       </ul>
 
       <h3 class="sec" id="step-4">STEP 4 積算方法の選択</h3>
@@ -428,23 +455,23 @@
         <table>
           <thead><tr><th>選択肢</th><th>判断の目安</th></tr></thead>
           <tbody>
-            <tr><td>本市積算基準</td><td>大分市が提供する積算基準をもとに積算した場合</td></tr>
+            <tr><td>本市積算基準</td><td>本市が提供する積算基準をもとに積算した場合</td></tr>
             <tr><td>参考見積</td><td>業者等からの見積書を参考に積算した場合</td></tr>
             <tr><td>過年度実績</td><td>過年度の契約実績を踏まえて積算した場合</td></tr>
-            <tr><td>その他</td><td>国・県・外部団体の単価、独自資料などを参考に積算した場合。積算根拠欄に具体内容を記入します。</td></tr>
+            <tr><td>その他</td><td>国・県・外部団体の単価、独自資料などを参考に積算した場合。積算根拠欄に具体内容を入力します。</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h3 class="sec" id="step-5">STEP 5 契約・入札種別</h3>
+      <h3 class="sec" id="step-5">STEP 5 契約・入札種別の入力</h3>
       <h5 class="field">契約種別 <span class="badge req">必須</span></h5>
-      <p>単年度契約、債務負担行為、長期継続契約から選びます。複数年度にまたがる場合は契約書・予算資料で根拠を確認してください。</p>
+      <p>単年度契約、債務負担行為、長期継続契約、指定管理者から選びます。複数年度にまたがる場合は契約書・予算資料で根拠を確認してください。</p>
       <div class="note example">
         <strong>要確認：年度をまたぐ契約の扱い</strong>
         履行期間が1会計年度以内で、契約日だけが前年度にある案件の登録要否・登録年度は、契約監理課の運用確認後に確定してください。
       </div>
       <h5 class="field">入札種別名称 <span class="badge req">必須</span></h5>
-      <p>一般競争入札、指名競争入札、随意契約、見積合わせのいずれかを選びます。随意契約・見積合わせの場合は適用号と理由の要否に注意してください。</p>
+      <p>一般競争入札、指名競争入札、随意契約、見積合わせのいずれかを選びます。随意契約・見積合わせの場合は適用号を選択し、「随意契約の理由」を入力してください。一般競争入札の場合は公告文を添付すること。</p>
 
       <h3 class="sec" id="step-6">STEP 6 日程の入力</h3>
       <p>入札日、契約日、期間開始、期間終了を入力します。契約書、入札結果、施行伺の日付と矛盾しないか確認してください。</p>
@@ -458,7 +485,7 @@
             <tr><td>辞退・欠席業者数</td><td><span class="badge cond">条件付き</span></td><td>辞退・欠席した業者がいるとき人数を入力。いない場合は0を入力</td></tr>
             <tr><td>くじ引き業者数</td><td><span class="badge cond">条件付き</span></td><td>くじ引きを行ったとき、くじを引いた業者数を入力。行っていない場合は0を入力</td></tr>
             <tr><td>無効業者数</td><td><span class="badge cond">条件付き</span></td><td>無効となった業者がいるとき人数を入力。いない場合は0を入力</td></tr>
-            <tr><td>障害者雇用促進企業指名業者数</td><td><span class="badge cond">条件付き</span></td><td>障害者雇用促進企業を指名したとき、指名した業者数を入力。指名していない場合は0を入力</td></tr>
+            <tr><td>障害者雇用促進企業指名業者名</td><td><span class="badge cond">条件付き</span></td><td>障害者雇用促進企業を指名したとき、指名業者名を入力。</td></tr>
             <tr><td>契約業者名称</td><td><span class="badge req">必須</span></td><td>契約相手方の正式名称。株式会社等の法人格を省略しない</td></tr>
             <tr><td>所在地</td><td><span class="badge req">必須</span></td><td>契約書または業者登録情報に記載された所在地を入力</td></tr>
           </tbody>
@@ -491,18 +518,8 @@
         「予定数量が不明のため、予算配分額で予定価格・契約金額を入力」／「災害対応のため緊急発注。発注経緯は別添資料のとおり」／「令和7年9月30日付けで契約解除」
       </div>
 
-      <h3 class="sec" id="step-10">STEP 10 確認チェックと送信</h3>
-      <p>入力内容を確認し、該当するチェックボックスを入れてから、ページ下部の回答ボタンで送信します。</p>
-      <div class="tbl-wrap" data-scroll>
-        <table>
-          <thead><tr><th>チェック項目</th><th>使う場面</th></tr></thead>
-          <tbody>
-            <tr><td>内容確認済（各課対応）</td><td>新規登録または不足項目の入力が完了し、根拠資料との照合が終わったとき</td></tr>
-            <tr><td>修正対応済（各課対応）</td><td>契約監理課からの修正依頼に対応し終えたとき</td></tr>
-            <tr><td>削除対象（各課対応）</td><td>12節委託料以外、二重登録、誤登録、本来登録すべきでない案件を契約監理課へ知らせるとき</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <h3 class="sec" id="step-submit">送信前の確認</h3>
+      <p>STEP 9まで入力したら、根拠資料と照合してからページ下部の回答ボタンで送信します。</p>
 
       <h3 class="sec" id="evidence">入力欄と根拠資料</h3>
       <p>どの資料を見て入力するかを先に決めると、推測入力や差戻しを減らせます。</p>
@@ -512,8 +529,8 @@
           <thead><tr><th>入力欄</th><th>主な根拠資料</th><th>確認ポイント</th></tr></thead>
           <tbody>
             <tr><td>件名・履行場所</td><td>契約書、施行伺</td><td>正式名称、対象施設、対象地区を確認</td></tr>
-            <tr><td>予算費目</td><td>起案文書、予算費目欄</td><td>12節委託料か、それ以外かを確認</td></tr>
-            <tr><td>契約種別</td><td>契約書、予算資料</td><td>単年度、債務負担行為、長期継続を確認</td></tr>
+            <tr><td>予算費目</td><td>起案文書、予算費目欄</td><td>12節 委託料か、それ以外かを確認</td></tr>
+            <tr><td>契約種別</td><td>契約書、予算資料</td><td>単年度、債務負担行為、長期継続契約、指定管理者を確認</td></tr>
             <tr><td>入札種別・参加者数</td><td>入札結果、見積結果</td><td>一般競争、指名競争、随意契約、見積合わせを確認</td></tr>
             <tr><td>随意契約理由</td><td>随意契約理由書</td><td>適用号と具体的な理由を照合</td></tr>
             <tr><td>金額・日程</td><td>契約書、入札結果、起案文書</td><td>税込金額、契約日、履行期間を確認</td></tr>
@@ -524,25 +541,25 @@
 
     <section id="cases">
       <h2 class="part">ケース別入力</h2>
-      <p>自分の案件に該当するケースだけ確認してください。複数該当する場合は、それぞれの節を確認します。</p>
+      <p>自分の案件に該当するケースを確認してください。</p>
 
       <h3 class="sec" id="case-negotiated">随意契約・見積合わせ</h3>
       <p>入札種別で随意契約または見積合わせを選ぶ場合は、根拠条文と理由の入力要否を確認します。</p>
       <div class="tbl-wrap" data-scroll>
         <table>
-          <thead><tr><th>区分</th><th>適用号</th><th>随意契約理由欄</th><th>注意点</th></tr></thead>
+          <thead><tr><th>区分</th><th>適用号</th><th>随意契約の理由欄</th><th>注意点</th></tr></thead>
           <tbody>
-            <tr><td>少額随契・見積合わせ</td><td>1号</td><td>詳細記入は不要。適用号欄が表示されている場合は1号を選択</td><td>入札参加業者数・見積業者数の入力を忘れない</td></tr>
-            <tr><td>2号から9号の随意契約</td><td>理由書の該当号</td><td>具体的な理由を記入</td><td>決裁時の随意契約理由書を基本に、第三者が読んで理解できる文章にする</td></tr>
+            <tr><td>少額随契・見積合わせ</td><td>1号</td><td>詳細入力は不要。適用号欄が表示されている場合は1号を選択</td><td>入札参加業者数の欄に見積業者数の入力を忘れない</td></tr>
+            <tr><td>2号から9号の随意契約</td><td>理由書の該当号</td><td>具体的な理由を入力</td><td>決裁時の随意契約理由書を基本に、第三者が読んで理解できる文章にする</td></tr>
           </tbody>
         </table>
       </div>
       <div class="note example"><strong>良い例</strong>本業務は、当該設備の製造元である〇〇株式会社にのみ技術仕様が開示されており、保守用部品の供給も同社からのみ可能であるため、他に契約の相手方となりうる業者が存在しない。よって地方自治法施行令第167条の2第1項第2号により随意契約とした。</div>
-      <div class="note warn"><strong>避けたい例</strong>「特殊な技術が必要なため、随意契約とした。」だけでは具体性が不足します。</div>
-      <div class="note important"><strong>ホームページ公表を前提に記入</strong>随意契約理由はホームページ公表で使う可能性があります。公開されても理由が伝わるよう、契約の相手方を選んだ根拠を具体的に書いてください。</div>
+      <div class="note warn"><strong>悪い例</strong>「特殊な技術が必要なため、随意契約とした。」だけでは具体性が不足します。</div>
+      <div class="note important"><strong>ホームページ公表を前提に入力</strong>随意契約理由はホームページ公表で使う可能性があります。公開されても理由が伝わるよう、契約の相手方を選んだ根拠を具体的に書いてください。</div>
 
       <h3 class="sec" id="case-open-bid">一般競争入札</h3>
-      <p>一般競争入札の場合は、公告文PDFを添付します。公告文PDFがLGWAN環境や庁内フォルダにある場合、そのままFormBridgeへ添付できないことがあります。庁内の情報持出し・ファイル移送ルールを確認し、インターネット環境で添付できる状態にしてから作業してください。</p>
+      <p>一般競争入札の場合は、公告文PDFを添付します。公告文PDFがLGWAN環境や庁内フォルダにある場合、そのままFormBridgeへ添付できません。庁内の情報持出し・ファイル移送ルールを確認し、インターネット環境で添付できる状態にしてから作業してください。</p>
       <ol class="steps">
         <li><span class="st-title">公告文PDFを準備</span>財務会計システムや庁内ファイルサーバから取得します。</li>
         <li><span class="st-title">紙公告しかない場合</span>紙公告しか残っていない場合は、スキャンしてPDF化してよいか契約監理課または情報管理担当へ確認します。</li>
@@ -570,23 +587,33 @@
       <p>電子契約システムを使って締結した場合は、契約手続方法で電子契約を選択します。紙契約の場合は紙契約を選択します。</p>
 
       <h3 class="sec" id="case-disabled-employment">障害者雇用促進企業の指名</h3>
-      <p>指名した業者の正式名称を入力します。「株式会社」「有限会社」を省略せず、法人格の前後位置も正確に記入してください。複数業者を指名した場合は、カンマ区切りまたは改行区切りで記入します。</p>
+      <p>指名した業者の正式名称を入力します。「株式会社」「有限会社」を省略せず、法人格の前後位置も正確に入力してください。複数業者を指名した場合は、カンマ区切りまたは改行区切りで入力します。</p>
     </section>
 
     <section id="after">
       <h2 class="part">送信後・差戻し・削除依頼</h2>
       <h3 class="sec" id="after-confirm">送信後の確認</h3>
-      <p>回答ボタンで送信した後は、確認画面または完了表示を確認します。ルートAや差戻し対応では、kViewer一覧に戻り、該当案件が更新されているか確認してください。</p>
+      <p>回答ボタンで送信した後は、確認画面または完了表示を確認します。ルートA1や差戻し対応では、kViewer一覧に戻り、該当案件が更新されているか確認してください。</p>
       <h3 class="sec" id="after-remand">差戻し対応</h3>
+      <p>「修正対応済（各課対応）」は、契約監理課から差戻しや修正依頼などのアクションがあった後に使うチェックです。初回入力ではチェックしません。</p>
       <ol class="steps">
         <li><span class="st-title">契約監理課から修正依頼を受ける</span>指摘内容を確認します。</li>
         <li><span class="st-title">kViewerで該当案件を開く</span>検索して対象案件を開きます。</li>
         <li><span class="st-title">修正事項欄を確認</span>修正事項欄は契約監理課が使う欄です。各課が新たに書き込む欄ではありません。</li>
         <li><span class="st-title">編集ボタンから修正</span>指摘された箇所だけを修正します。</li>
-        <li><span class="st-title">修正対応済にチェックして送信</span>回答ボタンで送信します。</li>
+        <li><span class="st-title">修正対応済にチェックして送信</span>修正が終わったことを示すため、「修正対応済（各課対応）」にチェックして回答ボタンで送信します。</li>
       </ol>
+      <div class="tbl-wrap" data-scroll>
+        <table>
+          <thead><tr><th>チェック項目</th><th>使う場面</th></tr></thead>
+          <tbody>
+            <tr><td>修正対応済（各課対応）</td><td>契約監理課からの差戻し・修正依頼に対応し終えたとき</td></tr>
+            <tr><td>削除対象（各課対応）</td><td>12節 委託料以外、二重登録、誤登録、本来登録すべきでない案件を契約監理課へ知らせるとき</td></tr>
+          </tbody>
+        </table>
+      </div>
       <h3 class="sec" id="after-change">変更契約</h3>
-      <p>当初契約の情報が台帳にすべて入力されている場合、変更契約分を別案件として新規登録しません。契約監理課から個別修正依頼がある場合や当初入力に誤りがある場合のみ、該当案件を修正します。</p>
+      <p>台帳への入力は、当初契約のみです。変更契約が生じても入力情報を修正する必要はありません。契約監理課から個別修正依頼がある場合や当初入力に誤りがある場合のみ、該当案件を修正します。</p>
       <div class="note example">
         <strong>要確認：変更契約時の修正登録</strong>
         変更契約後の金額・期間を台帳へ修正登録するケースの線引きは、契約監理課の運用確認後に確定してください。
@@ -595,12 +622,12 @@
       <p>契約解除案件は「削除対象」にチェックを入れないでください。解除日、契約解除の根拠条文、解除理由または解除概要を各課入力事項に記載し、契約経過として台帳に残します。削除処理ができるのは契約監理課のみです。</p>
       <div class="note example"><strong>入力例</strong>令和7年9月30日付けで契約解除。契約書第〇条に基づき、受託者からの申出により解除。解除日以降の業務履行はなし。</div>
       <h3 class="sec" id="after-delete">誤登録・二重登録の削除依頼</h3>
-      <p>12節委託料以外ではなく、過去案件の誤登録、二重登録、本来登録すべきでない案件などを削除依頼する場合は、削除理由を記載します。各課では削除処理そのものはできません。契約監理課が確認後に処理します。</p>
+      <p>12節 委託料以外ではなく、過去案件の誤登録、二重登録、本来登録すべきでない案件などを削除依頼する場合は、削除理由を記載します。各課では削除処理そのものはできません。契約監理課が確認後に処理します。</p>
       <ol class="steps">
         <li><span class="st-title">kViewerで該当案件を開く</span>対象案件を確認します。</li>
         <li><span class="st-title">編集ボタンをクリック</span>入力画面に進みます。</li>
         <li><span class="st-title">削除対象にチェック</span>削除対象（各課対応）にチェックします。</li>
-        <li><span class="st-title">各課入力事項に削除理由を記入</span>例：「二重登録のため削除対象の処理」。</li>
+        <li><span class="st-title">各課入力事項に削除理由を入力</span>例：「二重登録のため削除対象の処理」。</li>
         <li><span class="st-title">回答ボタンで送信</span>契約監理課が確認後に処理します。</li>
       </ol>
     </section>
@@ -627,8 +654,8 @@
       <div class="grid two">
         <div class="card">
           <h4 class="sub">入力前</h4>
-          <p><strong>自分のルートが分かりません。</strong><br>「3分で分かるルート判定」のQ1からQ3を順番に確認してください。不明な場合は施行伺と予算費目欄を確認し、契約監理課へ問い合わせます。</p>
-          <p><strong>スマートフォンで入力できますか。</strong><br>画面上は利用できる場合がありますが、必須項目が多く、資料確認も必要なためPCでの入力を推奨します。</p>
+          <p><strong>自分のルートが分かりません。</strong><br>「ルート判定」のQ1からQ3を順番に確認してください。不明な場合は施行伺と予算費目欄を確認し、契約監理課へ問い合わせます。</p>
+          <p><strong>契約連絡担当者以外でも入力や編集はできますか。</strong><br>誰でも入力や編集は可能です。ただし、入力内容に誤り等がないように各所属にて注意してください。</p>
         </div>
         <div class="card">
           <h4 class="sub">入力中</h4>
@@ -643,8 +670,8 @@
         <div class="card">
           <h4 class="sub">困ったとき</h4>
           <p><strong>kViewerで案件が見つかりません。</strong><br>取込み前の可能性、検索語が合っていない可能性があります。課名・件名の一部・施設名など検索語を変えて確認してください。</p>
-          <p><strong>12節委託料以外は何を入力しますか。</strong><br>追加入力は不要です。削除対象にチェックして回答送信します。削除理由も不要です。</p>
-          <p><strong>公告文PDF以外も移す必要がありますか。</strong><br>入力フォームで添付を求められている公告文PDFのみを移します。他資料の添付が必要に見える場合は、作業前に情報管理担当または契約監理課へ確認してください。</p>
+          <p><strong>12節 委託料以外は何を入力しますか。</strong><br>追加入力は不要です。削除対象にチェックして回答送信します。削除理由も不要です。</p>
+          <p><strong>公告文PDF以外も添付する必要がありますか。</strong><br>一般競争入札の場合は公告文PDFのみを添付します。</p>
         </div>
       </div>
 
@@ -654,7 +681,7 @@
           <thead><tr><th>用語</th><th>説明</th></tr></thead>
           <tbody>
             <tr><td>12節 委託料</td><td>歳出予算の節区分のひとつ。委託料のための予算費目を指します。</td></tr>
-            <tr><td>業務委託</td><td>職員として雇用する契約ではなく、業務の遂行や目的物の完成を外部事業者へ依頼する契約です。</td></tr>
+            <tr><td>業務委託契約</td><td>業務の遂行や目的物の完成を外部事業者へ依頼する契約です。</td></tr>
             <tr><td>施行伺</td><td>契約や支出などを行う際に、上位の決裁権者の承認を求める文書です。</td></tr>
             <tr><td>随意契約</td><td>競争入札によらず、特定の相手方を選定して契約する方式です。</td></tr>
             <tr><td>見積合わせ</td><td>複数業者から見積書を取り、条件を比較して契約する方式です。少額随契で多く使われます。</td></tr>
@@ -672,7 +699,7 @@
       <h3 class="sec" id="checklist">入力チェックリスト</h3>
       <ul class="checklist">
         <li class="group-h">共通チェック</li>
-        <li>自分のルート（A / A-2 / B / C）を確認した</li>
+        <li>自分のルート（ルートA1 / ルートA2 / ルートB/C）を確認した</li>
         <li>契約書、起案文書、入札・見積結果、随意契約理由書など根拠資料を確認した</li>
         <li>確認できない内容を推測で入力していない</li>
         <li>金額は税込で入力した</li>
@@ -693,10 +720,10 @@
         <li>契約解除案件を削除対象にしていない</li>
         <li>契約解除の場合、解除日・根拠条文・解除理由または概要を記載した</li>
         <li class="group-h">削除対象</li>
-        <li>12節委託料以外の場合、追加入力せず削除対象にチェックした</li>
+        <li>12節 委託料以外の場合、追加入力せず削除対象にチェックした</li>
         <li>誤登録・二重登録の場合、削除理由を各課入力事項に記載した</li>
         <li class="group-h">最終チェック</li>
-        <li>新規登録または不足項目の入力が完了した場合は内容確認済にチェックした</li>
+        <li>差戻し・修正依頼を受けた場合のみ、修正後に修正対応済へチェックした</li>
         <li>回答ボタンで送信した</li>
         <li>送信後、kViewer一覧または完了画面で更新を確認した</li>
       </ul>
@@ -707,20 +734,16 @@
         <table>
           <thead><tr><th>連絡先</th><th>内容</th></tr></thead>
           <tbody>
-            <tr><td>契約監理課</td><td>大分市契約監理課</td></tr>
-            <tr><td>電話</td><td>契約監理課の最新通知を確認</td></tr>
-            <tr><td>メール</td><td>契約監理課の最新通知を確認</td></tr>
-            <tr><td>内線</td><td>契約監理課の最新通知を確認</td></tr>
+            <tr><td>所属</td><td>契約監理課 総務担当班</td></tr>
+            <tr><td>電話</td><td>537-5605（内線1161 1162）</td></tr>
+            <tr><td>メール</td><td>keiyaku@city.oita.oita.jp</td></tr>
+            <tr><td>業務委託相談受付フォーム</td><td>要確認（正式な受付フォームURLが決まり次第差し替え）</td></tr>
           </tbody>
         </table>
       </div>
       <div class="note check">
-        <strong>問い合わせ前に伝える情報</strong>
+        <strong>問い合わせ時に伝える情報</strong>
         所属、件名、作業中のルート、困っている画面、エラーメッセージ、確認済み資料を整理してから問い合わせると対応が早くなります。
-      </div>
-      <div class="note warn">
-        <strong>正式版で差し替えが必要</strong>
-        電話、メール、内線は仮置きです。配布前に契約監理課の正式な連絡先へ差し替えてください。
       </div>
     </section>
 
@@ -760,24 +783,27 @@
 
 <div class="progress-bar" aria-hidden="true"></div>
 
-<!-- ルートA モーダル -->
+<!-- ルートA1 モーダル -->
 <dialog id="dlg-route-a" aria-labelledby="dlg-route-a-title">
   <div class="modal-header">
     <div class="modal-header-title">
-      <span class="route a" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;">ルートA</span>
-      <h2 id="dlg-route-a-title">kViewerで取り込み済み案件を編集する</h2>
+      <span class="route a" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;">ルートA1</span>
+      <h2 id="dlg-route-a-title">kViewerから案件を編集する</h2>
     </div>
     <button class="modal-close" type="button" aria-label="閉じる">×</button>
   </div>
-  <p class="modal-when"><strong>このルートの条件：</strong>財務会計システムで起票済み、業務区分「業務委託」、予算費目「12節 委託料」</p>
+  <p class="modal-when"><strong>このルートの条件：</strong>施行伺を財務会計システムで起票済み、業務区分「業務委託」、予算費目「12節 委託料」</p>
   <div class="modal-body">
     <ol class="steps">
-      <li><span class="st-title">契約監理課から取込み通知を受ける</span>取込み前はkViewerで案件が見つからない場合があります。通知後に作業してください。</li>
+      <li><span class="st-title">契約監理課から取込み通知を受ける</span>財務会計システムから定期的に案件情報が取込まれます。通知後に作業してください。</li>
       <li><span class="st-title">kViewerを開く</span>「まず開くURL一覧」からkViewerのURLを開きます。</li>
       <li><span class="st-title">課名または件名で検索する</span>見つからない場合は特徴語・施設名・年度など検索語を変えて確認します。</li>
-      <li><span class="st-title">予算費目が「12節 委託料」であることを確認する</span>A-2と区別するため、必ず費目を先に確認します。</li>
-      <li><span class="st-title">編集ボタンからFormBridge入力画面へ進む</span>不足項目を入力します。</li>
-      <li><span class="st-title">回答ボタンで送信し、一覧で更新を確認する</span>kViewer一覧に戻り、更新内容が反映されているか確認します。</li>
+      <li><span class="st-title">詳細画面で対象案件か確認する</span>件名、所属、契約日などを根拠資料と照合します。</li>
+      <li><span class="st-title">予算費目が「12節 委託料」であることを確認する</span>「12節 委託料以外」ならルートA2に切り替えます。</li>
+      <li><span class="st-title">編集ボタンからFormBridge入力画面へ進む</span>既存値を消さず、空欄や各所属で入力する項目を確認します。</li>
+      <li><span class="st-title">自動入力項目を確認する</span>明らかな誤りがある場合は契約監理課へ連絡します。</li>
+      <li><span class="st-title">不足項目を入力する</span>積算方法、契約種別、随意契約理由、手続方法などを根拠資料に基づいて入力します。</li>
+      <li><span class="st-title">回答ボタンで送信する</span>kViewer一覧に戻り、更新内容が反映されているか確認します。</li>
     </ol>
   </div>
   <div class="modal-footer">
@@ -786,23 +812,25 @@
   </div>
 </dialog>
 
-<!-- ルートA-2 モーダル -->
+<!-- ルートA2 モーダル -->
 <dialog id="dlg-route-a2" aria-labelledby="dlg-route-a2-title">
   <div class="modal-header">
     <div class="modal-header-title">
-      <span class="route a" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;">A-2</span>
-      <h2 id="dlg-route-a2-title">12節委託料以外を削除対象として送信する</h2>
+      <span class="route a" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;">ルートA2</span>
+      <h2 id="dlg-route-a2-title">12節 委託料以外を削除対象として送信する</h2>
     </div>
     <button class="modal-close" type="button" aria-label="閉じる">×</button>
   </div>
-  <p class="modal-when"><strong>このルートの条件：</strong>財務会計システムで起票済み、業務区分「業務委託」、予算費目「12節 委託料<strong>以外</strong>」</p>
+  <p class="modal-when"><strong>このルートの条件：</strong>施行伺を財務会計システムで起票済み、業務区分「業務委託」、予算費目「12節 委託料<strong>以外</strong>」</p>
   <div class="modal-body">
     <ol class="steps">
-      <li><span class="st-title">kViewerで該当案件を開く</span>課名・件名で検索し、対象案件を開きます。</li>
-      <li><span class="st-title">予算費目が12節委託料以外であることを確認</span>確認しないまま削除対象にしないでください。</li>
+      <li><span class="st-title">kViewerで検索する</span>課名、件名、施設名、年度などで対象案件を探します。</li>
+      <li><span class="st-title">詳細画面で対象案件か確認する</span>件名、所属、契約相手方、契約日などを根拠資料と照合します。</li>
       <li><span class="st-title">編集ボタンを押す</span>FormBridge入力画面に進みます。</li>
+      <li><span class="st-title">予算費目が「12節 委託料以外」であることを確認する</span>確認しないまま削除対象にしないでください。</li>
       <li><span class="st-title">追加入力はしない</span>随意契約理由・積算根拠・各課入力事項などは入力不要です。</li>
-      <li><span class="st-title">「削除対象」にチェックして回答送信</span>削除理由の記入は不要です。</li>
+      <li><span class="st-title">「削除対象」にチェックする</span>削除対象（各課対応）にチェックします。</li>
+      <li><span class="st-title">回答ボタンで送信する</span>削除理由は入力せず、回答ボタンで送信します。</li>
     </ol>
   </div>
   <div class="modal-footer">
@@ -820,7 +848,7 @@
     </div>
     <button class="modal-close" type="button" aria-label="閉じる">×</button>
   </div>
-  <p class="modal-when"><strong>ルートBの条件：</strong>財務会計システムで起票済み・業務区分「業務委託」以外　／　<strong>ルートCの条件：</strong>財務会計システムで施行伺から起票せず電算外で契約</p>
+  <p class="modal-when"><strong>ルートBの条件：</strong>施行伺を財務会計システムで起票済み、予算費目「12節 委託料」、業務区分「業務委託」以外　／　<strong>ルートCの条件：</strong>予算費目「12節 委託料」、財務会計システムで施行伺から起票せず、電算外で契約</p>
   <div class="modal-body">
     <ol class="steps">
       <li><span class="st-title">FormBridgeを開く</span>「まず開くURL一覧」からFormBridgeのURLを開きます。</li>
@@ -828,7 +856,7 @@
       <li><span class="st-title">STEP 3〜5：業種・積算方法・契約種別を入力</span>起案文書の記載内容に従って選択します。</li>
       <li><span class="st-title">STEP 6〜8：日程・業者情報・契約金額を入力</span>契約書・入札結果資料を手元に準備して入力します。</li>
       <li><span class="st-title">STEP 9：各課入力事項を入力</span>随意契約理由・積算根拠など必要事項を入力します。</li>
-      <li><span class="st-title">STEP 10：内容確認チェックを付けて回答送信</span>「内容確認済」チェック後に回答ボタンを押します。</li>
+      <li><span class="st-title">送信前に入力内容を確認して回答送信</span>入力内容を根拠資料と照合し、回答ボタンを押します。</li>
     </ol>
   </div>
   <div class="modal-footer">
