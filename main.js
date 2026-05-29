@@ -122,16 +122,15 @@
       }
       ul, ol { padding-left: 18pt; margin: 5pt 0; }
       li { margin-bottom: 2pt; line-height: 1.7; }
+      /* Wordでは罫線スタイル差(double/dotted/groove)が不安定なため、
+         淡いネイビー地＋実線の太い左バーで確実に区切る */
       .note {
-        border-left: 4pt solid #18324f;
-        background: #fafafa;
+        border: 1pt solid #c7d4e3;
+        border-left: 5pt solid #18324f;
+        background: #eef2f6;
         padding: 6pt 10pt;
         margin: 7pt 0;
       }
-      /* 色を使わず左罫線スタイルで種別を差別化（ネイビー基調） */
-      .note.warn { border-left-style: double; border-left-width: 6pt; }
-      .note.check { border-left-style: dotted; border-left-width: 5pt; }
-      .note.example { border-left-style: groove; border-left-width: 6pt; }
       .note strong { display: block; color: #18324f; margin-bottom: 2pt; font-weight: bold; }
       .route {
         display: inline;
