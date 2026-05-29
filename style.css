@@ -832,13 +832,16 @@ mark.search-hit.current-hit{background:#cfe0f0;box-shadow:0 0 0 2px rgba(24,50,7
     print-color-adjust:exact;
     margin-top:0;
   }
-  #start h2.part,#urls h2.part{break-before:auto; page-break-before:auto;}
+  /* #start は前の表に続けてよいが、#urls(まず開くURL一覧)は見出し＋本文ごと次ページから始める */
+  #start h2.part{break-before:auto; page-break-before:auto;}
   h3.sec,h4.sub,h5.field{break-after:avoid; page-break-after:avoid;}
   p,li{orphans:2; widows:2;}
   table{break-inside:auto; page-break-inside:auto;}
   thead{display:table-header-group;}
   tr,td,th{break-inside:avoid; page-break-inside:avoid;}
   .card,.note,.steps li,.manual-shot,figure,.flow .node,.url-card{break-inside:avoid; page-break-inside:avoid;}
+  /* ルート判定のジャンプボタンが行・ボタン単位でページ境界に切られないようにする */
+  .jump-row,.jump-btn{break-inside:avoid; page-break-inside:avoid;}
   .grid.two,.grid.three,.url-panel,.flow{grid-template-columns:1fr 1fr;}
   .source-list a,.url-text,a{color:#000; border-bottom:0;}
   .open-link{background:none; color:#000; padding:0; font-weight:400;}
