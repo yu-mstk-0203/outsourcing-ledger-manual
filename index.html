@@ -1,3 +1,4 @@
+<!-- saved from url=(0016)http://localhost -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -31,7 +32,7 @@
       <a class="lv1" href="#route-a2">ルートA2：12節 委託料以外を削除対象として送信する</a>
       <a class="lv3" href="#route-a2-flow">ルートA2の作業STEP</a>
       <a class="lv3" href="#route-a2-difference">A2：削除理由・契約解除との違い</a>
-      <a class="lv1" href="#route-bc">ルートB/C：FormBridgeで新規登録する案件</a>
+      <a class="lv1" href="#route-bc">ルートB：FormBridgeで新規登録する案件</a>
       <a class="lv3" href="#step-1">STEP 1 担当課の入力</a>
       <a class="lv3" href="#step-2">STEP 2 案件の基本情報</a>
       <a class="lv3" href="#step-3">STEP 3 業種の入力</a>
@@ -90,7 +91,7 @@
       <div class="quick-nav">
         <a class="quick-card" href="#start">
           <strong>① ルートを判定する</strong>
-          <span>Q1→Q2→Q3 に答えて、自分がA1／A2／B／Cのどれかを確認します。最初に必ずここ。</span>
+          <span>Q0で対象か確認し、Q1→Q2→Q3 に答えて、自分がA1／A2／B（または対象外）のどれかを確認します。最初に必ずここ。</span>
         </a>
         <a class="quick-card" href="#route-a">
           <strong>ルートA1：取込済を編集</strong>
@@ -101,8 +102,8 @@
           <span>12節 委託料以外の案件。追加入力せず「削除対象」にチェックして送信します。</span>
         </a>
         <a class="quick-card" href="#route-bc">
-          <strong>ルートB／C：新規登録</strong>
-          <span>自動取込み対象外の案件。FormBridgeで全項目を新規入力します。</span>
+          <strong>ルートB：新規登録</strong>
+          <span>委託料だが自動取込みされない案件（コンサル・工事・物品を委託料で発注、または電算外）。FormBridgeで全項目を新規入力します。</span>
         </a>
       </div>
     </section>
@@ -122,8 +123,8 @@
         </table>
       </div>
       <div class="note important">
-        <strong>契約締結後1か月以内に情報を台帳に入力してください</strong>
-        入力の対象は「12節 委託料」で執行した業務委託契約です。
+        <strong>契約を締結した後に、1か月以内をめどに台帳へ入力してください</strong>
+        入力の対象は、各所属が契約した「12節 委託料」の案件です。業務区分が「業務委託」のものは財務会計システムから自動で取込まれ（ルートA1）、コンサル・工事・物品を委託料で発注したものや電算外契約は各所属がFormBridgeで入力します（ルートB）。契約監理課で入札契約した案件（130万円超の工事、50万円超の建設コンサル業務委託）は対象外です。
       </div>
       <div class="note important">
         <strong>入札監視委員会で審議されることを前提とした入力をしてください</strong>
@@ -137,7 +138,7 @@
       <div class="url-panel">
         <div class="url-card">
           <h3 id="url-formbridge">FormBridge 入力フォーム</h3>
-          <p>新規に全項目を入力するフォームです。ルートB/Cで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
+          <p>新規に全項目を入力するフォームです。ルートBで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
           <div class="url-action">
             <a class="open-link" href="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2" target="_blank" rel="noopener">FormBridgeを開く</a>
             <button class="copy-btn" type="button" data-copy="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2">URLをコピー</button>
@@ -178,11 +179,15 @@
 
     <section id="start">
       <h2 class="part">入力ルートの判定</h2>
-      <p class="lead">次の3問を確認して、ルートを判定してください。まずは下の図でYes/Noをたどると、自分のルート（A1／A2／B／C）が分かります。</p>
+      <p class="lead">入力は契約を締結した後に行います。まず <strong>Q0</strong> で台帳の対象か対象外かを切り分け、対象であれば <strong>Q1→Q2→Q3</strong> で自分のルート（A1／A2／B）を判定してください。下の図でYes/Noをたどると分かります。</p>
+      <div class="note important">
+        <strong>はじめに：台帳の対象か確認してください（Q0）</strong>
+        <strong>契約監理課で入札契約した案件（130万円超の工事、50万円超の建設コンサル業務委託）は対象外</strong>で、台帳には登録しません（契約監理課が管理します）。それ以外（各所属が契約した案件）に進んでください。
+      </div>
       <figure class="manual-shot" aria-label="ルート判定フローチャート">
-        <div class="shot-scroll"><img src="fig2_route_flowchart.svg" alt="ルート判定フローチャート。Q1財務会計システムで起票したか→Q2業務区分は業務委託か→Q3予算費目は12節委託料か、の順に判定。いいえで右の結果（C・B・A2）へ、すべてはいでルートA1になる。"></div>
+        <div class="shot-scroll"><img src="fig2_route_flowchart.svg" alt="ルート判定フローチャート。まずQ0で契約監理課が入札契約した案件か（130万円超の工事・50万円超の建設コンサル）を判定し、はいなら対象外。いいえならQ1財務会計システムで起票したか→Q2業務区分は業務委託か→Q3予算費目は12節委託料かの順に判定する。委託料でなければ対象外、業務委託以外でも委託料ならルートB、業務委託かつ委託料ならルートA1、業務委託だが委託料以外ならルートA2になる。"></div>
         <figcaption>
-          <strong>図：Q1→Q2→Q3 で進むルート判定</strong>
+          <strong>図：Q0→Q1→Q2→Q3 で進むルート判定</strong>
           下の表は同じ判定を文章で示したものです。図と合わせて確認してください。
         </figcaption>
       </figure>
@@ -191,8 +196,9 @@
           <colgroup><col class="no"><col class="check"><col class="place"></colgroup>
           <thead><tr><th>順番</th><th>確認すること</th><th>確認場所</th></tr></thead>
           <tbody>
+            <tr><td>Q0</td><td>契約監理課で入札契約した案件ですか（130万円超の工事、50万円超の建設コンサル業務委託）。該当すれば対象外です。</td><td>施行伺、入札・契約の所管</td></tr>
             <tr><td>Q1</td><td>施行伺を財務会計システムで起票しましたか。</td><td>施行伺、起案文書、財務会計システム</td></tr>
-            <tr><td>Q2</td><td>業務区分は「業務委託」ですか。</td><td>財務会計システムの業務区分欄</td></tr>
+            <tr><td>Q2</td><td>業務区分は「業務委託」ですか（工事／コンサル／業務委託／物品の4区分から）。</td><td>財務会計システムの業務区分欄</td></tr>
             <tr><td>Q3</td><td>予算費目は「12節 委託料」ですか。</td><td>起案文書、予算費目欄、kViewerの予算費目欄</td></tr>
           </tbody>
         </table>
@@ -200,7 +206,7 @@
       <div class="jump-row" aria-label="判定結果から該当章へ移動">
         <a class="jump-btn primary" href="#route-a" data-modal="dlg-route-a">ルートA1：取込済案件へ</a>
         <a class="jump-btn" href="#route-a2" data-modal="dlg-route-a2">ルートA2：12節 委託料以外へ</a>
-        <a class="jump-btn" href="#route-bc" data-modal="dlg-route-bc">ルートB/C：新規登録へ</a>
+        <a class="jump-btn" href="#route-bc" data-modal="dlg-route-bc">ルートB：新規登録へ</a>
         <a class="jump-btn" href="#after">差戻し・削除へ</a>
       </div>
       <div class="tbl-wrap" data-scroll>
@@ -210,8 +216,9 @@
           <tbody>
             <tr><td>予算費目が「12節 委託料」で施行伺を財務会計システムで起票し、施行伺の業務区分が「業務委託」で契約した案件</td><td><span class="route a" data-modal="dlg-route-a" title="ルートA1の手順を確認（クリック）" style="cursor:pointer">ルートA1</span> kViewer</td><td>既存案件を検索し、編集ボタンから不足項目を入力して送信します。</td></tr>
             <tr><td>予算費目が「12節 委託料以外」で施行伺を財務会計システムで起票し、施行伺の業務区分が「業務委託」で契約した案件</td><td><span class="route a" data-modal="dlg-route-a2" title="ルートA2の手順を確認（クリック）" style="cursor:pointer">ルートA2</span> kViewer</td><td>追加入力せず、「削除対象」にチェックして送信します。削除理由は不要です。</td></tr>
-            <tr><td>予算費目が「12節 委託料」で施行伺を財務会計システムで起票し、施行伺の業務区分が「業務委託」以外で契約した案件</td><td><span class="route b" data-modal="dlg-route-bc" title="ルートBの手順を確認（クリック）" style="cursor:pointer">ルートB</span> FormBridge</td><td>自動取込み対象外のため、FormBridgeで全項目を新規入力します。</td></tr>
-            <tr><td>予算費目が「12節 委託料」で財務会計システムで施行伺から起票せず、電算外で契約した案件</td><td><span class="route c" data-modal="dlg-route-bc" title="ルートCの手順を確認（クリック）" style="cursor:pointer">ルートC</span> FormBridge</td><td>FormBridgeで全項目を新規入力します。</td></tr>
+            <tr><td>予算費目が「12節 委託料」で施行伺を財務会計システムで起票したが、業務区分が「業務委託」以外（コンサル・工事・物品）の案件</td><td><span class="route b" data-modal="dlg-route-bc" title="ルートBの手順を確認（クリック）" style="cursor:pointer">ルートB</span> FormBridge</td><td>自動取込み対象外のため、FormBridgeで全項目を新規入力します。起票区分は「財務会計システムから起票」を選びます。</td></tr>
+            <tr><td>予算費目が「12節 委託料」で、財務会計システムで施行伺から起票せず電算外で契約した案件</td><td><span class="route b" data-modal="dlg-route-bc" title="ルートBの手順を確認（クリック）" style="cursor:pointer">ルートB</span> FormBridge</td><td>FormBridgeで全項目を新規入力します。起票区分は「電算外」を選びます。</td></tr>
+            <tr><td>契約監理課で入札契約した案件（130万円超の工事・50万円超の建設コンサル業務委託）、または予算費目が「12節 委託料」でない案件</td><td><strong>対象外</strong></td><td>台帳には登録しません。</td></tr>
           </tbody>
         </table>
       </div>
@@ -468,13 +475,17 @@
     </section>
 
     <section id="route-bc">
-      <h2 class="part">ルートB/C：FormBridgeで新規登録する案件</h2>
-      <div class="chapter-summary" aria-label="ルートB/Cの要約">
+      <h2 class="part">ルートB：FormBridgeで新規登録する案件</h2>
+      <div class="chapter-summary" aria-label="ルートBの要約">
         <div class="summary-item"><strong>使う画面</strong><span>FormBridge入力フォーム</span></div>
-        <div class="summary-item"><strong>やること</strong><span>STEP 1から9まで入力</span></div>
+        <div class="summary-item"><strong>やること</strong><span>起票区分を選び、STEP 1から9まで入力</span></div>
         <div class="summary-item"><strong>最後の操作</strong><span>入力内容を確認して回答送信</span></div>
       </div>
-      <p>ルートB/Cは、財務会計システムから自動取込みされない案件です。特にルートCは、財務会計システムで施行伺から起票せず、電算外で契約した案件です。FormBridgeを開き、STEP 1からSTEP 9まで上から順に入力します。</p>
+      <p>ルートBは、予算費目が「12節 委託料」だが財務会計システムから自動取込みされない案件です。財務会計システムで起票したが業務区分が「業務委託」以外（コンサル・工事・物品）の案件と、電算外で契約した案件の両方が含まれます。FormBridgeを開き、STEP 1からSTEP 9まで上から順に入力します。</p>
+      <div class="note important">
+        <strong>最初に「起票区分」を選びます</strong>
+        ルートBのフォームには「起票区分」のラジオボタンがあります。財務会計システムで起票したが業務区分が「業務委託」以外だった案件は<strong>「財務会計システムから起票」</strong>を、財務会計システムを通さず契約した案件は<strong>「電算外」</strong>を選んでください。
+      </div>
       <div class="flow">
         <div class="node"><strong>STEP 1</strong>担当課</div>
         <div class="node"><strong>STEP 2</strong>基本情報</div>
@@ -759,7 +770,7 @@
       <div class="grid two">
         <div class="card">
           <h4 class="sub">入力前</h4>
-          <p><strong>自分のルートが分かりません。</strong><br>「ルート判定」のQ1からQ3を順番に確認してください。不明な場合は施行伺と予算費目欄を確認し、契約監理課へ問い合わせます。</p>
+          <p><strong>自分のルートが分かりません。</strong><br>まず「ルート判定」のQ0で契約監理課が入札契約した案件（対象外）でないか確認し、次にQ1からQ3を順番に確認してください。不明な場合は施行伺と予算費目欄を確認し、契約監理課へ問い合わせます。</p>
           <p><strong>契約連絡担当者以外でも入力や編集はできますか。</strong><br>誰でも入力や編集は可能です。ただし、入力内容に誤り等がないように各所属にて注意してください。</p>
         </div>
         <div class="card">
@@ -774,7 +785,7 @@
         </div>
         <div class="card">
           <h4 class="sub">困ったとき</h4>
-          <p><strong>kViewerで案件が見つかりません。</strong><br>取込み前の可能性、検索語が合っていない可能性があります。課名・件名の一部・施設名など検索語を変えて確認してください。</p>
+          <p><strong>kViewerで案件が見つかりません。</strong><br>取込み前の可能性、検索語が合っていない可能性があります。課名・件名の一部・施設名など検索語を変えて確認してください。なお、業務区分が「業務委託」以外（コンサル・工事・物品を委託料で発注）の案件や電算外契約は自動取込みされないため、kViewerには出ません。これらはルートB（FormBridgeで新規入力）です。</p>
           <p><strong>12節 委託料以外は何を入力しますか。</strong><br>追加入力は不要です。削除対象にチェックして回答送信します。削除理由も不要です。</p>
           <p><strong>公告文PDF以外も添付する必要がありますか。</strong><br>一般競争入札の場合は公告文PDFのみを添付します。</p>
         </div>
@@ -787,6 +798,9 @@
           <tbody>
             <tr><td>12節 委託料</td><td>歳出予算の節区分のひとつ。委託料のための予算費目を指します。</td></tr>
             <tr><td>業務委託契約</td><td>業務の遂行や目的物の完成を外部事業者へ依頼する契約です。</td></tr>
+            <tr><td>業務区分</td><td>財務会計システムで施行伺を起票する際に選ぶ区分。工事／コンサル／業務委託／物品の4つがあります。台帳の自動取込み（ルートA1）は「業務委託」区分のものが対象です。</td></tr>
+            <tr><td>建設コンサルタント業務委託</td><td>測量・設計・調査などの建設コンサルタント業務の委託。財務会計システムでは「コンサル」区分で起票します。50万円超は契約監理課が入札契約するため台帳の対象外、50万円以下は各所属が契約しルートB（FormBridge手入力）で登録します。</td></tr>
+            <tr><td>施設維持管理業務委託</td><td>施設の維持管理に関する業務委託。「業務委託」区分の一種で、通常はルートA1（kViewerで追記）として扱います。</td></tr>
             <tr><td>施行伺</td><td>契約や支出などを行う際に、上位の決裁権者の承認を求める文書です。</td></tr>
             <tr><td>随意契約</td><td>競争入札によらず、特定の相手方を選定して契約する方式です。</td></tr>
             <tr><td>見積合わせ</td><td>複数業者から見積書を取り、条件を比較して契約する方式です。少額随契で多く使われます。</td></tr>
@@ -804,7 +818,10 @@
       <h3 class="sec" id="checklist">入力チェックリスト</h3>
       <ul class="checklist">
         <li class="group-h">共通チェック</li>
-        <li>自分のルート（ルートA1 / ルートA2 / ルートB/C）を確認した</li>
+        <li>Q0で契約監理課が入札契約した案件（対象外）でないことを確認した</li>
+        <li>入力は契約を締結した後に行っている</li>
+        <li>自分のルート（ルートA1 / ルートA2 / ルートB）を確認した</li>
+        <li>ルートBの場合、起票区分（財務会計システムから起票／電算外）を選んだ</li>
         <li>契約書、起案文書、入札・見積結果、随意契約理由書など根拠資料を確認した</li>
         <li>確認できない内容を推測で入力していない</li>
         <li>金額は税込で入力した</li>
@@ -945,19 +962,20 @@
   </div>
 </dialog>
 
-<!-- ルートB/C モーダル -->
+<!-- ルートB モーダル -->
 <dialog id="dlg-route-bc" aria-labelledby="dlg-route-bc-title">
   <div class="modal-header">
     <div class="modal-header-title">
-      <span class="route b" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;">ルートB/C</span>
+      <span class="route b" style="-webkit-print-color-adjust:exact;print-color-adjust:exact;">ルートB</span>
       <h2 id="dlg-route-bc-title">FormBridgeで新規登録する</h2>
     </div>
     <button class="modal-close" type="button" aria-label="閉じる">×</button>
   </div>
-  <p class="modal-when"><strong>ルートBの条件：</strong>施行伺を財務会計システムで起票済み、予算費目「12節 委託料」、業務区分「業務委託」以外　／　<strong>ルートCの条件：</strong>予算費目「12節 委託料」、財務会計システムで施行伺から起票せず、電算外で契約</p>
+  <p class="modal-when"><strong>このルートの条件：</strong>予算費目「12節 委託料」で、kViewerに自動取込みされない案件。①財務会計システムで起票したが業務区分が「業務委託」以外（コンサル／工事／物品）、または②電算外で契約。フォームの「起票区分」で〔財務会計システムから起票／電算外〕を選びます。</p>
   <div class="modal-body">
     <ol class="steps">
       <li><span class="st-title">FormBridgeを開く</span>「まず開くURL一覧」からFormBridgeのURLを開きます。</li>
+      <li><span class="st-title">起票区分を選ぶ</span>「財務会計システムから起票」か「電算外」かを選択します。</li>
       <li><span class="st-title">STEP 1〜2：担当課・基本情報を入力</span>課名検索で所属を表示し、件名・履行場所・業務区分を入力します。</li>
       <li><span class="st-title">STEP 3〜5：業種・積算方法・契約種別を入力</span>起案文書の記載内容に従って選択します。</li>
       <li><span class="st-title">STEP 6〜8：日程・業者情報・契約金額を入力</span>契約書・入札結果資料を手元に準備して入力します。</li>
