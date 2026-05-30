@@ -71,7 +71,7 @@
     <rect x="40" y="305" width="920" height="60" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
     <rect x="40" y="305" width="6" height="60" fill="#B45309"/>
     <text x="62" y="330" font-size="13" fill="#1F2937"><tspan font-weight="700" fill="#B45309">ポイント: </tspan>ステップ1は契約監理課が行う作業なので、各課は<tspan font-weight="700" fill="#B91C1C">ステップ2から</tspan>が実作業です。</text>
-    <text x="62" y="352" font-size="12" fill="#4B5563">基本情報の多くは取込み時に自動入力されているため、ゼロから入力するルートB・Cより大幅に楽に進められます。</text>
+    <text x="62" y="352" font-size="12" fill="#4B5563">基本情報の多くは取込み時に自動入力されているため、ゼロから入力するルートBより大幅に楽に進められます。</text>
   </g>
 
   <defs>
