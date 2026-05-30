@@ -227,6 +227,8 @@ tbody tr:nth-child(even){background:#fafbfc;}
 /* 色相に依存せず字形・装飾で差別化（CLAUDE.md §3.3／色覚アクセシビリティ対応） */
 .route.a{background:var(--navy); color:#fff; border:1.5px solid var(--navy);}
 .route.b{background:#fff; color:var(--navy); border:1.5px solid var(--navy);}
+/* 用語・数値の泣き別れ防止（例：「12節 委託料」「130万円超」） */
+.nobr{white-space:nowrap;}
 .route[data-modal]:hover{
   opacity:.85;
   box-shadow:0 2px 8px rgba(23,32,44,.22);
@@ -813,6 +815,60 @@ mark.search-hit.current-hit{background:#cfe0f0;box-shadow:0 0 0 2px rgba(24,50,7
 .search-btn:active{background:#d8e4f0;}
 .search-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .search-sep{width:1px;height:22px;background:var(--line);flex-shrink:0;}
+
+/* ── モバイル：判定表・決定表をカード化（横スクロール解消） ── */
+@media(max-width:640px){
+  .tbl-wrap .question-table,
+  .tbl-wrap .decision-table{min-width:0;}
+  .question-table,
+  .question-table tbody,
+  .question-table tr,
+  .question-table td,
+  .decision-table,
+  .decision-table tbody,
+  .decision-table tr,
+  .decision-table td{display:block; width:auto;}
+  .question-table thead,
+  .decision-table thead{display:none;}
+  .question-table tr,
+  .decision-table tr{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    margin:0 0 10px;
+    padding:10px 12px;
+    background:#fff;
+  }
+  .question-table td,
+  .decision-table td{
+    border:0;
+    padding:3px 0;
+    white-space:normal !important;
+  }
+  .question-table td:first-child{
+    display:inline-block;
+    min-width:40px;
+    margin:0 0 6px;
+    padding:2px 10px;
+    background:var(--navy);
+    color:#fff;
+    font-weight:800;
+    text-align:center;
+    border-radius:5px;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .decision-table td:first-child{
+    margin:0 0 6px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .question-table td[data-label]::before,
+  .decision-table td[data-label]::before{
+    content:attr(data-label)"：";
+    font-weight:800;
+    color:var(--navy);
+  }
+}
 
 @page{
   size:A4 portrait;
