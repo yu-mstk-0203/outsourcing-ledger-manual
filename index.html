@@ -13,11 +13,11 @@
     <p class="toc-title">目次</p>
     <nav>
       <a class="lv1" href="#purpose">本台帳の目的</a>
+      <a class="lv1" href="#prepare">入力前に準備する資料</a>
+      <a class="lv1" href="#start">入力ルートの判定</a>
       <a class="lv1" href="#urls">まず開くURL一覧</a>
       <a class="lv3" href="#url-formbridge">FormBridge 入力フォーム</a>
       <a class="lv3" href="#url-kviewer">kViewer 閲覧・編集用ビュー</a>
-      <a class="lv1" href="#prepare">入力前に準備する資料</a>
-      <a class="lv1" href="#start">入力ルートの判定</a>
       <a class="lv1" href="#tools">FormBridge と kViewer の基本</a>
       <a class="lv3" href="#tool-kintone">kintone</a>
       <a class="lv3" href="#tool-formbridge">FormBridge</a>
@@ -81,7 +81,7 @@
     <section class="print-only" aria-label="PDF用概要">
       <div class="note important">
         <strong>PDF版の読み方</strong>
-        このPDFは、HTMLマニュアルをA4縦で保存したものです。最初に「本台帳の目的」「まず開くURL一覧」「入力ルートの判定」を確認し、自分のルートの章だけを重点的に読んでください。
+        このPDFは、HTMLマニュアルをA4縦で保存したものです。最初に「本台帳の目的」「入力ルートの判定」「まず開くURL一覧」を確認し、自分のルートの章だけを重点的に読んでください。
       </div>
     </section>
 
@@ -104,6 +104,10 @@
         <a class="quick-card" href="#route-bc">
           <strong>ルートB：新規登録</strong>
           <span>委託料だが自動取込みされない案件（コンサル・工事・物品を委託料で発注、または電算外）。FormBridgeで全項目を新規入力します。</span>
+        </a>
+        <a class="quick-card" href="#start">
+          <strong>対象外：登録しない</strong>
+          <span>契約監理課で入札契約した案件（<span class="nobr">130万円超</span>の工事・<span class="nobr">50万円超</span>の建設コンサル）や、委託料でない案件は台帳に登録しません。</span>
         </a>
       </div>
     </section>
@@ -129,33 +133,6 @@
       <div class="note important">
         <strong>入札監視委員会で審議されることを前提とした入力をしてください</strong>
         各課内のメモではなく、第三者が契約内容、契約方法、理由を確認する資料として入力してください。
-      </div>
-    </section>
-
-    <section id="urls">
-      <h2 class="part">まず開くURL一覧</h2>
-      <p class="lead">入力作業で使う入口は2つです。自分の案件がどのルートかを判定してから、該当するURLを開いてください。</p>
-      <div class="url-panel">
-        <div class="url-card">
-          <h3 id="url-formbridge">FormBridge 入力フォーム</h3>
-          <p>新規に全項目を入力するフォームです。ルートBで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
-          <div class="url-action">
-            <a class="open-link" href="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2" target="_blank" rel="noopener">FormBridgeを開く</a>
-            <button class="copy-btn" type="button" data-copy="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2">URLをコピー</button>
-            <span class="copy-status" aria-live="polite"></span>
-          </div>
-          <span class="url-text">https://oitacity.form.kintoneapp.com/public/outsourcing-ver2</span>
-        </div>
-        <div class="url-card">
-          <h3 id="url-kviewer">kViewer 閲覧・編集用ビュー</h3>
-          <p>財務会計システムから取込まれた既存案件を探し、該当レコードの編集に進むための画面です。ルートA1で使います。</p>
-          <div class="url-action">
-            <a class="open-link" href="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview" target="_blank" rel="noopener">kViewerを開く</a>
-            <button class="copy-btn" type="button" data-copy="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview">URLをコピー</button>
-            <span class="copy-status" aria-live="polite"></span>
-          </div>
-          <span class="url-text">https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview</span>
-        </div>
       </div>
     </section>
 
@@ -226,6 +203,33 @@
         <strong>財務会計システム画面について</strong>
         確認する場所は財務会計システムで施行伺を起票した際の「業務区分」と「予算費目」です。
         画面の見方が分からない場合は、起案文書や施行伺の内容をもとに、kViewerで該当案件を探して予算費目を確認してください。kViewerの予算費目が「12節&nbsp;委託料」ならルートA1、「12節&nbsp;委託料以外」ならルートA2になります。
+      </div>
+    </section>
+
+    <section id="urls">
+      <h2 class="part">まず開くURL一覧</h2>
+      <p class="lead">自分のルートを判定したら、該当するURLを開きます。入力作業で使う入口は2つです。</p>
+      <div class="url-panel">
+        <div class="url-card">
+          <h3 id="url-formbridge">FormBridge 入力フォーム</h3>
+          <p>新規に全項目を入力するフォームです。ルートBで使います。kViewerの編集ボタンから開く場合も、実際の入力・送信画面はFormBridgeです。</p>
+          <div class="url-action">
+            <a class="open-link" href="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2" target="_blank" rel="noopener">FormBridgeを開く</a>
+            <button class="copy-btn" type="button" data-copy="https://oitacity.form.kintoneapp.com/public/outsourcing-ver2">URLをコピー</button>
+            <span class="copy-status" aria-live="polite"></span>
+          </div>
+          <span class="url-text">https://oitacity.form.kintoneapp.com/public/outsourcing-ver2</span>
+        </div>
+        <div class="url-card">
+          <h3 id="url-kviewer">kViewer 閲覧・編集用ビュー</h3>
+          <p>財務会計システムから取込まれた既存案件を探し、該当レコードの編集に進むための画面です。ルートA1で使います。</p>
+          <div class="url-action">
+            <a class="open-link" href="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview" target="_blank" rel="noopener">kViewerを開く</a>
+            <button class="copy-btn" type="button" data-copy="https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview">URLをコピー</button>
+            <span class="copy-status" aria-live="polite"></span>
+          </div>
+          <span class="url-text">https://oitacity.viewer.kintoneapp.com/public/outsourcing-ver2-listview</span>
+        </div>
       </div>
     </section>
 
@@ -536,18 +540,18 @@
       <h3 class="sec" id="step-1">STEP 1 担当課の入力</h3>
       <p>「課名検索」欄にキーワードを入力し、検索ボタンで該当する課の情報を表示します。表示された部No・部・課No・課が自分の所属と一致しているか確認してください。</p>
       <h3 class="sec" id="step-2">STEP 2 基本情報の入力</h3>
-      <h5 class="field">件名 <span class="badge req">必須</span></h5>
+      <h4 class="field">件名 <span class="badge req">必須</span></h4>
       <p>契約書または施行伺の正式名称を入力します。同一・類似案件が複数ある場合は「その1」「その2」、対象施設名、対象地区名、業務内容の違いなどを加え、案件の違いが分かる名称にしてください。</p>
       <div class="note example"><strong>良い例・悪い例</strong>良い例：東部地区除草業務委託その1、大分市立〇〇小学校樹木剪定業務委託。悪い例：除草業務委託、介護審査料4月分。</div>
-      <h5 class="field">履行場所 <span class="badge req">必須</span></h5>
+      <h4 class="field">履行場所 <span class="badge req">必須</span></h4>
       <p>業務を実際に行う場所を入力します。例：大分市役所本庁舎、大分市内一円、対象施設名。</p>
-      <h5 class="field">予算費目 <span class="badge req">必須</span></h5>
+      <h4 class="field">予算費目 <span class="badge req">必須</span></h4>
       <p>起案文書の予算費目欄を確認し、「12節&nbsp;委託料」または「12節&nbsp;委託料以外」を選択します。</p>
       <div class="note example">
         <strong>要確認：文字入力ルール</strong>
         環境依存文字を使わない、全角スペースを使わない。起案文書の予算費目欄にある文字を正確に確認して選択してください。
       </div>
-      <h5 class="field">スライド条項の適用 <span class="badge req">必須</span></h5>
+      <h4 class="field">スライド条項の適用 <span class="badge req">必須</span></h4>
       <p>複数年契約でスライド条項を適用している場合のみ「有」を選択します。それ以外は「無」を選択します。</p>
 
       <h3 class="sec" id="step-3">STEP 3 業種の入力</h3>
@@ -571,13 +575,13 @@
       </div>
 
       <h3 class="sec" id="step-5">STEP 5 契約・入札種別の入力</h3>
-      <h5 class="field">契約種別 <span class="badge req">必須</span></h5>
+      <h4 class="field">契約種別 <span class="badge req">必須</span></h4>
       <p>単年度契約、債務負担行為、長期継続契約、指定管理者から選びます。複数年度にまたがる場合は契約書・予算資料で根拠を確認してください。</p>
       <div class="note example">
         <strong>要確認：年度をまたぐ契約の扱い</strong>
         履行期間が1会計年度以内で、契約日だけが前年度にある案件の登録要否・登録年度は、契約監理課の運用確認後に確定してください。
       </div>
-      <h5 class="field">入札種別名称 <span class="badge req">必須</span></h5>
+      <h4 class="field">入札種別名称 <span class="badge req">必須</span></h4>
       <p>一般競争入札、指名競争入札、随意契約、見積合わせのいずれかを選びます。随意契約・見積合わせの場合は適用号を選択し、「随意契約の理由」を入力してください。一般競争入札の場合は公告文を添付すること。</p>
 
       <h3 class="sec" id="step-6">STEP 6 日程の入力</h3>
@@ -681,7 +685,7 @@
 
       <h3 class="sec" id="case-unit-price">単価契約</h3>
       <p>単価契約は、単価の決め方によって入力方法が2通りに分かれます。</p>
-      <h5 class="field">① 競争で単価を決める単価契約</h5>
+      <h4 class="field">① 競争で単価を決める単価契約</h4>
       <p>入札・見積合わせで単価を競わせる場合は、想定数量をもとに予算を取るため、予定価格・契約金額には単価そのものではなく合計金額（単価×数量）を入力します。</p>
       <div class="tbl-wrap" data-scroll>
         <table>
@@ -692,7 +696,7 @@
           </tbody>
         </table>
       </div>
-      <h5 class="field">② 競争によらない単価契約（法令等で定められた単価で複数業者と契約する場合 など）</h5>
+      <h4 class="field">② 競争によらない単価契約（法令等で定められた単価で複数業者と契約する場合 など）</h4>
       <p>あらかじめ単価が定まっていて競争しない場合は、<strong>予定価格と契約金額を同額（＝予算配当額）</strong>にし、各課入力事項にその旨と契約相手方を記載します。複数の相手方と締結しても登録は<strong>1件</strong>です（入札参加業者数は1）。</p>
       <div class="note example">
         <strong>入力例：競争によらない単価契約</strong>
