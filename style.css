@@ -163,7 +163,10 @@ p{margin:8px 0;}
   padding:14px 16px;
   margin:14px 0;
 }
-.note strong,.box-title{display:block; color:var(--navy); margin-bottom:3px;}
+/* 注意ボックスの「タイトル」だけをブロック化。文中の <strong> はインライン強調のまま */
+.note > strong:first-child,.box-title{display:block; color:var(--navy); margin-bottom:3px;}
+/* 文中強調（2つ目以降の strong）はインラインの太字（本文色）で表示 */
+.note > strong:first-child ~ strong{font-weight:700; color:inherit;}
 /* 色を使わず、左罫線スタイルでコールアウト種別を差別化（CLAUDE.md §3.2） */
 .note.important{border-left-style:solid; border-left-width:4px;}
 .note.warn{border-left-style:double; border-left-width:6px;}
@@ -938,5 +941,5 @@ mark.search-hit.current-hit{background:#cfe0f0;box-shadow:0 0 0 2px rgba(24,50,7
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
   }
-  .note strong{color:var(--navy) !important;}
+  .note > strong:first-child{color:var(--navy) !important;}
 }
