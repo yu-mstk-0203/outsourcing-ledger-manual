@@ -227,7 +227,6 @@ tbody tr:nth-child(even){background:#fafbfc;}
 /* 色相に依存せず字形・装飾で差別化（CLAUDE.md §3.3／色覚アクセシビリティ対応） */
 .route.a{background:var(--navy); color:#fff; border:1.5px solid var(--navy);}
 .route.b{background:#fff; color:var(--navy); border:1.5px solid var(--navy);}
-.route.c{background:#fff; color:var(--navy); border:1.5px dotted var(--navy);}
 .route[data-modal]:hover{
   opacity:.85;
   box-shadow:0 2px 8px rgba(23,32,44,.22);
@@ -517,9 +516,27 @@ dialog{
   width:100%;
   box-shadow:0 12px 48px rgba(23,32,44,.28);
 }
+dialog[open]{display:block;}
 dialog::backdrop{
   background:rgba(10,18,30,.52);
   backdrop-filter:blur(2px);
+}
+body.dialog-fallback-active::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(10,18,30,.52);
+  z-index:999;
+}
+dialog.legacy-dialog-open{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:1000;
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
 }
 .modal-header{
   display:flex;
