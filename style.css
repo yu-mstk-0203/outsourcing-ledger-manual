@@ -33,7 +33,7 @@ p,li,td,th,figcaption,.lead,.summary-item span,.shot-points li,.note,.flow .node
   text-wrap:pretty;
 }
 /* 見出し・短いラベルは text-wrap:balance で行ごとの文字数を均す */
-h1,h2.part,h3.sec,h4.sub,h5.field,.doc-header h1,.modal-header h2,.st-title,.quick-card strong,.url-card h3{
+h1,h2.part,h3.sec,h4.sub,.field,.doc-header h1,.modal-header h2,.st-title,.quick-card strong,.url-card h3{
   text-wrap:balance;
 }
 a{
@@ -132,7 +132,7 @@ h4.sub{
   color:#23344a;
   font-size:16px;
 }
-h5.field{
+.field{
   margin:18px 0 6px;
   padding-left:10px;
   border-left:4px solid var(--navy-2);
@@ -694,7 +694,7 @@ dialog.legacy-dialog-open{
   h2.part{font-size:16px; padding:9px 12px; margin:22px 0 12px;}
   h3.sec{font-size:15px; margin-top:20px; padding-bottom:6px;}
   h4.sub{font-size:14px; margin:16px 0 6px;}
-  h5.field{font-size:13px; padding-left:8px; border-left-width:3px;}
+  .field{font-size:13px; padding-left:8px; border-left-width:3px;}
   .lead{font-size:14px;}
   section{margin:18px 0;}
   .card{padding:12px 12px;}
@@ -907,7 +907,7 @@ mark.search-hit.current-hit{background:#cfe0f0;box-shadow:0 0 0 2px rgba(24,50,7
   }
   /* #start は前の表に続けてよいが、#urls(まず開くURL一覧)は見出し＋本文ごと次ページから始める */
   #start h2.part{break-before:auto; page-break-before:auto;}
-  h3.sec,h4.sub,h5.field{break-after:avoid; page-break-after:avoid;}
+  h3.sec,h4.sub,.field{break-after:avoid; page-break-after:avoid;}
   p,li{orphans:2; widows:2;}
   table{break-inside:auto; page-break-inside:auto;}
   thead{display:table-header-group;}
